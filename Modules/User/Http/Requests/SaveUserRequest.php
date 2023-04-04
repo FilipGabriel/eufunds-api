@@ -24,7 +24,6 @@ class SaveUserRequest extends Request
         return [
             'name' => 'required',
             'about' => 'nullable|max:1000',
-            'username' => ['sometimes', Rule::unique('users')->ignore($this->id, 'id')],
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->id, 'id')],
             'phone' => ['required'],
             'image' =>'nullable|image',
