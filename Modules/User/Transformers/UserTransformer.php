@@ -15,10 +15,7 @@ class UserTransformer extends JsonResource
             'phone'   => $this->resource->phone,
             'about' => $this->resource->about,
             'role' => $this->getRoleName($this->resource),
-            'logo' => $this->resource->user_logo->path,
-            'urls' => [
-                'delete_url' => route('api.users.destroy', $this->resource->id),
-            ]
+            'logo' => $this->resource->user_logo->path
         ];
     }
 

@@ -16,7 +16,8 @@ class EnsureEmailIsVerified
         'api.login.*',
         'password.email',
         'verification.verify',
-        'api.users.show'
+        'api.users.show',
+        'programs.index'
     ];
 
     /**
