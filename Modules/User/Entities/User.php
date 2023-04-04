@@ -35,7 +35,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'email', 'phone', 'about', 'password', 'permissions', 'email_verified_at', 'last_login', 'remember_token'
+        'name', 'email', 'phone', 'about', 'password', 'permissions', 'email_verified_at', 'last_login', 'remember_token'
     ];
 
     /**
@@ -54,18 +54,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'user_logo',
         'user_email',
     ];
-
-    /**
-     * Perform any actions required after the model boots.
-     *
-     * @return void
-     */
-    protected static function booted()
-    {
-        static::creating(function ($user) {
-            $user->username = self::generateSlug($user->name);
-        });
-    }
 
     /**
      * @return bool
@@ -112,11 +100,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function findByEmail($email)
     {
         return static::where('email', $email)->first();
-    }
-
-    public static function findByUsername($username)
-    {
-        return static::where('username', $username)->first();
     }
 
     public function scopeWithLogo($query)
@@ -274,25 +257,6 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return new StandardPermissions($userPermissions, $rolePermissions);
-    }
-
-    /**
-     * Generate slug by the given value.
-     *
-     * @param string $value
-     * @return string
-     */
-    private static function generateSlug($value)
-    {
-        $slug = str_slug($value) ?: slugify($value);
-
-        $query = User::where('username', $slug)->withoutGlobalScope('active');
-
-        if ($query->exists()) {
-            $slug .= '-' . str_random(8);
-        }
-
-        return $slug;
     }
 
     /**
