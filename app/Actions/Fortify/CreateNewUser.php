@@ -43,7 +43,6 @@ class CreateNewUser implements CreatesNewUsers
 
         $user = User::create([
             'name' => $input['name'],
-            'username' => $this->generateSlug($input['name']),
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'phone' => $input['phone'],
@@ -63,24 +62,5 @@ class CreateNewUser implements CreatesNewUsers
         if ($role->exists) {
             $user->roles()->sync($role);
         }
-    }
-
-    /**
-     * Generate slug by the given value.
-     *
-     * @param string $value
-     * @return string
-     */
-    private function generateSlug($value)
-    {
-        $slug = str_slug($value) ?: slugify($value);
-
-        $query = User::where('username', $slug)->withoutGlobalScope('active');
-
-        if ($query->exists()) {
-            $slug .= '-' . str_random(8);
-        }
-
-        return $slug;
     }
 }
