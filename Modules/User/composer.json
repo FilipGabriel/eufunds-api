@@ -1,0 +1,31 @@
+{
+    "name": "smis/user",
+    "description": "The SMIS User Module.",
+    "authors": [
+        {
+            "name": "SMIS",
+            "email": "contact@smis.ro"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "laravel/sanctum": "^2.9",
+        "cartalyst/sentinel": "^5.0",
+        "laravel/socialite": "^5.0",
+        "lab404/laravel-impersonate": "^1.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\User\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

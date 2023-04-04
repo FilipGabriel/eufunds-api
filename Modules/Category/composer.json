@@ -1,0 +1,28 @@
+{
+    "name": "smis/category",
+    "description": "The SMIS Category Module.",
+    "authors": [
+        {
+            "name": "SMIS",
+            "email": "contact@smis.ro"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "typicms/nestablecollection": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Category\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

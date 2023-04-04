@@ -1,0 +1,20 @@
+{
+    "Admin": true,
+    "Attribute": true,
+    "Brand": true,
+    "Cart": true,
+    "Category": true,
+    "Core": true,
+    "Coupon": true,
+    "Currency": true,
+    "Maintenance": true,
+    "Media": true,
+    "Meta": true,
+    "Option": true,
+    "Product": true,
+    "Program": true,
+    "Setting": true,
+    "Support": true,
+    "Translation": true,
+    "User": true
+}

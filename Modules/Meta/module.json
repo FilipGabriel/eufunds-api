@@ -1,0 +1,6 @@
+{
+    "name": "Meta",
+    "alias": "meta",
+    "description": "SMIS meta data management",
+    "priority": 110
+}

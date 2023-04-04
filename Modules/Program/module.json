@@ -1,0 +1,9 @@
+{
+    "name": "Program",
+    "alias": "program",
+    "description": "The program module is responsible for managing programs.",
+    "priority": 70,
+    "providers": [
+        "Modules\\Program\\Providers\\ProgramServiceProvider"
+    ]
+}

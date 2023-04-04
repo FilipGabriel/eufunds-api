@@ -1,0 +1,9 @@
+{
+    "name": "Translation",
+    "alias": "translation",
+    "description": "Module containing all SMIS translations",
+    "priority": 10,
+    "providers": [
+        "Modules\\Translation\\Providers\\TranslationServiceProvider"
+    ]
+}

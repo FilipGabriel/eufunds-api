@@ -1,0 +1,6 @@
+{
+    "name": "Maintenance",
+    "alias": "maintenance",
+    "description": "The smis Maintenance Module.",
+    "priority": 20
+}

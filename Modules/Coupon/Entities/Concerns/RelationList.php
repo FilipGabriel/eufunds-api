@@ -1,0 +1,76 @@
+<?php
+
+namespace Modules\Coupon\Entities\Concerns;
+
+trait RelationList
+{
+    /**
+     * Get the list of the coupon applicable users.
+     *
+     * @return array
+     */
+    public function userList()
+    {
+        return $this->getItemUserList('users');
+    }
+
+    /**
+     * Get the list of the excluded users.
+     *
+     * @return array
+     */
+    public function excludeUserList()
+    {
+        return $this->getItemUserList('excludeUsers');
+    }
+
+    /**
+     * Get the list of the coupon applicable products.
+     *
+     * @return array
+     */
+    public function productList()
+    {
+        return $this->getItemList('products');
+    }
+
+    /**
+     * Get the list of the excluded products.
+     *
+     * @return array
+     */
+    public function excludeProductList()
+    {
+        return $this->getItemList('excludeProducts');
+    }
+
+    /**
+     * Get the item list for the given coupon with the given attribute.
+     *
+     * @param string $attributes
+     * @return array
+     */
+    private function getItemList($attribute)
+    {
+        $items = $this->getAttribute($attribute);
+
+        return $items->mapWithKeys(function ($item) {
+            return [$item->id => $item->name];
+        })->all();
+    }
+
+    /**
+     * Get the item list for the given coupon with the given attribute.
+     *
+     * @param string $attributes
+     * @return array
+     */
+    private function getItemUserList($attribute)
+    {
+        $items = $this->getAttribute($attribute);
+
+        return $items->mapWithKeys(function ($item) {
+            return [$item->id => $item->user_email];
+        })->all();
+    }
+}

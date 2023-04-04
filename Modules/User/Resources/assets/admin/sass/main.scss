@@ -1,0 +1,232 @@
+.permission-row {
+    padding: 6px 0 4px 0;
+}
+
+.api-keys {
+    margin-bottom: 20px;
+}
+
+.permission-group {
+    margin-bottom: 30px;
+}
+
+.permission-parent-head {
+    margin-bottom: 15px;
+
+    h3 {
+        border-bottom: 1px solid #d2d6de;
+        padding-bottom: 5px;
+    }
+}
+
+%permission-actions {
+    border: 1px solid #d2d6de;
+}
+
+
+%permission-actions-btn {
+    padding: 3px 10px;
+    margin-left: 0px !important;
+    border-right: 1px solid #d2d6de;
+
+    &:last-child {
+        border-right: none;
+    }
+}
+
+.permission-parent-actions {
+    @extend %permission-actions;
+    margin-top: 0;
+
+    > .btn {
+        @extend %permission-actions-btn;
+    }
+}
+
+.permission-group-actions {
+    @extend %permission-actions;
+
+    > .btn {
+        @extend %permission-actions-btn;
+    }
+}
+
+.permission-row {
+    .permission-label {
+        font-family: "Open Sans", sans-serif;
+        font-weight: 600;
+        display: block;
+        padding-top: 6px;
+    }
+
+    .radio-btn {
+        .radio {
+            float: right;
+            margin-left: 15px;
+
+            &:last-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
+
+#new_password {
+    .btn-reset-password {
+        margin: 10px 0 15px;
+    }
+}
+
+.options {
+    .form-group {
+        margin: 0;
+    }
+
+    thead th {
+        &:first-child {
+            width: 40px;
+        }
+
+        &:last-child {
+            width: 60px;
+        }
+    }
+}
+
+.options #rules-values tr td:first-child {
+    width: 25%;
+}
+
+.options #benefits-values tr td:first-child {
+    width: 25%;
+}
+
+.slide {
+    border: 1px solid #e9e9e9;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.slide .slide-header {
+    padding: 15px;
+    background: #f6f6f7;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.slide .slide-header span {
+    font-size: 16px;
+}
+
+.slide .slide-body {
+    position: relative;
+    padding: 15px;
+}
+
+.slider-values-wrapper .slide {
+    margin-bottom: 20px;
+}
+
+.slider-values-wrapper .table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+#settings .settings-table {
+    thead > tr {
+        background: #f9f9f9;
+
+        th {
+            padding: 15px;
+
+            &:not(:first-child) {
+                text-align: center;
+            }
+        }
+    }
+
+    tbody > tr {
+        &:hover {
+            background: none;
+        }
+
+        td {
+            vertical-align: middle;
+            padding: 15px;
+        
+            .form-group {
+                margin-bottom: 0px;
+        
+                .checkbox {
+                    padding-top: 0px;
+                    min-height: auto;
+                    justify-content: space-around;
+        
+                    [type=checkbox] {
+                        &:checked+label {
+                            padding-left: 20px;
+
+                            &:after {
+                                color: #0055b8;
+                            }
+                        }
+                    
+                        &:not(:checked) + label {
+                            padding-left: 20px;
+                        
+                            &::after {
+                                opacity: .2;
+                                transform: scale(1);
+                            }
+                        }
+                    }
+
+                    label::after {
+                        color: #fff;
+                        -webkit-text-stroke: 1px #0055b8;
+                    }
+        
+                    label::before {
+                        color: #0055b8;
+                        -webkit-text-stroke: 1px #fff;
+                        background: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .permission-row {
+        .radio-btn {
+            float: left;
+            margin-left: 15px;
+        }
+    }
+
+    .permission-group-actions {
+        margin-top: 10px;
+    }
+
+    .slider-values-wrapper .table > tbody > tr {
+        border-top: 1px solid #e9e9e9;
+    }
+
+    .slider-values-wrapper .table > tbody > tr > td:nth-child(2),
+    .slider-values-wrapper .table > tbody > tr > td:nth-child(3) {
+        display: block;
+        border: none;
+        width: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: left;
+        vertical-align: initial;
+    }
+
+    .slider-values-wrapper .table > tbody > tr > td:nth-child(3) {
+        padding-bottom: 15px;
+    }
+
+    .slider-values-wrapper .options .drag-icon {
+        margin-top: 0;
+    }
+}

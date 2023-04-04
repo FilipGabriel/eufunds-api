@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'home' => 'Home',
+    'contact' => 'Contact',
+    'compare' => 'Compara',
+    'account' => 'Cont',
+    'login' => 'Autentificare',
+    'more_results' => ':count mai multe rezultate',
+    'favorites' => 'Favorite',
+    'most_searched' => 'Cele mai cautate:',
+    'navigation' => 'Navigatie',
+    'menu' => 'Meniu',
+    'subtotal' => 'Subtotal',
+    'subscribe_to_our_newsletter' => 'Aboneaza-te la Newsletter-ul nostru',
+    'subscribe_to_our_newsletter_subtitle' => 'Aboneaza-te la newsletter-ul & primeste notificari despre reduceri.',
+    'by_subscribing' => 'Prin abonarea la newsletter-ul nostru,accepti ',
+    'privacy_policy' => 'Politica de Confidențialitate.',
+    'don\'t_show_this_popup_again' => 'Don\'t show this popup again',
+    'enter_your_email_address' => 'Introduce-ti adresa de email',
+    'subscribe' => 'ABONEAZA-TE',
+    'subscribed' => 'ABONAT',
+    'the_website_uses_cookies' => 'Website-ul foloseste cookies ca sa iti asigure cea mai buna experienta pe website-ul nostru',
+    'got_it' => 'GOT IT!',
+    'next' => 'Pagina urmatoare',
+    'prev' => 'Pagina anterioara',
+    'enter_captcha_code' => 'Introduce-ti codul captcha',
+    'contact_us' => 'Contactati-ne',
+    'my_account' => 'Contul meu',
+
+];

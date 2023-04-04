@@ -1,0 +1,10 @@
+{
+    "The :attribute must be at least :length characters and contain at least one uppercase character.": ":attribute trebuie sa fie cel putin de :length caractere si sa contina cel putin o litera mare.",
+    "The :attribute must be at least :length characters.": ":attribute trebuie sa fie cel putin de :length caractere.",
+    "The :attribute must be at least :length characters and contain at least one special character and one number.": ":attribute trebuie sa fie cel putin de :length caractere si sa contina cel putin un caracter special si o cifra.",
+    "The :attribute must be at least :length characters and contain at least one uppercase character, one number, and one special character.": ":attribute trebuie sa fie cel putin de :length caractere si sa contina cel putin o litera mare, o cifra si un caracter special.",
+    "The :attribute must be at least :length characters and contain at least one uppercase character and one special character.": ":attribute trebuie sa fie cel putin de :length caractere si sa contina cel putin o litera mare si un caracter special.",
+    "The :attribute must be at least :length characters and contain at least one uppercase character and one number.": ":attribute trebuie sa fie cel putin de :length caractere si sa contina cel putin o litera mare si o cifra.",
+    "The :attribute must be at least :length characters and contain at least one special character.": ":attribute trebuie sa fie cel putin de :length caractere si sa contina cel putin un caracter special.",
+    "The :attribute must be at least :length characters and contain at least one number.": ":attribute trebuie sa fie cel putin de :length caractere si sa contina cel putin o cifra."
+}

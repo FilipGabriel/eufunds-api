@@ -1,0 +1,28 @@
+{
+    "name": "smis/translation",
+    "description": "The SMIS Translation Module.",
+    "authors": [
+        {
+            "name": "SMIS",
+            "email": "contact@smis.ro"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.0",
+        "astrotomic/laravel-translatable": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Translation\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}

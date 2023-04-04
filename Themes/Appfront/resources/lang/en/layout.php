@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'home' => 'Home',
+    'contact' => 'Contact',
+    'compare' => 'Compare',
+    'account' => 'Account',
+    'login' => 'Login',
+    'more_results' => ':count more results',
+    'favorites' => 'Favorites',
+    'most_searched' => 'Most searched:',
+    'navigation' => 'Navigation',
+    'menu' => 'Menu',
+    'subtotal' => 'Subtotal',
+    'subscribe_to_our_newsletter' => 'Subscribe to Our Newsletter',
+    'subscribe_to_our_newsletter_subtitle' => 'Subscribe to our newsletter & get notification about discounts.',
+    'by_subscribing' => 'By subscribing to our newsletter you agree to our ',
+    'privacy_policy' => 'Privacy Policy.',
+    'don\'t_show_this_popup_again' => 'Don\'t show this popup again',
+    'enter_your_email_address' => 'Enter your email address',
+    'subscribe' => 'SUBSCRIBE',
+    'subscribed' => 'SUBSCRIBED',
+    'the_website_uses_cookies' => 'The website uses cookies to ensure you get the best experience on our website.',
+    'got_it' => 'GOT IT!',
+    'next' => 'NEXT',
+    'prev' => 'PREV',
+    'enter_captcha_code' => 'Enter captcha code',
+    'contact_us' => 'Contact Us',
+    'my_account' => 'My Account',
+
+];
