@@ -96,15 +96,12 @@ class Category extends Model
             });
     }
 
-    public static function treeIds($ids,$sellerId)
+    public static function treeIds($ids)
     {
-        return Cache::tags('categories')
-            ->rememberForever(md5("categories.treeId{$sellerId}:" . locale()), function () use ($ids) {
-                return static::with('files')
-                    ->orderByRaw('-position DESC')
-                    ->get()
-                    ->nestIds($ids);
-            });
+        return static::with('files')
+            ->orderByRaw('-position DESC')
+            ->get()
+            ->nestIds($ids);
     }
 
     public static function filtered($ids)

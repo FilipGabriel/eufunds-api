@@ -14,17 +14,8 @@ class UserTransformer extends JsonResource
             'email' => $this->resource->email,
             'phone'   => $this->resource->phone,
             'about' => $this->resource->about,
-            'role' => $this->getRoleName($this->resource),
+            'role' => $this->resource->roles->pluck('name'),
             'logo' => $this->resource->user_logo->path
         ];
-    }
-
-    private function getRoleName($user)
-    {
-        if($user->isCustomer()) {
-            return null;
-        }
-
-        return $user->roles->first()->name;
     }
 }

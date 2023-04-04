@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Program\Entities\Program;
 use Modules\Product\Entities\Product;
+use Modules\Category\Entities\Category;
 use Modules\Attribute\Entities\Attribute;
 use Modules\Product\Filters\ProductFilter;
 use Modules\Product\Events\ShowingProductList;
@@ -41,6 +42,7 @@ trait ProductSearch
         return response()->json([
             'products' => $this->transform($products),
             'attributes' => $this->getAttributes($productIds),
+            'categories' => $this->getProgramCategories()
         ]);
     }
 
@@ -77,6 +79,14 @@ trait ProductSearch
                 $query->whereIn('id', $this->getProductsCategoryIds($productIds));
             })
             ->get();
+    }
+
+    private function getProgramCategories()
+    {
+        $program = Program::findBySlug(request('program'));
+        $categoryIds = $program->categories->pluck('id')->toArray();
+
+        return Category::treeIds($categoryIds);
     }
 
     private function getProductsCategoryIds($productIds)
