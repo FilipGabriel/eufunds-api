@@ -42,6 +42,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
+        'product_id',
         'brand_id',
         'tax_class_id',
         'slug',

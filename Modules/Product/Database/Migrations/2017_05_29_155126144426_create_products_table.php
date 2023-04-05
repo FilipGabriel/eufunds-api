@@ -15,10 +15,13 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('product_id')->nullable();
+            $table->integer('brand_id')->unsigned()->nullable();
             $table->integer('tax_class_id')->unsigned()->nullable();
             $table->string('slug')->unique();
             $table->decimal('price', 18, 4)->unsigned();
             $table->decimal('special_price', 18, 4)->unsigned()->nullable();
+            $table->string('special_price_type')->nullable();
             $table->date('special_price_start')->nullable();
             $table->date('special_price_end')->nullable();
             $table->decimal('selling_price', 18, 4)->unsigned()->nullable();
@@ -27,11 +30,14 @@ class CreateProductsTable extends Migration
             $table->integer('qty')->nullable();
             $table->boolean('in_stock');
             $table->integer('viewed')->unsigned()->default(0);
+            $table->boolean('virtual')->default(false);
             $table->boolean('is_active');
             $table->datetime('new_from')->nullable();
             $table->datetime('new_to')->nullable();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('set null');
         });
     }
 

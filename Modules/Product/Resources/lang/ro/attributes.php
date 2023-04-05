@@ -5,6 +5,7 @@ return [
     'slug' => 'URL',
     'description' => 'Descriere',
     'short_description' => 'Scurta Descriere',
+    'product_id' => 'NOD ID',
     'brand_id' => 'Brand',
     'categories' => 'Categorii',
     'virtual' => 'Virtual',

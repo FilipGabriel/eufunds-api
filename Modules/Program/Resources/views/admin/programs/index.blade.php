@@ -9,7 +9,7 @@
 @section('content')
     <div class="box box-default">
         <div class="box-body clearfix">
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-4">
                 <div class="row">
                     <button class="btn btn-default add-root-program">{{ trans('program::programs.tree.add_root_program') }}</button>
                     <button class="btn btn-default add-sub-program disabled">{{ trans('program::programs.tree.add_sub_program') }}</button>
@@ -23,7 +23,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-9 col-md-8">
+            <div class="col-lg-8">
                 <div class="tab-wrapper program-details-tab">
                     <ul class="nav nav-tabs">
                         <li class="general-information-tab active"><a data-toggle="tab" href="#general-information">{{ trans('program::programs.tabs.general') }}</a></li>
@@ -49,6 +49,7 @@
                                         {{ Form::text('name', trans('program::attributes.name'), $errors, null, ['required' => true]) }}
                                         {{ Form::select('categories', trans('product::attributes.categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true]) }}
                                         {{ Form::checkbox('is_active', trans('program::attributes.is_active'), trans('program::programs.form.enable_the_program'), $errors) }}
+                                        {{ Form::checkbox('is_searchable', trans('program::attributes.is_searchable'), trans('program::programs.form.show_this_program_in_search_box'), $errors) }}
                                     </div>
                                 </div>
                             </div>
