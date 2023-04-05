@@ -3,8 +3,8 @@
 namespace Modules\Program\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
-use Modules\Program\Entities\Program;
 use Modules\Product\Entities\Product;
+use Modules\Product\Events\ProductViewed;
 use Modules\Product\Filters\ProductFilter;
 use Modules\Product\Http\Controllers\Api\ProductSearch;
 use Modules\Product\Http\Middleware\SetProductSortOption;
@@ -36,5 +36,31 @@ class ProgramProductController extends Controller
         request()->merge(['program' => $slug ]);
 
         return $this->searchProducts($model, $productFilter);
+    }
+
+    /**
+     * Show the specified resource.
+     *
+     * @param string $program
+     * @param string $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function show($program, $slug)
+    {
+        request()->merge(['program' => $program ]);
+
+        $product = Product::findBySlug($slug);
+        $product->selling_price = $product->getSellingPrice()->amount();
+        
+        $relatedProducts = $product->relatedProducts()->forCard()->get();
+        $upSellProducts = $product->upSellProducts()->forCard()->get();
+
+        event(new ProductViewed($product));
+
+        return response()->json([
+            'product' => $product,
+            'relatedProducts' => $relatedProducts,
+            'upSellProducts' => $upSellProducts
+        ]);
     }
 }

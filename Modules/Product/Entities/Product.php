@@ -6,9 +6,11 @@ use Modules\Support\Money;
 use Modules\Media\Entities\File;
 use Modules\Brand\Entities\Brand;
 use Illuminate\Support\Facades\DB;
+use Modules\Coupon\Entities\Coupon;
 use Modules\Option\Entities\Option;
 use Modules\Support\Eloquent\Model;
 use Modules\Media\Eloquent\HasMedia;
+use Modules\Program\Entities\Program;
 use Modules\Meta\Eloquent\HasMetaData;
 use Modules\Support\Search\Searchable;
 use Modules\Category\Entities\Category;
@@ -120,9 +122,9 @@ class Product extends Model
                 $product->saveRelations(request()->all());
             }
 
-            $product->withoutEvents(function () use ($product) {
-                $product->update(['selling_price' => $product->getSellingPrice()->amount()]);
-            });
+            // $product->withoutEvents(function () use ($product) {
+            //     $product->update(['selling_price' => $product->getSellingPrice()->amount()]);
+            // });
         });
 
         static::addActiveGlobalScope();
@@ -364,7 +366,65 @@ class Product extends Model
 
     public function getSellingPrice()
     {
-        return $this->hasSpecialPrice() ? $this->getSpecialPrice() : $this->price;
+        $sellingPrice = $this->hasSpecialPrice() ? $this->getSpecialPrice() : $this->price;
+
+        $sellingPrice = $this->applyProgramDiscounts($sellingPrice);
+        $sellingPrice = $this->applyCategoryDiscounts($sellingPrice);
+        $sellingPrice = $this->applyUserDiscount($sellingPrice);
+
+        return $sellingPrice;
+    }
+
+    private function applyProgramDiscounts($sellingPrice)
+    {
+        $program = Program::findBySlug(request('program'));
+
+        foreach($this->getCouponsByProgram($program->id) as $couponId) {
+            $coupon = Coupon::find($couponId);
+
+            if(
+                $coupon && $coupon->valid() && ! $coupon->usageLimitReached() &&
+                ! $coupon->perCustomerUsageLimitReached() && ! $coupon->excludePrograms->contains($program->id)
+            ) {
+                $sellingPrice = $sellingPrice->subtract($coupon->getCalculatedValue($this->price));
+            }
+        }
+
+        return $sellingPrice;
+    }
+
+    private function applyCategoryDiscounts($sellingPrice)
+    {
+        $categoryIds = $this->categories->pluck('id');
+        
+        foreach($this->getCouponsByCategory($categoryIds) as $couponId) {
+            $coupon = Coupon::find($couponId);
+
+            if(
+                $coupon && $coupon->valid() && ! $coupon->usageLimitReached() && ! $coupon->perCustomerUsageLimitReached() &&
+                $coupon->excludeCategories->intersect($this->categories)->isEmpty()
+            ) {
+                $sellingPrice = $sellingPrice->subtract($coupon->getCalculatedValue($this->price));
+            }
+        }
+
+        return $sellingPrice;
+    }
+
+    private function applyUserDiscount($sellingPrice)
+    {
+        foreach($this->getCouponsByUser() as $couponId) {
+            $coupon = Coupon::find($couponId);
+
+            if(
+                $coupon && $coupon->valid() && ! $coupon->usageLimitReached() &&
+                ! $coupon->perCustomerUsageLimitReached() && ! $coupon->excludeUsers->contains(auth()->id())
+            ) {
+                $sellingPrice = $sellingPrice->subtract($coupon->getCalculatedValue($this->price));
+            }
+        }
+
+        return $sellingPrice;
     }
 
     public function getCouponsByProgram($id)

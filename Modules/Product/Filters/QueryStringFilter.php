@@ -2,7 +2,6 @@
 
 namespace Modules\Product\Filters;
 
-use Modules\Support\Money;
 use Illuminate\Support\Facades\DB;
 use Modules\Program\Entities\Program;
 use Illuminate\Database\Query\JoinClause;
@@ -76,31 +75,6 @@ class QueryStringFilter
     public function latest($query)
     {
         $query->latest();
-    }
-
-    public function priceLowToHigh($query)
-    {
-        $query->orderBy('selling_price');
-    }
-
-    public function priceHighToLow($query)
-    {
-        $query->orderByDesc('selling_price');
-    }
-
-    public function fromPrice($query, $price)
-    {
-        $query->where('selling_price', '>=', $this->convertPrice($price));
-    }
-
-    public function toPrice($query, $price)
-    {
-        $query->where('selling_price', '<=', $this->convertPrice($price));
-    }
-
-    private function convertPrice($price)
-    {
-        return Money::inCurrentCurrency($price)->convertToDefaultCurrency()->amount();
     }
 
     public function brand($query, $slug)

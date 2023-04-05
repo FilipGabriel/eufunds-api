@@ -21,7 +21,7 @@ class AttributeValue extends Model
      *
      * @var array
      */
-    protected $fillable = ['position'];
+    protected $fillable = ['id', 'position'];
 
     /**
      * The attributes that are translatable.
