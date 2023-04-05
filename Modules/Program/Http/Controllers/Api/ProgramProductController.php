@@ -59,8 +59,22 @@ class ProgramProductController extends Controller
 
         return response()->json([
             'product' => $product,
-            'relatedProducts' => $relatedProducts,
-            'upSellProducts' => $upSellProducts
+            'relatedProducts' => $this->forCard($relatedProducts),
+            'upSellProducts' => $this->forCard($upSellProducts)
         ]);
+    }
+
+    private function forCard($products)
+    {
+        return $products->map(function($product) {
+            return [
+                'slug' => $product->slug,
+                'name' => $product->name,
+                'base_image' => $product->base_image->path ?? null,
+                'description' => $product->description,
+                'short_description' => $product->short_description,
+                'price' => $product->getSellingPrice()->format(),
+            ];
+        });
     }
 }
