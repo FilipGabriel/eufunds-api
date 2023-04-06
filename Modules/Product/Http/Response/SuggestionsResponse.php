@@ -39,9 +39,25 @@ class SuggestionsResponse implements Responsable
     public function toResponse($request)
     {
         return response()->json([
+            'categories' => $this->transformCategories(),
             'products' => $this->transformProducts(),
             'remaining' => $this->getRemainingCount(),
         ]);
+    }
+
+    /**
+     * Transform the categories.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    private function transformCategories()
+    {
+        return $this->categories->map(function (Category $category) {
+            return [
+                'slug' => $category->slug,
+                'name' => $category->name,
+            ];
+        })->unique('slug')->values();
     }
 
     /**
