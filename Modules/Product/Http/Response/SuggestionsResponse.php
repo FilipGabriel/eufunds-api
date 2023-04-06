@@ -39,7 +39,6 @@ class SuggestionsResponse implements Responsable
     public function toResponse($request)
     {
         return response()->json([
-            'categories' => $this->transformCategories(),
             'products' => $this->transformProducts(),
             'remaining' => $this->getRemainingCount(),
         ]);
@@ -69,10 +68,10 @@ class SuggestionsResponse implements Responsable
     {
         return $this->products->map(function (Product $product) {
             return [
+                'slug' => $product->slug,
                 'name' => $this->highlight($product->name),
-                'price' => $product->getSellingPrice()->format(),
+                'selling_price' => $product->getSellingPrice(),
                 'base_image' => $product->base_image->path ?? null,
-                'url' => $product->url(),
             ];
         });
     }

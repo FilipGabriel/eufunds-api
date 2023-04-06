@@ -2,6 +2,7 @@
 
 namespace Modules\Product\Http\Controllers\Api;
 
+use Modules\Program\Entities\Program;
 use Modules\Product\Entities\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Product\Http\Response\SuggestionsResponse;
@@ -61,6 +62,7 @@ class SuggestionController
             ->with(['files', 'categories' => function ($query) {
                 $query->limit(5);
             }])
+            ->when(request()->filled('program'), $this->programQuery())
             ->when(request()->filled('category'), $this->categoryQuery())
             ->get();
     }
@@ -75,6 +77,23 @@ class SuggestionController
         return function (Builder $query) {
             $query->whereHas('categories', function ($categoryQuery) {
                 $categoryQuery->where('slug', request('category'));
+            });
+        };
+    }
+
+    /**
+     * Returns program condition closure.
+     *
+     * @return \Closure
+     */
+    private function programQuery()
+    {
+        $program = Program::findBySlug(request('program'));
+        $categoryIds = $program->categories->pluck('id')->toArray();
+
+        return function (Builder $query) use ($categoryIds) {
+            $query->whereHas('categories', function ($categoryQuery) use ($categoryIds) {
+                $categoryQuery->whereIn('id', $categoryIds);
             });
         };
     }
