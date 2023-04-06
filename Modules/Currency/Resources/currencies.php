@@ -465,7 +465,7 @@ return [
         'name' => 'Qatari Rial',
         'subunit' => 2,
     ],
-    'lei' => [
+    'RON' => [
         'name' => 'Romanian Leu',
         'subunit' => 2,
     ],

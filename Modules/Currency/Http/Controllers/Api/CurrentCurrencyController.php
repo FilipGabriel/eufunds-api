@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Currency\Http\Controllers;
+namespace Modules\Currency\Http\Controllers\Api;
 
 class CurrentCurrencyController
 {
