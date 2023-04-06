@@ -15,7 +15,7 @@ class ProgramController
     {
         return response()->json([
             'programs' => Program::tree(),
-            'activePrograms' => Program::whereIsSearchable(true)->get()
+            'activePrograms' => Program::searchable()
         ]);
     }
 }
