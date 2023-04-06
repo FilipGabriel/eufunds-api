@@ -56,6 +56,7 @@ trait ProductSearch
         return $products->setCollection(
             $products->getCollection()->map(function($product) {
                 return [
+                    'id' => $product->id,
                     'slug' => $product->slug,
                     'name' => $product->name,
                     'base_image' => $product->base_image->path ?? null,

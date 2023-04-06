@@ -68,6 +68,7 @@ class ProgramProductController extends Controller
     {
         return $products->map(function($product) {
             return [
+                'id' => $product->id,
                 'slug' => $product->slug,
                 'name' => $product->name,
                 'base_image' => $product->base_image->path ?? null,
