@@ -13,6 +13,9 @@ class ProgramController
      */
     public function index()
     {
-        return response()->json(Program::tree());
+        return response()->json([
+            'programs' => Program::tree(),
+            'activePrograms' => Program::whereIsSearchable(true)->get()
+        ]);
     }
 }
