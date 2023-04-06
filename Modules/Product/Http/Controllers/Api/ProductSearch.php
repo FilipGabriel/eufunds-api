@@ -59,7 +59,7 @@ trait ProductSearch
                     'slug' => $product->slug,
                     'name' => $product->name,
                     'base_image' => $product->base_image->path ?? null,
-                    'price' => $product->getSellingPrice(),
+                    'selling_price' => $product->getSellingPrice(),
                 ];
             })
         );
