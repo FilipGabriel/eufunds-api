@@ -36,6 +36,7 @@ class SuggestionController
     {
         return $model->search(request('query'))
             ->query()
+            ->when(request()->filled('program'), $this->programQuery())
             ->when(request()->filled('category'), $this->categoryQuery())
             ->count();
     }

@@ -45,21 +45,6 @@ class SuggestionsResponse implements Responsable
     }
 
     /**
-     * Transform the categories.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    private function transformCategories()
-    {
-        return $this->categories->map(function (Category $category) {
-            return [
-                'slug' => $category->slug,
-                'name' => $category->name,
-            ];
-        })->unique('slug')->values();
-    }
-
-    /**
      * Transform the products.
      *
      * @return \Illuminate\Support\Collection
