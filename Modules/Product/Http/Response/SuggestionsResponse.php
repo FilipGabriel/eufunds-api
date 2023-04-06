@@ -86,7 +86,7 @@ class SuggestionsResponse implements Responsable
     {
         $query = str_replace(' ', '|', preg_quote($this->query));
 
-        return preg_replace("/($query)/i", '<em>$1</em>', $text);
+        return preg_replace("/($query)/i", '<strong>$1</strong>', $text);
     }
 
     /**
