@@ -123,9 +123,9 @@ class Product extends Model
                 $product->saveRelations(request()->all());
             }
 
-            // $product->withoutEvents(function () use ($product) {
-            //     $product->update(['selling_price' => $product->getSellingPrice()->amount()]);
-            // });
+            $product->withoutEvents(function () use ($product) {
+                $product->update(['selling_price' => $product->getSellingPrice()->amount()]);
+            });
         });
 
         static::addActiveGlobalScope();

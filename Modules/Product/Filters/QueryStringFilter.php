@@ -77,6 +77,16 @@ class QueryStringFilter
         $query->latest();
     }
 
+    public function priceLowToHigh($query)
+    {
+        $query->orderBy('selling_price');
+    }
+
+    public function priceHighToLow($query)
+    {
+        $query->orderByDesc('selling_price');
+    }
+
     public function brand($query, $slug)
     {
         $query->whereHas('brand', function ($brandQuery) use ($slug) {
