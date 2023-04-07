@@ -46,6 +46,7 @@ class UserController
                     'company_name' => $order->company_name,
                     'total' => $order->total->format(),
                     'program' => $order->funding->name,
+                    'created' => $order->created_at->format('d M Y'),
                 ];
             });
 
