@@ -13,6 +13,9 @@
                 @slot('thead')
                     <tr>
                         <th>{{ trans('admin::admin.table.id') }}</th>
+                        <th>{{ trans('order::orders.table.funding') }}</th>
+                        <th>{{ trans('order::orders.table.business_id') }}</th>
+                        <th>{{ trans('order::orders.table.company_name') }}</th>
                         <th>{{ trans('order::orders.table.customer_name') }}</th>
                         <th>{{ trans('order::orders.table.customer_email') }}</th>
                         <th>{{ trans('admin::admin.table.status') }}</th>
@@ -35,6 +38,9 @@
         new DataTable('#orders-table .table', {
             columns: [
                 { data: 'id', width: '5%' },
+                { data: 'funding', orderable: false, searchable: false },
+                { data: 'business_id' },
+                { data: 'company_name' },
                 { data: 'customer_name', orderable: false, searchable: false },
                 { data: 'customer_email' },
                 { data: 'status' },

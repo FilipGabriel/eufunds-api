@@ -51,7 +51,10 @@ class OrderService
             $order->storeProducts($cartItem);
         }
 
-        $order->update([ 'total' => $total->amount() ]);
+        $order->update([
+            'sub_total' => $total->amount(),
+            'total' => $total->amount()
+        ]);
     }
 
     private function storeOrderDownloads($request, Order $order)

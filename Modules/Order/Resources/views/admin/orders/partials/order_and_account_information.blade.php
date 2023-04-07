@@ -44,6 +44,11 @@
                                     </div>
                                 </td>
                             </tr>
+                            
+                            <tr>
+                                <td>{{ trans('order::orders.table.funding') }}</td>
+                                <td>{{ $order->funding->name }}</td>
+                            </tr>
 
                             @if ($order->shipping_method)
                                 <tr>
@@ -51,11 +56,6 @@
                                     <td>{{ $order->shipping_method }}</td>
                                 </tr>
                             @endif
-
-                            <tr>
-                                <td>{{ trans('order::orders.payment_method') }}</td>
-                                <td>{{ $order->payment_method }}</td>
-                            </tr>
 
                             @if (is_multilingual())
                                 <tr>
@@ -89,6 +89,14 @@
                     <table class="table">
                         <tbody>
                             <tr>
+                                <td>{{ trans('order::orders.business_id') }}</td>
+                                <td>{{ $order->business_id }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ trans('order::orders.company_name') }}</td>
+                                <td>{{ $order->company_name }}</td>
+                            </tr>
+                            <tr>
                                 <td>{{ trans('order::orders.customer_name') }}</td>
                                 <td>{{ $order->customer_full_name }}</td>
                             </tr>
@@ -101,14 +109,6 @@
                             <tr>
                                 <td>{{ trans('order::orders.customer_phone') }}</td>
                                 <td>{{ $order->customer_phone }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>{{ trans('order::orders.customer_group') }}</td>
-
-                                <td>
-                                    {{ is_null($order->customer_id) ? trans('order::orders.guest') : trans('order::orders.registered') }}
-                                </td>
                             </tr>
                         </tbody>
                     </table>

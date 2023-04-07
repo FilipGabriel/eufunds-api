@@ -14,6 +14,9 @@ class OrderTable extends AdminTable
     public function make()
     {
         return $this->newTable()
+            ->editColumn('funding', function ($order) {
+                return optional($order->funding)->name;
+            })
             ->addColumn('customer_name', function ($order) {
                 return $order->customer_full_name;
             })

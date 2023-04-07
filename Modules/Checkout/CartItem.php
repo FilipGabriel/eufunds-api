@@ -3,8 +3,8 @@
 namespace Modules\Checkout;
 
 use JsonSerializable;
-use Modules\Product\Entities\Product;
 use Modules\Support\Money;
+use Modules\Product\Entities\Product;
 
 class CartItem implements JsonSerializable
 {

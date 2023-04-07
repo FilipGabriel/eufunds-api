@@ -13,7 +13,7 @@ return [
     'shipping_address' => 'Shipping Address',
     'product' => 'Product',
     'unit_price' => 'Unit Price',
-    'quantity' => 'Quantity',
+    'quantity' => 'Qty',
     'line_total' => 'Line Total',
     'subtotal' => 'Subtotal',
     'total' => 'Total',

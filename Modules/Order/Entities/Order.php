@@ -13,6 +13,7 @@ use Modules\Coupon\Entities\Coupon;
 use Modules\Order\Admin\OrderTable;
 use Modules\Support\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Program\Entities\Program;
 use Modules\Transaction\Entities\Transaction;
 
 class Order extends Model
@@ -40,6 +41,15 @@ class Order extends Model
      * @var array
      */
     protected $dates = ['start_date', 'end_date', 'deleted_at'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'funding'
+    ];
 
     public static function totalSales()
     {
@@ -118,6 +128,11 @@ class Order extends Model
     public function transaction()
     {
         return $this->hasOne(Transaction::class)->withTrashed();
+    }
+
+    public function getFundingAttribute()
+    {
+        return Program::whereSlug($this->program)->first();
     }
 
     public function getSubTotalAttribute($subTotal)
@@ -209,6 +224,9 @@ class Order extends Model
         $query = $this->newQuery()
             ->select([
                 'id',
+                'program',
+                'company_name',
+                'business_id',
                 'customer_first_name',
                 'customer_last_name',
                 'customer_email',
