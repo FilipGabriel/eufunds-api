@@ -133,11 +133,11 @@
 
 @media screen and (max-width: 1199px) {
     .single-grid {
-        &.total-companies {
+        &.total-customers {
             margin-top: 15px;
         }
 
-        &.total-consultants {
+        &.total-products {
             margin-top: 15px;
         }
     }
@@ -145,11 +145,7 @@
 
 @media screen and (max-width: 767px) {
 	.single-grid {
-        &.total-consultants {
-            margin-top: 15px;
-        }
-
-        &.total-customers {
+        &.total-orders {
             margin-top: 15px;
         }
     }

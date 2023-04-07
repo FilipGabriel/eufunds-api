@@ -17,16 +17,8 @@ class SidebarExtender extends BaseSidebarExtender
                 $item->weight(15);
                 $item->route('admin.orders.index');
                 $item->authorize(
-                    $this->auth->hasAnyAccess(['admin.orders.index', 'admin.transactions.index'])
+                    $this->auth->hasAccess('admin.orders.index')
                 );
-
-                $item->item(trans('order::orders.orders'), function (Item $item) {
-                    $item->weight(5);
-                    $item->route('admin.orders.index');
-                    $item->authorize(
-                        $this->auth->hasAccess('admin.orders.index')
-                    );
-                });
             });
         });
     }
