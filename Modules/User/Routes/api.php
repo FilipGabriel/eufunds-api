@@ -6,6 +6,7 @@ Route::get('login/{provider}', 'AuthController@redirectToProvider')->name('api.l
 Route::get('login/{provider}/callback', 'AuthController@handleProviderCallback')->name('api.login.callback');
 
 Route::get('account/orders', 'UserController@index')->name('account.orders.index');
+Route::get('account/orders/{id}', 'UserController@show')->name('account.orders.show');
 
 Route::get('user', [
     'as' => 'api.user.authenticated',
