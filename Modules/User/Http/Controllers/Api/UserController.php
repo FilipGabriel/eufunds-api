@@ -45,6 +45,7 @@ class UserController
                     'business_id' => $order->business_id,
                     'company_name' => $order->company_name,
                     'total' => $order->total->format(),
+                    'program' => $order->funding->name,
                 ];
             });
 

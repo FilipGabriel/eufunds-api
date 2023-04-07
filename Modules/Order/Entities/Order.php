@@ -132,7 +132,7 @@ class Order extends Model
 
     public function getFundingAttribute()
     {
-        return Program::whereSlug($this->program)->first();
+        return Program::withoutGlobalScope('active')->whereSlug($this->program)->first();
     }
 
     public function getSubTotalAttribute($subTotal)
