@@ -30,4 +30,24 @@ class UserController
 
         return new UserTransformer(auth()->user());
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $orders = auth()->user()->orders()->latest()->get()
+            ->map(function($order) {
+                return [
+                    'id' => $order->id,
+                    'business_id' => $order->business_id,
+                    'company_name' => $order->company_name,
+                    'total' => $order->total->format(),
+                ];
+            });
+
+        return response()->json($orders);
+    }
 }

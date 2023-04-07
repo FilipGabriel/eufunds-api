@@ -13,7 +13,7 @@
                 @slot('thead')
                     <tr>
                         <th>{{ trans('admin::admin.table.id') }}</th>
-                        <th>{{ trans('order::orders.table.funding') }}</th>
+                        <th width="25%">{{ trans('order::orders.table.funding') }}</th>
                         <th>{{ trans('order::orders.table.business_id') }}</th>
                         <th>{{ trans('order::orders.table.company_name') }}</th>
                         <th>{{ trans('order::orders.table.customer_name') }}</th>

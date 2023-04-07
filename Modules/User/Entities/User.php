@@ -5,6 +5,7 @@ namespace Modules\User\Entities;
 use Modules\Media\Entities\File;
 use Modules\User\Admin\UserTable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\Order\Entities\Order;
 use Illuminate\Support\Facades\Mail;
 use Modules\Media\Eloquent\HasMedia;
 use Modules\Support\Search\Searchable;
@@ -188,6 +189,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function hasRoleName($name)
     {
         return $this->roles()->whereTranslation('name', $name)->count() !== 0;
+    }
+
+    /**
+     * Get the orders of the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'customer_id');
     }
 
     /**
