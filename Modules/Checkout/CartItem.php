@@ -3,21 +3,20 @@
 namespace Modules\Checkout;
 
 use JsonSerializable;
+use Modules\Product\Entities\Product;
 use Modules\Support\Money;
 
 class CartItem implements JsonSerializable
 {
-    public $id;
     public $qty;
     public $product;
     public $options;
 
     public function __construct($item)
     {
-        $this->id = $item->id;
-        $this->qty = $item->quantity;
-        $this->product = $item->attributes['product'];
-        $this->options = $item->attributes['options'];
+        $this->qty = $item['qty'];
+        $this->product = Product::find($item['id']);
+        $this->options = collect($item['options'] ?? []);
     }
 
     public function unitPrice()
@@ -56,7 +55,6 @@ class CartItem implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id' => $this->id,
             'qty' => $this->qty,
             'product' => $this->product->clean(),
             'options' => $this->options->keyBy('position'),

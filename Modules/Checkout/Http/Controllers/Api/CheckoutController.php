@@ -22,7 +22,7 @@ class CheckoutController extends Controller
         try {
             $order = $orderService->create($request);
         } catch (Exception $e) {
-            $order->delete();
+            $orderService->delete($order);
 
             return response()->json([
                 'message' => $e->getMessage(),

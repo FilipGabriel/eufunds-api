@@ -60,4 +60,9 @@ class OrderService
             $order->storeDownloads(new CartItem($item));
         }
     }
+
+    public function delete(Order $order)
+    {
+        $order->delete();
+    }
 }
