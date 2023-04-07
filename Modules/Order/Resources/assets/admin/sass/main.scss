@@ -89,8 +89,10 @@
                 border-top: 1px solid #f1f1f1 !important;
                 vertical-align: middle;
 
+                min-width: 100px;
+
                 &:first-child {
-                    min-width: 250px;
+                    min-width: 350px;
                 }
 
                 &:last-child {

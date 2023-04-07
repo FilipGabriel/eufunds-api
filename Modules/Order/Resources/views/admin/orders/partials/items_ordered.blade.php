@@ -10,7 +10,7 @@
                             <tr>
                                 <th>{{ trans('order::orders.product') }}</th>
                                 <th>{{ trans('order::orders.unit_price') }}</th>
-                                <th>{{ trans('order::orders.quantity') }}</th>
+                                <th class="text-center">{{ trans('order::orders.quantity') }}</th>
                                 <th>{{ trans('order::orders.line_total') }}</th>
                             </tr>
                         </thead>
@@ -47,7 +47,7 @@
                                         {{ $product->unit_price->format() }}
                                     </td>
 
-                                    <td>{{ $product->qty }}</td>
+                                    <td class="text-center">{{ $product->qty }}</td>
 
                                     <td>
                                         {{ $product->line_total->format() }}
