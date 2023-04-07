@@ -14,7 +14,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         \Modules\Product\Events\ProductViewed::class => [
             \Modules\Product\Listeners\IncrementProductView::class,
-            \Modules\Product\Listeners\AddToRecentlyViewed::class,
         ],
         \Modules\Product\Events\ShowingProductList::class => [
             \Modules\Product\Listeners\StoreSearchTerm::class,

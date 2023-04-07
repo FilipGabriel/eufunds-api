@@ -3,7 +3,6 @@
 namespace Modules\Coupon\Entities;
 
 use Modules\Support\Money;
-use Modules\Cart\Facades\Cart;
 use Modules\User\Entities\User;
 use Modules\Order\Entities\Order;
 use Illuminate\Support\Facades\DB;
@@ -171,24 +170,6 @@ class Coupon extends Model
     private function userIsNotLoggedInWhenAddingCouponToCart($customerEmail = null)
     {
         return is_null($customerEmail) && auth()->guest();
-    }
-
-    public function didNotSpendTheRequiredAmount()
-    {
-        if (is_null($this->minimum_spend)) {
-            return false;
-        }
-
-        return Cart::subTotal()->lessThan($this->minimum_spend);
-    }
-
-    public function spentMoreThanMaximumAmount()
-    {
-        if (is_null($this->maximum_spend)) {
-            return false;
-        }
-
-        return Cart::subTotal()->greaterThan($this->maximum_spend);
     }
 
     public function users()
