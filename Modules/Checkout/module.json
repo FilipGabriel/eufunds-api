@@ -1,0 +1,9 @@
+{
+    "name": "Checkout",
+    "alias": "checkout",
+    "description": "The SMIS Checkout Module.",
+    "priority": 100,
+    "providers": [
+        "Modules\\Checkout\\Providers\\EventServiceProvider"
+    ]
+}

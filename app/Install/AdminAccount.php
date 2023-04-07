@@ -60,6 +60,10 @@ class AdminAccount
             'admin.attribute_sets.create' => true,
             'admin.attribute_sets.edit' => true,
             'admin.attribute_sets.destroy' => true,
+            // orders
+            'admin.orders.index' => true,
+            'admin.orders.show' => true,
+            'admin.orders.edit' => true,
             // options
             'admin.options.index' => true,
             'admin.options.create' => true,
