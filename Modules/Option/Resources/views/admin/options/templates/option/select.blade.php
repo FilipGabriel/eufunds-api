@@ -24,6 +24,7 @@
             </table>
         </div>
 
+        @if(request()->routeIs('admin.options.*'))
         <button
             type="button"
             class="btn btn-default"
@@ -35,5 +36,6 @@
         >
             {{ trans('option::options.form.add_new_row') }}
         </button>
+        @endif
     </div>
 </script>

@@ -5,6 +5,6 @@ if ($('#option-create-form, #option-edit-form').length !== 0) {
     new Option();
 }
 
-if ($('#option-create-form, #option-edit-form').length !== 0) {
+if ($('#product-create-form, #product-edit-form').length !== 0) {
     new ProductOption();
 }

@@ -10,8 +10,8 @@ class ProductTabsExtender
 {
     public function extend(Tabs $tabs)
     {
-        // $tabs->group('basic_information')
-        //     ->add($this->options());
+        $tabs->group('basic_information')
+            ->add($this->options());
     }
 
     private function options()

@@ -3,6 +3,7 @@
 namespace Modules\Program\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
+use Modules\Option\Entities\OptionValue;
 use Modules\Product\Entities\Product;
 use Modules\Product\Events\ProductViewed;
 use Modules\Product\Filters\ProductFilter;
@@ -51,6 +52,19 @@ class ProgramProductController extends Controller
 
         $product = Product::findBySlug($slug);
         $product->selling_price = $product->getSellingPrice()->amount();
+        $product->variants = $product->options->map(function($option) use ($product) {
+            return [
+                'id' => $option->id,
+                'type' => $option->type,
+                'values' => $option->values->map(function (OptionValue $value) use ($product) {
+                    return [
+                        'id' => $value->id,
+                        'label' => $value->label . $value->formattedPriceForProduct($product),
+                        'amount' => $value->priceForProduct($product)->convertToCurrentCurrency()->amount(),
+                    ];
+                })
+            ];
+        });
         
         $relatedProducts = $product->relatedProducts()->forCard()->get();
         $upSellProducts = $product->upSellProducts()->forCard()->get();

@@ -22,7 +22,7 @@
                         <div class="col-lg-6 col-md-12 p-l-0">
                             <div class="form-group">
                                 <label for="option-<%- optionId %>-name">{{ trans('option::attributes.name') }}</label>
-                                <input type="text" name="options[<%- optionId %>][name]" class="form-control option-name-field" id="option-<%- optionId %>-name" value="<%- option.name %>">
+                                <input type="text" name="options[<%- optionId %>][name]" class="form-control option-name-field" id="option-<%- optionId %>-name" value="<%- option.name %>" readonly>
                             </div>
                         </div>
 
@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label for="option-<%- optionId %>-type">{{ trans('option::attributes.type') }}</label>
 
-                                <select name="options[<%- optionId %>][type]" class="form-control custom-select-black" id="option-<%- optionId %>-type">
+                                <select name="options[<%- optionId %>][type]" class="form-control custom-select-black" id="option-<%- optionId %>-type" readonly>
                                     <option value=""
                                         <%= option.type === null ? 'selected' : '' %>
                                     >

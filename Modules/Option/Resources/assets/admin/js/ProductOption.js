@@ -9,7 +9,7 @@ export default class extends BaseOption {
         this.addOptions(SMIS.data['product.options']);
 
         if (this.optionsCount === 0) {
-            this.addOption();
+            // this.addOption();
         }
 
         if (this.optionsCount > 3) {

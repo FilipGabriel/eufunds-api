@@ -34,29 +34,9 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    'smartbill' => [
-        'cif' => env('SMARTBILL_API_CIF'),
-        'series' => env('SMARTBILL_API_SERIES'),
-        'key' => env('SMARTBILL_API_KEY'),
-        'url' => env('SMARTBILL_API_URL'),
-    ],
-
-    'mobilpay' => [
-        'signature' => env('MOBILPAY_SIGNATURE'),
-        'public_cer' => env('MOBILPAY_PUBLIC_CER'),
-        'private_key' => env('MOBILPAY_PRIVATE_KEY'),
-    ],
-
-    'termene' => [
-        'baseUrl' => env('TERMENE_BASE_URL'),
-        'username' => env('TERMENE_USERNAME'),
-        'password' => env('TERMENE_PASSWORD'),
-        'key' => env('TERMENE_KEY'),
-    ],
-
-    'zoom' => [
-        'url' => env('ZOOM_API_URL'),
-        'api_key' => env('ZOOM_API_KEY'),
-        'secret_key' => env('ZOOM_SECRET_KEY')
+    'nod' => [
+        'user' => env('NOD_API_USER'),
+        'key' => env('NOD_API_KEY'),
+        'url' => env('NOD_API_URL'),
     ],
 ];

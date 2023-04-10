@@ -3,13 +3,13 @@
 </div>
 
 <div class="box-footer no-border p-t-0">
-    <div class="form-group pull-left">
+    <!-- <div class="form-group pull-left">
         <div class="col-md-10">
             <button type="button" class="btn btn-default m-r-10" id="add-new-option">
                 {{ trans('option::options.form.add_new_option') }}
             </button>
         </div>
-    </div>
+    </div> -->
 
     @hasAccess('admin.options.index')
         @if ($globalOptions->isNotEmpty())

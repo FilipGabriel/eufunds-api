@@ -59,8 +59,9 @@ trait ProductSearch
                     'id' => $product->id,
                     'slug' => $product->slug,
                     'name' => $product->name,
+                    'variants' => $product->options->count(),
                     'base_image' => $product->base_image->path ?? null,
-                    'selling_price' => $product->getSellingPrice(),
+                    'selling_price' => $product->getSellingPrice()
                 ];
             })
         );
