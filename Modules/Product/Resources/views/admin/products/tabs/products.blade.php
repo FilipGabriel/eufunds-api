@@ -10,8 +10,6 @@
             DataTable.setSelectedIds('#related_products .table', {!! old_json('related_products', $product->relatedProductList(), JSON_NUMERIC_CHECK) !!});
         @elseif ($name === 'up_sells')
             DataTable.setSelectedIds('#up_sells .table', {!! old_json('up_sells', $product->upSellProductList(), JSON_NUMERIC_CHECK) !!});
-        @elseif ($name === 'cross_sells')
-            DataTable.setSelectedIds('#cross_sells .table', {!! old_json('cross_sells', $product->crossSellProductList(), JSON_NUMERIC_CHECK) !!});
         @endif
 
         DataTable.setRoutes('#{{ $name }} .table', {

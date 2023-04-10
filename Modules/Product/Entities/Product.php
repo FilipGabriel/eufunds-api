@@ -225,11 +225,6 @@ class Product extends Model
         return $this->belongsToMany(static::class, 'up_sell_products', 'product_id', 'up_sell_product_id');
     }
 
-    public function crossSellProducts()
-    {
-        return $this->belongsToMany(static::class, 'cross_sell_products', 'product_id', 'cross_sell_product_id');
-    }
-
     public function filter($filter)
     {
         return $filter->apply($this);
@@ -559,13 +554,6 @@ class Product extends Model
             ->pluck('up_sell_product_id');
     }
 
-    public function crossSellProductList()
-    {
-        return $this->crossSellProducts()
-            ->withoutGlobalScope('active')
-            ->pluck('cross_sell_product_id');
-    }
-
     public static function findBySlug($slug)
     {
         return self::with([
@@ -627,7 +615,6 @@ class Product extends Model
     {
         $this->categories()->sync(array_get($attributes, 'categories', []));
         $this->upSellProducts()->sync(array_get($attributes, 'up_sells', []));
-        $this->crossSellProducts()->sync(array_get($attributes, 'cross_sells', []));
         $this->relatedProducts()->sync(array_get($attributes, 'related_products', []));
     }
 

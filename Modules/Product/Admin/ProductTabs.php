@@ -20,7 +20,6 @@ class ProductTabs extends Tabs
         $this->group('advanced_information', trans('product::products.tabs.group.advanced_information'))
             ->add($this->relatedProducts())
             ->add($this->upSells())
-            ->add($this->crossSells())
             ->add($this->seo());
     }
 
@@ -110,14 +109,6 @@ class ProductTabs extends Tabs
         return tap(new Tab('up_sells', trans('product::products.tabs.up_sells')), function (Tab $tab) {
             $tab->weight(45);
             $tab->view('product::admin.products.tabs.products', ['name' => 'up_sells']);
-        });
-    }
-
-    private function crossSells()
-    {
-        return tap(new Tab('cross_sells', trans('product::products.tabs.cross_sells')), function (Tab $tab) {
-            $tab->weight(45);
-            $tab->view('product::admin.products.tabs.products', ['name' => 'cross_sells']);
         });
     }
 

@@ -21,7 +21,6 @@ return [
         'seo' => 'SEO',
         'related_products' => 'Related Products',
         'up_sells' => 'Up-Sells',
-        'cross_sells' => 'Cross-Sells',
         'additional' => 'Additional',
     ],
     'form' => [
