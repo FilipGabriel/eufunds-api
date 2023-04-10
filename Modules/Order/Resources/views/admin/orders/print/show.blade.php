@@ -48,7 +48,7 @@
                 <div class="invoice-body clearfix">
                     <div class="invoice-details-wrapper">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6">
+                            <div class="col-md-12">
                                 <div class="invoice-details">
                                     <h5>{{ trans('order::print.order_details') }}</h5>
 

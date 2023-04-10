@@ -25,17 +25,7 @@ class SettingTabs extends Tabs
             ->add($this->maintenance())
             ->add($this->app())
             ->add($this->currency())
-            ->add($this->mail())
-            ->add($this->newsletter())
-            ->add($this->customCssJs());
-
-        $this->group('social_logins', trans('setting::settings.tabs.group.social_logins'))
-            ->add($this->facebook())
-            ->add($this->google());
-
-        $this->group('payment_methods', trans('setting::settings.tabs.group.payment_methods'))
-            ->add($this->bankTransfer())
-            ->add($this->mobilpay());
+            ->add($this->mail());
     }
 
     private function general()
@@ -138,86 +128,5 @@ class SettingTabs extends Tabs
     private function getMailEncryptionProtocols()
     {
         return ['' => trans('admin::admin.form.please_select')] + trans('setting::settings.form.mail_encryption_protocols');
-    }
-
-    private function newsletter()
-    {
-        return tap(new Tab('newsletter', trans('setting::settings.tabs.newsletter')), function (Tab $tab) {
-            $tab->weight(32);
-            $tab->fields(['newsletter_enabled', 'mailchimp_api_key', 'mailchimp_list_id']);
-            $tab->view('setting::admin.settings.tabs.newsletter');
-        });
-    }
-
-    private function customCssJs()
-    {
-        return tap(new Tab('custom_css_js', trans('setting::settings.tabs.custom_css_js')), function (Tab $tab) {
-            $tab->weight(35);
-            $tab->view('setting::admin.settings.tabs.custom_css_js');
-        });
-    }
-
-    private function facebook()
-    {
-        return tap(new Tab('facebook', trans('setting::settings.tabs.facebook')), function (Tab $tab) {
-            $tab->weight(38);
-
-            $tab->fields([
-                'facebook_login_enabled',
-                'translatable.facebook_login_label',
-                'facebook_login_app_id',
-                'facebook_login_app_secret',
-            ]);
-
-            $tab->view('setting::admin.settings.tabs.facebook');
-        });
-    }
-
-    private function google()
-    {
-        return tap(new Tab('google', trans('setting::settings.tabs.google')), function (Tab $tab) {
-            $tab->weight(39);
-
-            $tab->fields([
-                'google_login_enabled',
-                'translatable.google_login_label',
-                'google_login_client_id',
-                'google_login_client_secret',
-            ]);
-
-            $tab->view('setting::admin.settings.tabs.google');
-        });
-    }
-
-    private function bankTransfer()
-    {
-        return tap(new Tab('bank_transfer', trans('setting::settings.tabs.bank_transfer')), function (Tab $tab) {
-            $tab->weight(41);
-
-            $tab->fields([
-                'bank_transfer_enabled',
-                'translatable.bank_transfer_label',
-                'translatable.bank_transfer_description',
-                'translatable.bank_transfer_instructions',
-            ]);
-
-            $tab->view('setting::admin.settings.tabs.bank_transfer');
-        });
-    }
-
-    private function mobilpay()
-    {
-        return tap(new Tab('mobilpay', trans('setting::settings.tabs.mobilpay')), function (Tab $tab) {
-            $tab->weight(42);
-
-            $tab->fields([
-                'mobilpay_enabled',
-                'translatable.mobilpay_label',
-                'translatable.mobilpay_description',
-                'mobilpay_test_mode',
-            ]);
-
-            $tab->view('setting::admin.settings.tabs.mobilpay');
-        });
     }
 }

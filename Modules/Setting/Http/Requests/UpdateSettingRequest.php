@@ -56,18 +56,6 @@ class UpdateSettingRequest extends Request
 
             'mail_from_address' => 'nullable|email',
             'mail_encryption' => ['nullable', Rule::in($this->mailEncryptionProtocols())],
-
-            'newsletter_enabled' => ['required', 'boolean'],
-            'mailchimp_api_key' => ['required_if:newsletter_enabled,1'],
-            'mailchimp_list_id' => ['required_if:newsletter_enabled,1'],
-
-            'facebook_login_enabled' => 'required|boolean',
-            'facebook_login_app_id' => 'required_if:facebook_login_enabled,1',
-            'facebook_login_app_secret' => 'required_if:facebook_login_enabled,1',
-
-            'google_login_enabled' => 'required|boolean',
-            'google_login_client_id' => 'required_if:google_login_enabled,1',
-            'google_login_client_secret' => 'required_if:google_login_enabled,1',
         ];
     }
 

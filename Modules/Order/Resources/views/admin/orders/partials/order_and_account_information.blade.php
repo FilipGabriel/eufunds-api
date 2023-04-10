@@ -32,7 +32,7 @@
                                 <td>{{ trans('order::orders.order_status') }}</td>
                                 <td>
                                     <div class="row">
-                                        <div class="col-lg-9 col-md-10 col-sm-10">
+                                        <div class="col-lg-6 col-sm-12">
                                             <select id="order-status" class="form-control custom-select-black" data-id="{{ $order->id }}">
                                                 @foreach (trans('order::statuses') as $name => $label)
                                                     <option value="{{ $name }}" {{ $order->status === $name ? 'selected' : '' }}>
