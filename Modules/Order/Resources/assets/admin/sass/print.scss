@@ -424,11 +424,7 @@ table {
             vertical-align: middle;
             min-width: 100px;
 
-            &:nth-child(5) {
-                text-align: center;
-            }
-
-            &:nth-child(6) span {
+            &:nth-child(5) span {
                 font-weight: 600;
             }
         }
@@ -470,10 +466,6 @@ table {
 
     .table {
         margin-bottom: 0;
-
-        tr:last-child {
-            border-top: 1px solid #e9e9e9;
-        }
 
         td {
             font-size: 16px;
@@ -536,10 +528,6 @@ table {
     .cart-list {
         .table-responsive td {
             border: none;
-
-            &:nth-child(5) {
-                text-align: left;
-            }
         }
 
         .table {
@@ -580,13 +568,12 @@ table {
             }
 
             &:nth-child(2),
-            &:nth-child(4),
-            &:nth-child(5) {
+            &:nth-child(4) {
                 display: block;
                 padding: 0 0 5px 0;
             }
 
-            &:nth-child(6) {
+            &:nth-child(5) {
                 display: block;
                 padding: 0 0 15px 0;
             }
@@ -703,5 +690,5 @@ table {
 
 @page {
     size: A4;
-    margin: 0;
+    margin: 5mm 5mm 5mm 5mm;
 }

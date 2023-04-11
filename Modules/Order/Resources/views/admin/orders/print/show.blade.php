@@ -60,12 +60,8 @@
                                                     <td>{{ $order->funding->name }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>{{ trans('order::orders.business_id') }}</td>
-                                                    <td>{{ $order->business_id }}</td>
-                                                </tr>
-                                                <tr>
                                                     <td>{{ trans('order::orders.company_name') }}</td>
-                                                    <td>{{ $order->company_name }}</td>
+                                                    <td>{{ $order->business_id }} - {{ $order->company_name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>{{ trans('order::print.email') }}:</td>
@@ -92,7 +88,6 @@
                                         <tr>
                                             <th>{{ trans('order::print.key') }}</th>
                                             <th>{{ trans('order::print.sku') }}</th>
-                                            <th>{{ trans('order::print.product') }}</th>
                                             <th>{{ trans('order::print.unit_price') }}</th>
                                             <th>{{ trans('order::print.quantity') }}</th>
                                             <th>{{ trans('order::print.line_total') }}</th>
@@ -112,7 +107,22 @@
                                                 </td>
 
                                                 <td>
-                                                    <span>{{ $product->name }}</span>
+                                                    <label class="visible-xs">{{ trans('order::print.unit_price') }}:</label>
+                                                    <span>{{ $product->unit_price->convert($order->currency, $order->currency_rate)->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
+                                                </td>
+
+                                                <td>
+                                                    <label class="visible-xs">{{ trans('order::print.quantity') }}:</label>
+                                                    <span>{{ $product->qty }}</span>
+                                                </td>
+                                                <td>
+                                                    <label class="visible-xs">{{ trans('order::print.line_total') }}:</label>
+                                                    <span>{{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5" style="text-align: justify;">
+                                                    <span>{!! $product->product->description !!}</span>
 
                                                     @if ($product->hasAnyOption())
                                                         <div class="option">
@@ -130,20 +140,6 @@
                                                         </div>
                                                     @endif
                                                 </td>
-
-                                                <td>
-                                                    <label class="visible-xs">{{ trans('order::print.unit_price') }}:</label>
-                                                    <span>{{ $product->unit_price->convert($order->currency, $order->currency_rate)->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
-                                                </td>
-
-                                                <td>
-                                                    <label class="visible-xs">{{ trans('order::print.quantity') }}:</label>
-                                                    <span>{{ $product->qty }}</span>
-                                                </td>
-                                                <td>
-                                                    <label class="visible-xs">{{ trans('order::print.line_total') }}:</label>
-                                                    <span>{{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -154,11 +150,6 @@
                         <div class="total pull-right">
                             <table class="table">
                                 <tbody>
-                                    <tr>
-                                        <td>{{ trans('order::print.subtotal') }}</td>
-                                        <td>{{ $order->sub_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</td>
-                                    </tr>
-
                                     <tr>
                                         <td>{{ trans('order::print.total') }}</td>
                                         <td>{{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</td>
@@ -171,8 +162,8 @@
             </div>
         </div>
 
-        <!-- <script>
+        <script>
             window.print();
-        </script> -->
+        </script>
     </body>
 </html>

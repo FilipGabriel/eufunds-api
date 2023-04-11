@@ -3,7 +3,7 @@
 return [
     'key' => 'Nr crt',
     'sku' => 'Cod produs',
-    'estimate' => 'Factura Proforma',
+    'estimate' => 'Proforma',
     'invoice_id' => 'Numar',
     'date' => 'Data',
     'order_details' => 'Detaliile comenzii',
@@ -13,6 +13,5 @@ return [
     'unit_price' => 'Pret unitar',
     'quantity' => 'Cantitate',
     'line_total' => 'Valoare',
-    'subtotal' => 'Subtotal',
     'total' => 'Total',
 ];

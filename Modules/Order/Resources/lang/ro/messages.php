@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'status_updated' => 'Order status has been updated.',
-    'invoice_sent' => 'Invoice has been sent to the customer.',
+    'status_updated' => 'Statusul a fost schimbat.',
+    'invoice_sent' => 'Proforma a fost trimisa catre client.',
 ];

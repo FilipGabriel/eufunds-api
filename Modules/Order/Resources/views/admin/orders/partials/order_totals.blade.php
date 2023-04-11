@@ -5,25 +5,6 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <td>{{ trans('order::orders.subtotal') }}</td>
-                            <td class="text-right">{{ $order->sub_total->format() }}</td>
-                        </tr>
-
-                        @if ($order->hasShippingMethod())
-                            <tr>
-                                <td>{{ $order->shipping_method }}</td>
-                                <td class="text-right">{{ $order->shipping_cost->format() }}</td>
-                            </tr>
-                        @endif
-
-                        @if ($order->hasCoupon())
-                            <tr>
-                                <td>{{ trans('order::orders.coupon') }} (<span class="coupon-code">{{ $order->coupon->code }}</span>)</td>
-                                <td class="text-right">&#8211;{{ $order->discount->format() }}</td>
-                            </tr>
-                        @endif
-
-                        <tr>
                             <td>{{ trans('order::orders.total') }}</td>
                             <td class="text-right">{{ $order->total->format() }}</td>
                         </tr>

@@ -8,10 +8,15 @@ use Modules\Media\Entities\File;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewOrder extends Mailable implements ShouldQueue
+class Invoice extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    /**
+     * The instance of the order.
+     *
+     * @var \Modules\Order\Entities\Order
+     */
     public $order;
 
     /**
@@ -32,14 +37,13 @@ class NewOrder extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject(trans('checkout::mail.new_order_subject'))
-            ->view("emails.{$this->getViewName()}", [
+        app()->setLocale($this->order->locale);
+
+        $this->order->load('products');
+
+        return $this->subject(trans('appfront::invoice.subject', ['id' => $this->order->id]))
+            ->view("emails.invoice", [
                 'logo' => File::findOrNew(setting('appfront_mail_logo'))->path,
             ]);
-    }
-
-    private function getViewName()
-    {
-        return 'new_order';
     }
 }

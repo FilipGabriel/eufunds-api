@@ -25,7 +25,7 @@
                         <tbody>
                             <tr>
                                 <td>{{ trans('order::orders.order_date') }}</td>
-                                <td>{{ $order->created_at->toFormattedDateString() }}</td>
+                                <td>{{ $order->created_at->format('d M Y') }}</td>
                             </tr>
 
                             <tr>
@@ -49,13 +49,6 @@
                                 <td>{{ trans('order::orders.table.funding') }}</td>
                                 <td>{{ $order->funding->name }}</td>
                             </tr>
-
-                            @if ($order->shipping_method)
-                                <tr>
-                                    <td>{{ trans('order::orders.shipping_method') }}</td>
-                                    <td>{{ $order->shipping_method }}</td>
-                                </tr>
-                            @endif
 
                             @if (is_multilingual())
                                 <tr>
@@ -89,12 +82,8 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td>{{ trans('order::orders.business_id') }}</td>
-                                <td>{{ $order->business_id }}</td>
-                            </tr>
-                            <tr>
                                 <td>{{ trans('order::orders.company_name') }}</td>
-                                <td>{{ $order->company_name }}</td>
+                                <td>{{ $order->business_id }} - {{ $order->company_name }}</td>
                             </tr>
                             <tr>
                                 <td>{{ trans('order::orders.customer_name') }}</td>
