@@ -30,6 +30,8 @@ trait NodApi
     {
         $this->_client = config('services.nod.user');
         $this->_authKey = config('services.nod.key');
+
+        parent::__construct();
     }
 
     private function getRequest($queryString = null)
@@ -39,16 +41,15 @@ trait NodApi
 
     private function request(string $queryString = null)
     {
-        $url = config('services.nod.url') . $queryString;
-
-        $request = (new Client())->get($url, [
+        $request = (new Client([
+            'base_uri' => config('services.nod.url'),
             'headers' => [
                 'X-NodWS-Date' => gmdate('r'),
                 'X-NodWS-User' => $this->_client,
                 'X-NodWS-Auth' => $this->_getSignatureString($this->_authKey, 'GET', rawurldecode($queryString)),
                 'X-NodWS-Accept' => 'json'
             ]
-        ]);
+        ]))->get($queryString);
 
         $response = json_decode($request->getBody()->getContents());
 

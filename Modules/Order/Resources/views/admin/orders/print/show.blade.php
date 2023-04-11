@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ trans('order::print.invoice') }}</title>
+        <title>{{ trans('order::print.estimate') }}</title>
 
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
         <link href="{{ v(Module::asset('order:admin/css/print.css')) }}" rel="stylesheet">
@@ -27,7 +27,7 @@
 
                         <div class="col-md-9 clearfix">
                             <div class="invoice-header-right pull-right">
-                                <span class="title">{{ trans('order::print.invoice') }}</span>
+                                <span class="title">{{ trans('order::print.estimate') }}</span>
 
                                 <div class="invoice-info clearfix">
                                     <div class="invoice-id">
@@ -37,7 +37,7 @@
 
                                     <div class="invoice-date">
                                         <label for="invoice-date">{{ trans('order::print.date') }}:</label>
-                                        <span>{{ $order->created_at->format('Y / m / d') }}</span>
+                                        <span>{{ $order->created_at->format('d M Y') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -90,6 +90,8 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>{{ trans('order::print.key') }}</th>
+                                            <th>{{ trans('order::print.sku') }}</th>
                                             <th>{{ trans('order::print.product') }}</th>
                                             <th>{{ trans('order::print.unit_price') }}</th>
                                             <th>{{ trans('order::print.quantity') }}</th>
@@ -97,8 +99,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($order->products as $product)
+                                        @foreach ($order->products as $key => $product)
                                             <tr>
+                                                <td>
+                                                    <label class="visible-xs">{{ trans('order::print.key') }}:</label>
+                                                    <span>{{ ++$key }}</span>
+                                                </td>
+
+                                                <td>
+                                                    <label class="visible-xs">{{ trans('order::print.sku') }}:</label>
+                                                    <span>{{ $product->product->sku }}</span>
+                                                </td>
+
                                                 <td>
                                                     <span>{{ $product->name }}</span>
 
@@ -149,20 +161,6 @@
                                         <td>{{ $order->sub_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</td>
                                     </tr>
 
-                                    @if ($order->hasShippingMethod())
-                                        <tr>
-                                            <td>{{ $order->shipping_method }}</td>
-                                            <td>{{ $order->shipping_cost->convert($order->currency, $order->currency_rate)->format($order->currency) }}</td>
-                                        </tr>
-                                    @endif
-
-                                    @if ($order->hasCoupon())
-                                        <tr>
-                                            <td>{{ trans('order::orders.coupon') }} (<span class="coupon-code">{{ $order->coupon->code }}</span>)</td>
-                                            <td>&#8211;{{ $order->discount->convert($order->currency, $order->currency_rate)->format($order->currency) }}</td>
-                                        </tr>
-                                    @endif
-
                                     <tr>
                                         <td>{{ trans('order::print.total') }}</td>
                                         <td>{{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</td>
@@ -175,8 +173,8 @@
             </div>
         </div>
 
-        <script>
+        <!-- <script>
             window.print();
-        </script>
+        </script> -->
     </body>
 </html>

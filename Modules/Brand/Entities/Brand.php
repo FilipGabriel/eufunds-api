@@ -28,7 +28,7 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['slug', 'is_active'];
+    protected $fillable = ['nod_id', 'slug', 'is_active'];
 
     /**
      * The attributes that should be cast to native types.
