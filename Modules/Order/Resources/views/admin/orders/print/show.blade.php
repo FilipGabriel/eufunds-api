@@ -118,8 +118,6 @@
                                                         <div class="option">
                                                             @foreach ($product->options as $option)
                                                                 <span>
-                                                                    {{ $option->name }}:
-
                                                                     <span>
                                                                         @if ($option->option->isFieldType())
                                                                             {{ $option->value }}

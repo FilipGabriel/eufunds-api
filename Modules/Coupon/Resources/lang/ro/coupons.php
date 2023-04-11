@@ -1,25 +1,25 @@
 <?php
 
 return [
-    'coupon' => 'Coupon',
-    'coupons' => 'Coupons',
+    'coupon' => 'Cupon',
+    'coupons' => 'Cupoane',
     'table' => [
-        'name' => 'Name',
-        'code' => 'Code',
+        'name' => 'Nume',
+        'code' => 'Cod',
         'discount' => 'Discount',
     ],
     'tabs' => [
         'group' => [
-            'coupon_information' => 'Coupon Information',
+            'coupon_information' => 'Informatii cupon',
         ],
         'general' => 'General',
-        'usage_restrictions' => 'Usage Restrictions',
-        'usage_limits' => 'Usage Limits',
+        'usage_restrictions' => 'Restrictii de utilizare',
+        'usage_limits' => 'Limite de utilizare',
     ],
     'form' => [
         'price_types' => [
-            '0' => 'Fixed',
-            '1' => 'Percent',
+            '0' => 'Fix',
+            '1' => 'Procent',
         ],
         'enable_the_coupon' => 'Enable the coupon',
     ],

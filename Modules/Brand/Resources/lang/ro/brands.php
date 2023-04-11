@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'brand' => 'Brand',
-    'brands' => 'Brands',
+    'brand' => 'Producator',
+    'brands' => 'Producatori',
     'table' => [
         'logo' => 'Logo',
-        'name' => 'Name',
+        'name' => 'Nume',
     ],
     'tabs' => [
         'group' => [
-            'brand_information' => 'Brand Information',
+            'brand_information' => 'Informatii producator',
         ],
         'general' => 'General',
         'seo' => 'SEO',

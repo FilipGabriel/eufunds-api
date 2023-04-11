@@ -4,6 +4,7 @@ namespace Modules\Order\Entities;
 
 use Modules\Support\Money;
 use Modules\Support\Eloquent\Model;
+use Modules\Option\Entities\Option;
 use Modules\Product\Entities\Product;
 
 class OrderProduct extends Model
@@ -58,6 +59,8 @@ class OrderProduct extends Model
     public function storeOptions($options)
     {
         $options->each(function ($option) {
+            $option = Option::find($option['id']);
+
             $orderProductOption = $this->options()->create([
                 'order_product_id' => $this->id,
                 'option_id' => $option->id,

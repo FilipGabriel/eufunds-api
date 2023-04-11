@@ -4,6 +4,7 @@ namespace Modules\Checkout;
 
 use JsonSerializable;
 use Modules\Support\Money;
+use Modules\Option\Entities\Option;
 use Modules\Product\Entities\Product;
 
 class CartItem implements JsonSerializable
@@ -21,12 +22,12 @@ class CartItem implements JsonSerializable
 
     public function unitPrice()
     {
-        return $this->product->getSellingPrice()->add($this->optionsPrice());
+        return $this->product->getSellingPrice();
     }
 
     public function total()
     {
-        return $this->unitPrice()->multiply($this->qty);
+        return $this->unitPrice()->multiply($this->qty)->add($this->optionsPrice());
     }
 
     public function optionsPrice()
@@ -37,6 +38,8 @@ class CartItem implements JsonSerializable
     public function calculateOptionsPrice()
     {
         return $this->options->sum(function ($option) {
+            $option = Option::find($option['id']);
+            
             return $this->valuesSum($option->values);
         });
     }

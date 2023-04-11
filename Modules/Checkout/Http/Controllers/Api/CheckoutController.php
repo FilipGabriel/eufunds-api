@@ -19,14 +19,14 @@ class CheckoutController extends Controller
      */
     public function store(StoreOrderRequest $request, OrderService $orderService)
     {
+        $order = $orderService->create($request);
+        
         try {
-            $order = $orderService->create($request);
+            $orderService->storeOrderProducts($request, $order);
         } catch (Exception $e) {
             $orderService->delete($order);
 
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 403);
+            return response()->json([ 'message' => $e->getMessage() ], 422);
         }
 
         event(new OrderPlaced($order));

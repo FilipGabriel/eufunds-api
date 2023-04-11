@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'Name',
+    'name' => 'Nume',
     'slug' => 'URL',
     'is_active' => 'Status',
 ];

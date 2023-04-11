@@ -2,7 +2,7 @@
 
 return [
     'program' => 'Program',
-    'programs' => 'Programs',
+    'programs' => 'Programe',
     'tree' => [
         'add_root_program' => 'Add Root Program',
         'add_sub_program' => 'Add Subprogram',
@@ -15,7 +15,7 @@ return [
         'seo' => 'SEO',
     ],
     'form' => [
-        'show_this_program_in_search_box' => 'Show this program in search box program list',
+        'show_this_program_in_search_box' => 'Afiseaza in lista finantarilor active',
         'enable_the_program' => 'Enable the program',
         'banner' => 'Banner',
     ],

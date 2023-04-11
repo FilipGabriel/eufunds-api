@@ -11,14 +11,6 @@ class OrderService
 {
     public function create($request)
     {
-        return tap($this->store($request), function ($order) use ($request) {
-            $this->storeOrderProducts($request, $order);
-            $this->storeOrderDownloads($request, $order);
-        });
-    }
-
-    private function store($request)
-    {
         $currency = $request->currency ?? currency();
 
         return Order::create([
@@ -40,7 +32,7 @@ class OrderService
         ]);
     }
 
-    private function storeOrderProducts($request, Order $order)
+    public function storeOrderProducts($request, Order $order)
     {
         $total = Money::inDefaultCurrency(0);
 
