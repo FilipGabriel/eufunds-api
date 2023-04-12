@@ -1,21 +1,21 @@
 <?php
 
 return [
-    'name' => 'Name',
-    'type' => 'Type',
+    'name' => 'Nume',
+    'type' => 'Tip',
     'is_required' => 'Required',
     'label' => 'Label',
-    'price' => 'Price',
-    'price_type' => 'Price Type',
+    'price' => 'Pret',
+    'price_type' => 'Tip pret',
 
     // Validations
     'values.*.label' => 'Label',
-    'values.*.price' => 'Price',
-    'values.*.price_type' => 'Price Type',
+    'values.*.price' => 'Pret',
+    'values.*.price_type' => 'Tip pret',
 
-    'options.*.name' => 'Name',
-    'options.*.type' => 'Type',
+    'options.*.name' => 'Nume',
+    'options.*.type' => 'Tip',
     'options.*.values.*.label' => 'Label',
-    'options.*.values.*.price' => 'Price',
-    'options.*.values.*.price_type' => 'Price Type',
+    'options.*.values.*.price' => 'Pret',
+    'options.*.values.*.price_type' => 'Tip pret',
 ];

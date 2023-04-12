@@ -1,31 +1,31 @@
 <?php
 
 return [
-    'option' => 'Option',
-    'options' => 'Options',
-    'select_global_option' => 'Select Global Option',
-    'please_select_a_option_type' => 'Please select a option type.',
+    'option' => 'Optiune',
+    'options' => 'Optiuni',
+    'select_global_option' => 'Selecteaza din optiunile globale',
+    'please_select_a_option_type' => 'Selecteaza tipul de optiune.',
     'table' => [
-        'name' => 'Name',
-        'type' => 'Type',
+        'name' => 'Nume',
+        'type' => 'Tip',
     ],
     'tabs' => [
         'group' => [
-            'option_information' => 'Option Information',
+            'option_information' => 'Informatii optiune',
         ],
         'general' => 'General',
-        'values' => 'Values',
+        'values' => 'Valori',
         'product' => [
-            'options' => 'Options',
+            'options' => 'Optiuni',
         ],
     ],
     'form' => [
         'this_option_is_required' => 'This option is required',
         'add_new_option' => 'Add New Option',
-        'add_global_option' => 'Add Global Option',
-        'new_option' => 'New Option',
+        'add_global_option' => 'Adauga Optiune globala',
+        'new_option' => 'Optiune noua',
         'option_types' => [
-            'please_select' => 'Please Select',
+            'please_select' => 'Selecteaza',
             'text' => 'Text',
             'field' => 'Field',
             'textarea' => 'Textarea',
@@ -40,13 +40,13 @@ return [
             'date_time' => 'Date & Time',
             'time' => 'Time',
         ],
-        'delete_option' => 'Delete Option',
-        'price' => 'Price',
+        'delete_option' => 'Sterge optiune',
+        'price' => 'Pret',
         'price_types' => [
-            'fixed' => 'Fixed',
-            'percent' => 'Percent',
+            'fixed' => 'Fix',
+            'percent' => 'Procent',
         ],
-        'add_new_row' => 'Add New Row',
-        'delete_row' => 'Delete Row',
+        'add_new_row' => 'Adauga',
+        'delete_row' => 'Sterge',
     ],
 ];
