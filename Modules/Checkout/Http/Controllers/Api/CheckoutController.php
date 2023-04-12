@@ -7,9 +7,20 @@ use Illuminate\Routing\Controller;
 use Modules\Checkout\Events\OrderPlaced;
 use Modules\Checkout\Services\OrderService;
 use Modules\Order\Http\Requests\StoreOrderRequest;
+use Modules\Checkout\Http\Middleware\CheckCartItems;
 
 class CheckoutController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(CheckCartItems::class)->only(['store']);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

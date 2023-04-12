@@ -56,6 +56,9 @@ class OrderController
                     'qty' => $product->qty,
                     'unit_price' => $product->unit_price->format(),
                     'total' => $product->line_total->format(),
+                    'variants' => $product->options->map(function($option) {
+                        return $option->values->implode('label', ', ');
+                    })
                 ];
             }),
             'created' => $order->created_at->format('d M Y'),

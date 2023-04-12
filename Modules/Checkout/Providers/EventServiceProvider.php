@@ -15,7 +15,6 @@ class EventServiceProvider extends ServiceProvider
         \Modules\Checkout\Events\OrderPlaced::class => [
             \Modules\Checkout\Listeners\UpdateOrderStatus::class,
             \Modules\Checkout\Listeners\SendNewOrderEmails::class,
-            \Modules\Checkout\Listeners\SendNewOrderSms::class,
         ],
     ];
 }
