@@ -13,10 +13,6 @@ class EnsureEmailIsVerified
      * @var array
      */
     protected $except = [
-        'api.login.*',
-        'password.email',
-        'verification.verify',
-        'api.users.show',
         'programs.index'
     ];
 

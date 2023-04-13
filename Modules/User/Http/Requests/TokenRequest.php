@@ -2,13 +2,12 @@
 
 namespace Modules\User\Http\Requests;
 
-use Illuminate\Validation\Rule;
 use Modules\Core\Http\Requests\Request;
 
-class SaveUserRequest extends Request
+class TokenRequest extends Request
 {
     /**
-     * Available attributes.
+     * Available attributes for users.
      *
      * @var string
      */
@@ -22,11 +21,11 @@ class SaveUserRequest extends Request
     public function rules()
     {
         return [
+            'nod_id' => 'required',
             'name' => 'required',
-            'email' => ['required', 'email', Rule::unique('users')->ignore($this->id, 'id')],
-            'image' =>'nullable|image',
-            'password' => 'nullable|confirmed|min:6',
-            'roles' => ['sometimes', Rule::exists('roles', 'id')],
+            'email' => 'required|email',
+            'manager_email' => 'required|email',
+            'manager_name' => 'required'
         ];
     }
 }

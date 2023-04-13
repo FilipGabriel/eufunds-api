@@ -15,7 +15,7 @@ return [
 
     'stateful' => explode(',', env(
         'SANCTUM_STATEFUL_DOMAINS',
-        'eufunds.ro,localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1'
+        'eufunds.ro,localhost,localhost:4000,127.0.0.1,127.0.0.1:8000,::1'
     )),
 
     /*
@@ -48,5 +48,4 @@ return [
     ],
 
     'prefix' => 'api/v1'
-
 ];

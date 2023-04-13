@@ -56,7 +56,7 @@ class InstallController extends Controller
     public function complete()
     {
         if (config('app.installed')) {
-            return redirect()->route('home');
+            return redirect()->route('admin.dashboard.index');
         }
 
         DotenvEditor::setKey('APP_INSTALLED', 'true')->save();

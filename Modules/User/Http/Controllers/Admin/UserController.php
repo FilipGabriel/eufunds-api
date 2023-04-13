@@ -102,18 +102,6 @@ class UserController
 
         $user->roles()->sync($request->roles);
 
-        if ($user->isNotActivated() && $request->activated === '1') {
-            $user->update([
-                'email_verified_at' => now()
-            ]);
-        }
-
-        if ($user->isActivated() && $request->activated === '0') {
-            $user->update([
-                'email_verified_at' => NULL
-            ]);
-        }
-
         return redirect()->route('admin.users.index')
             ->withSuccess(trans('admin::messages.resource_saved', ['resource' => trans('user::users.user')]));
     }

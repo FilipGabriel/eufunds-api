@@ -16,7 +16,6 @@ class AdminAccount
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
-            'email_verified_at' => now(),
         ]);
 
         $admin->roles()->attach($role);

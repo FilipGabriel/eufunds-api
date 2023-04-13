@@ -3,7 +3,7 @@
 namespace Modules\User\Http\Controllers\Admin;
 
 use Modules\Admin\Ui\Facades\TabManager;
-use Modules\User\Http\Requests\UpdateProfileRequest;
+use Modules\Core\Http\Requests\Request;
 
 class ProfileController
 {
@@ -23,16 +23,12 @@ class ProfileController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Modules\User\Http\Requests\UpdateProfileRequest $request
+     * @param \Modules\Core\Http\Requests\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request)
+    public function update(Request $request)
     {
         $this->bcryptPassword($request);
-
-        if (auth()->user()->hasAccess('admin.user_settings.edit')) {
-            $this->updateUserSettings(auth()->user(), $request->settings);
-        }
 
         auth()->user()->update($request->all());
 

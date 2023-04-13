@@ -13,8 +13,4 @@ return [
         'edit' => 'user::permissions.roles.edit',
         'destroy' => 'user::permissions.roles.destroy',
     ],
-    'admin.user_devices' => [
-        'index' => 'user::permissions.user_devices.index',
-        'export' => 'user::permissions.user_devices.export'
-    ],
 ];

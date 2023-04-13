@@ -3,6 +3,8 @@
 namespace Modules\Core\Http\Middleware;
 
 use Closure;
+use Laravel\Sanctum\Sanctum;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate
 {
@@ -12,10 +14,6 @@ class Authenticate
      * @var array
      */
     protected $except = [
-        'api.login.*',
-        'password.email',
-        'verification.verify',
-        'api.users.show',
         'programs.index'
     ];
 
@@ -28,17 +26,21 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->inExceptArray($request) || auth()->check()) {
-            return $next($request);
+        if ($this->inExceptArray($request)) { return $next($request); }
+
+        $token = $request->bearerToken();
+        $model = Sanctum::$personalAccessTokenModel;
+
+        if($token && $accessToken = $model::findToken($token)) {
+            if (! $this->isValidAccessToken($accessToken)) {
+                abort(419, trans('user::messages.users.unauthenticated'));
+            }
+
+            Auth::loginUsingId($accessToken->tokenable_id);
+            $accessToken->forceFill(['last_used_at' => now()])->save();
         }
 
-        $url = url()->full();
-
-        if (! $request->isMethod('get')) {
-            $url = url()->previous();
-        }
-
-        session()->put('url.intended', $url);
+        if (auth()->check()) { return $next($request); }
 
         abort(419, trans('user::messages.users.unauthenticated'));
     }
@@ -60,5 +62,43 @@ class Authenticate
         }
 
         return false;
+    }
+
+    /**
+     * Determine if the provided access token is valid.
+     *
+     * @param  mixed  $accessToken
+     * @return bool
+     */
+    protected function isValidAccessToken($accessToken): bool
+    {
+        if (! $accessToken) {
+            return false;
+        }
+
+        $expiration = config('sanctum.expiration');
+
+        $isValid =
+            (! $expiration || $accessToken->created_at->gt(now()->subMinutes($expiration)))
+            && $this->hasValidProvider($accessToken->tokenable);
+
+        if (is_callable(Sanctum::$accessTokenAuthenticationCallback)) {
+            $isValid = (bool) (Sanctum::$accessTokenAuthenticationCallback)($accessToken, $isValid);
+        }
+        
+        return $isValid;
+    }
+
+    /**
+     * Determine if the tokenable model matches the provider's model type.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $tokenable
+     * @return bool
+     */
+    protected function hasValidProvider($tokenable)
+    {
+        $model = config("auth.providers.users.model");
+
+        return $tokenable instanceof $model;
     }
 }

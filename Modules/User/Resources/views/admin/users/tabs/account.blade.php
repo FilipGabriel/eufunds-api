@@ -10,9 +10,5 @@
             {{ Form::password('password', trans('user::attributes.users.password'), $errors, null, ['required' => true]) }}
             {{ Form::password('password_confirmation', trans('user::attributes.users.password_confirmation'), $errors, null, ['required' => true]) }}
         @endif
-
-        @if (request()->routeIs('admin.users.edit'))
-            {{ Form::checkbox('activated', trans('user::attributes.users.activated'), trans('user::users.form.activated'), $errors, $user, ['disabled' => $user->id === $currentUser->id, 'checked' => old('activated', $user->isActivated())]) }}
-        @endif
     </div>
 </div>

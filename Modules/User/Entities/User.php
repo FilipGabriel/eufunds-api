@@ -6,14 +6,10 @@ use Modules\Media\Entities\File;
 use Modules\User\Admin\UserTable;
 use Laravel\Sanctum\HasApiTokens;
 use Modules\Order\Entities\Order;
-use Illuminate\Support\Facades\Mail;
 use Modules\Media\Eloquent\HasMedia;
 use Modules\Support\Search\Searchable;
 use Modules\User\Repositories\Permission;
-use Modules\User\Mail\ResetPasswordEmail;
-use Modules\User\Mail\ActivationCodeEmail;
 use Lab404\Impersonate\Models\Impersonate;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Cartalyst\Sentinel\Permissions\PermissibleTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +17,7 @@ use Cartalyst\Sentinel\Permissions\StandardPermissions;
 use Cartalyst\Sentinel\Permissions\PermissionsInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use PermissibleTrait,
         HasApiTokens,
@@ -36,7 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'about', 'password', 'permissions', 'email_verified_at', 'last_login', 'remember_token'
+        'name', 'email', 'phone', 'password', 'permissions', 'last_login', 'remember_token'
     ];
 
     /**
@@ -70,27 +66,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function canBeImpersonated()
     {
         return $this->hasRoleName('Customer') && $this->id !== auth()->user()->id;
-    }
-
-    public function sendEmailVerificationNotification()
-    {
-        Mail::to($this)->send(new ActivationCodeEmail($this));
-    }
-
-    /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
-     */
-    public function sendPasswordResetNotification($token)
-    {
-        Mail::to($this)->send(new ResetPasswordEmail($this, $token));
-    }
-
-    public function getEmailForVerification()
-    {
-        return $this->email;
     }
 
     public static function registered($email)
@@ -128,31 +103,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function login()
     {
         return auth()->login($this);
-    }
-
-    public function hasVerifiedEmail()
-    {
-        return ! is_null($this->email_verified_at);
-    }
-
-    /**
-     * Check if the current user is activated.
-     *
-     * @return bool
-     */
-    public function isActivated()
-    {
-        return ! is_null($this->email_verified_at);
-    }
-
-    /**
-     * Check if the current user is not activated.
-     *
-     * @return bool
-     */
-    public function isNotActivated()
-    {
-        return ! $this->isActivated();
     }
 
     /**

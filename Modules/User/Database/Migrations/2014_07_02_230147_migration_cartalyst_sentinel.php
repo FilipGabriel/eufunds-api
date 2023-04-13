@@ -35,12 +35,13 @@ class MigrationCartalystSentinel extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->text('about')->nullable();
             $table->string('password');
+            $table->text('two_factor_secret')->nullable();
+            $table->text('two_factor_recovery_codes')->nullable();
             $table->text('permissions')->nullable();
             $table->datetime('last_login')->nullable();
-            $table->datetime('email_verified_at')->nullable();
             $table->longText('remember_token')->nullable();
             $table->timestamps();
         });

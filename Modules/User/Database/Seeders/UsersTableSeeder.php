@@ -20,7 +20,6 @@ class UsersTableSeeder extends Seeder
             ->select([
                 'old_users.name',
                 'old_users.email',
-                'old_users.email_verified_at',
                 'old_users.password',
                 'old_users.phone'
             ])
@@ -36,7 +35,6 @@ class UsersTableSeeder extends Seeder
                 $newUser = User::create([
                     'name' => $user->name,
                     'email' => $user->email,
-                    'email_verified_at' => $user->email_verified_at,
                     'password' => $user->password,
                     'phone' => $user->phone ?? ''
                 ]);
