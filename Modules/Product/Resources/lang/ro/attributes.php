@@ -7,6 +7,7 @@ return [
     'short_description' => 'Scurta Descriere',
     'product_id' => 'NOD ID',
     'brand_id' => 'Brand',
+    'warranty' => 'Garantie',
     'categories' => 'Categorii',
     'virtual' => 'Virtual',
     'is_active' => 'Status',

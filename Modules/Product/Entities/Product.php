@@ -44,7 +44,7 @@ class Product extends Model
     protected $fillable = [
         'nod_id',
         'brand_id',
-        'tax_class_id',
+        'warranty',
         'slug',
         'sku',
         'price',

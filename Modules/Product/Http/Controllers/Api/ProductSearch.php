@@ -60,6 +60,7 @@ trait ProductSearch
                     'slug' => $product->slug,
                     'name' => $product->name,
                     'variants' => $product->options->count(),
+                    'short_description' => $product->short_description,
                     'base_image' => $product->base_image->path ?? null,
                     'selling_price' => $product->getSellingPrice()
                 ];

@@ -17,14 +17,6 @@
                 .order-details {
                     width: 100% !important;
                 }
-
-                .shipping-address {
-                    width: 100% !important;
-                }
-
-                .billing-address {
-                    width: 100% !important;
-                }
             }
         </style>
     </head>
@@ -106,11 +98,11 @@
                                                             color: #444444;
                                                             padding: 0;"
                                                     >
-                                                        <span style="float: left;">
+                                                        <span>
                                                             {{ trans('appfront::invoice.order_id') }}:
                                                         </span>
 
-                                                        <span style="float: right;">
+                                                        <span>
                                                             #{{ $order->id }}
                                                         </span>
                                                     </td>
@@ -123,11 +115,11 @@
                                                             color: #444444;
                                                             padding: 0;"
                                                     >
-                                                        <span style="float: left;">
+                                                        <span>
                                                             {{ trans('appfront::invoice.date') }}:
                                                         </span>
 
-                                                        <span style="float: right;">
+                                                        <span>
                                                             {{ $order->created_at->format('d M Y') }}
                                                         </span>
                                                     </td>
@@ -207,44 +199,6 @@
                                                                             word-break: break-all;"
                                                                     >
                                                                         {{ $order->business_id }} - {{ $order->company_name }}
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;"
-                                                                    >
-                                                                        {{ trans('appfront::invoice.email') }}:
-                                                                    </td>
-
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;
-                                                                            word-break: break-all;"
-                                                                    >
-                                                                        {{ $order->customer_email }}
-                                                                    </td>
-                                                                </tr>
-
-                                                                <tr>
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;"
-                                                                    >
-                                                                        {{ trans('appfront::invoice.phone') }}:
-                                                                    </td>
-
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;
-                                                                            word-break: break-all;"
-                                                                    >
-                                                                        {{ $order->customer_phone }}
                                                                     </td>
                                                                 </tr>
                                                             </tbody>

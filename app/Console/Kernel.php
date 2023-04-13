@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\ScaffoldModuleCommand::class,
         Commands\ScaffoldEntityCommand::class,
+        Commands\ImportProductsCommand::class,
         Commands\ImportProductCategoriesCommand::class,
         Commands\ImportProductManufacturersCommand::class,
     ];

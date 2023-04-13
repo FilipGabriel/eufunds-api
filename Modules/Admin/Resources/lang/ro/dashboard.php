@@ -22,9 +22,9 @@ return [
             'hits' => 'Indicii',
         ],
         'latest_orders' => [
-            'order_id' => 'Order ID',
-            'business_id' => 'Business ID',
-            'company_name' => 'Company_name',
+            'order_id' => 'ID',
+            'business_id' => 'CUI',
+            'company_name' => 'Beneficiar',
             'total' => 'Total',
         ],
         'latest_reviews' => [

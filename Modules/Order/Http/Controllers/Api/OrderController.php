@@ -2,6 +2,9 @@
 
 namespace Modules\Order\Http\Controllers\Api;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Modules\Media\Entities\File;
+
 class OrderController
 {
     /**
@@ -63,5 +66,33 @@ class OrderController
             }),
             'created' => $order->created_at->format('d M Y'),
         ]);
+    }
+
+    /**
+     * Download Order
+     *
+     * @param int $id
+     */
+    public function download(int $id)
+    {
+        $order = auth()->user()->orders()->with(['products'])
+            ->where('id', $id)
+            ->firstOrFail();
+
+        // $html = view('emails.invoice', [
+        //     'download' => true,
+        //     'order' => $order,
+        //     'logo' => null,
+        // ])->render();
+        // echo $html;
+        // die();
+
+        $file = Pdf::loadView('emails.invoice', [
+            'download' => true,
+            'order' => $order,
+            'logo' => File::findOrNew(setting('appfront_mail_logo'))->path,
+        ])->setPaper('a4', 'portrait');
+
+        return $file->download("Oferta {$order->company_name}.pdf");
     }
 }

@@ -31,7 +31,6 @@ class RouteServiceProvider extends ServiceProvider
         foreach ($this->app['modules']->allEnabled() as $module) {
             $this->groupRoutes("Modules\\{$module->getName()}\\Http\\Controllers", function () use ($module) {
                 $this->mapAdminRoutes("{$module->getPath()}/Routes/admin.php");
-                $this->mapPublicRoutes("{$module->getPath()}/Routes/public.php");
                 $this->mapApiRoutes("{$module->getPath()}/Routes/api.php");
             });
         }
@@ -48,7 +47,6 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->groupRoutes("Themes\\{$theme->getName()}\\Http\\Controllers", function () use ($theme) {
             $this->mapAdminRoutes("{$theme->getPath()}/routes/admin.php");
-            $this->mapPublicRoutes("{$theme->getPath()}/routes/public.php");
             $this->mapApiRoutes("{$theme->getPath()}/routes/api.php");
         });
     }
@@ -91,19 +89,6 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Map public routes.
-     *
-     * @param string $path
-     * @return void
-     */
-    private function mapPublicRoutes($path)
-    {
-        if (file_exists($path)) {
-            require_once $path;
-        }
-    }
-
     private function mapApiRoutes($path)
     {
         if (! file_exists($path)) {
@@ -113,7 +98,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::group([
             'namespace' => 'Api',
             'prefix' => 'api/v1',
-            'middleware' => ['auth:sanctum', 'verified'],
+            'middleware' => ['auth:sanctum'],
         ], function () use ($path) {
             require $path;
         });

@@ -6,8 +6,20 @@
 
         <title>{{ trans('order::print.estimate') }}</title>
 
+        @if($download ?? false)
+        <style>
+            {{ file_get_contents(public_path('modules/order/admin/css/print.css')) }}
+        </style>
+        @else
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
         <link href="{{ v(Module::asset('order:admin/css/print.css')) }}" rel="stylesheet">
+        <style>
+            @page {
+                 size: A4;
+                 margin: 5mm 5mm 5mm 5mm;
+            }
+        </style>
+        @endif
     </head>
 
     <body class="{{ is_rtl() ? 'rtl' : 'ltr' }}">
@@ -63,6 +75,7 @@
                                                     <td>{{ trans('order::orders.company_name') }}</td>
                                                     <td>{{ $order->business_id }} - {{ $order->company_name }}</td>
                                                 </tr>
+                                                @if(is_null($download ?? null))
                                                 <tr>
                                                     <td>{{ trans('order::print.email') }}:</td>
                                                     <td>{{ $order->customer_email }}</td>
@@ -72,6 +85,7 @@
                                                     <td>{{ trans('order::print.phone') }}:</td>
                                                     <td>{{ $order->customer_phone }}</td>
                                                 </tr>
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>
@@ -162,8 +176,10 @@
             </div>
         </div>
 
+        @if(is_null($download ?? null))
         <script>
             window.print();
         </script>
+        @endif
     </body>
 </html>

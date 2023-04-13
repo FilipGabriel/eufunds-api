@@ -186,4 +186,17 @@ class Category extends Model
 
         return $attributes;
     }
+
+    public static function getNestCategoryBy($id, $values = [])
+    {
+        $category = self::find($id);
+
+        if($category->parent_id) {
+            $values = array_merge($values, [$category->parent_id]);
+
+            return self::getNestCategoryBy($category->parent_id, $values);
+        }
+
+        return $values;
+    }
 }

@@ -14,7 +14,7 @@ class OrderPrintController
      */
     public function show(Order $order)
     {
-        $order->load('products', 'coupon');
+        $order->load('products');
 
         return view('order::admin.orders.print.show', compact('order'));
     }
