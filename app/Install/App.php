@@ -31,7 +31,7 @@ class App
 
         $env->setKey('APP_ENV', 'production');
         $env->setKey('APP_DEBUG', 'false');
-        $env->setKey('APP_CACHE', 'true');
+        // $env->setKey('APP_CACHE', 'true');
         $env->setKey('APP_URL', url('/'));
 
         $env->save();
@@ -64,8 +64,8 @@ class App
             'mail_from_name' => 'EUFunds',
             'mail_host' => 'smtp.mailtrap.io',
             'mail_port' => '2525',
-            'mail_username' => '31f915ed119fa4',
-            'mail_password' => 'a3f4c4fa5a5202',
+            'mail_username' => '',
+            'mail_password' => '',
             'mail_encryption' => 'tls',
             'appfront_copyright_text' => 'Copyright © <a href="{{ app_url }}">{{ app_name }}</a> {{ year }}. All rights reserved.',
         ]);

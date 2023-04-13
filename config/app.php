@@ -133,20 +133,6 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
-    'onesignal' => env('ONESIGNAL', false),
-
-    'ciphering' => env('CIPHERING', ''),
-
-    'encryption_iv' => env('ENCRYPTION_IV', ''),
-
-    'encryption_key' => env('ENCRYPTION_KEY', ''),
-
-    'decryption_iv' => env('DECRYPTION_IV', ''),
-
-    'decryption_key' => env('DECRYPTION_KEY', ''),
-
-    'open_api_key'  => env('OPEN_API_KEY', ''),
-
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -247,9 +233,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Notification' => Illuminate\Support\Facades\Notification::class,
         'Module' => \Nwidart\Modules\Facades\Module::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'OneSignal' => Berkayk\OneSignal\OneSignalFacade::class,
-        'PDFMerger' => Webklex\PDFMerger\Facades\PDFMergerFacade::class,
     ],
 ];

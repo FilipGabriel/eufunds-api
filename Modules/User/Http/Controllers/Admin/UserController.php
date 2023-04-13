@@ -3,10 +3,7 @@
 namespace Modules\User\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Modules\User\Entities\Role;
 use Modules\User\Entities\User;
-use Rap2hpoutre\FastExcel\FastExcel;
-use Modules\User\Entities\SoldHistory;
 use Modules\Admin\Traits\HasCrudActions;
 use Modules\User\Http\Requests\SaveUserRequest;
 
