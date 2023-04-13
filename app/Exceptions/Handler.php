@@ -3,7 +3,6 @@
 namespace Smis\Exceptions;
 
 use Throwable;
-use Smis\Events\NewError;
 use Illuminate\Http\Request;
 use Swift_TransportException;
 use Illuminate\Validation\ValidationException;
@@ -42,10 +41,6 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $e)
     {
-        if(! empty($e->getMessage())) {
-            event(new NewError(strip_tags($e->getMessage())));
-        }
-
         parent::report($e);
     }
 

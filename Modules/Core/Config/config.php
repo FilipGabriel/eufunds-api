@@ -8,11 +8,9 @@ return [
         'dashboard',
         'meta',
         'user',
-        'workshop',
         'setting',
         'media',
         'meta',
-        'page',
         'translation',
     ],
 ];

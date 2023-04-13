@@ -24,7 +24,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Smis\Http\Middleware\TrustProxies::class,
         \Smis\Http\Middleware\RedirectToInstallerIfNotInstalled::class,
-        \Smis\Http\Middleware\RunUpdater::class,
     ];
 
     /**

@@ -14,11 +14,7 @@ class CheckForMaintenanceMode extends BaseCheckForMaintenanceMode
      */
     protected $except = [
         '*/admin*',
-        '*/api/v1/primary-landing-menu',
-        '*/api/v1/categories',
-        '*/api/v1/news*',
-        '*/api/v1/landing/news*',
-        '*/api/v1/m3-manager/consultant'
+        '*/api/v1/programs'
     ];
 
     /**

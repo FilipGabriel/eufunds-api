@@ -12,7 +12,6 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        '*ipn/mobilpay/*',
         'api/v1/*',
     ];
 }

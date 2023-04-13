@@ -201,7 +201,6 @@ return [
         Mehedi\Stylist\StylistServiceProvider::class,
         Lab404\Impersonate\ImpersonateServiceProvider::class,
         Smis\Providers\GoogleDriveServiceProvider::class,
-        Smis\Providers\HorizonServiceProvider::class,
     ],
 
     /*

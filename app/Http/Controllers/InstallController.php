@@ -6,11 +6,11 @@ use Exception;
 use Smis\Install\App;
 use Smis\Install\Database;
 use Smis\Install\Requirement;
-use Illuminate\Routing\Controller;
 use Smis\Install\AdminAccount;
+use Illuminate\Routing\Controller;
 use Smis\Http\Requests\InstallRequest;
-use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 use Smis\Http\Middleware\RedirectIfInstalled;
+use Jackiedo\DotenvEditor\Facades\DotenvEditor;
 
 class InstallController extends Controller
 {
