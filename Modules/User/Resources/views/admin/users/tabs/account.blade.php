@@ -2,7 +2,7 @@
     <div class="col-md-8">
         {{ Form::text('name', trans('user::attributes.users.name'), $errors, $user, ['required' => true]) }}
         {{ Form::email('email', trans('user::attributes.users.email'), $errors, $user, ['required' => true]) }}
-        {{ Form::text('phone', trans('user::attributes.users.phone'), $errors, $user, ['required' => true]) }}
+        {{ Form::text('phone', trans('user::attributes.users.phone'), $errors, $user) }}
         
         {{ Form::select('roles', trans('user::attributes.users.roles'), $errors, $roles, $user, ['multiple' => true, 'required' => true, 'class' => 'selectize prevent-creation']) }}
         

@@ -2,8 +2,8 @@
 
 namespace Modules\User\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use Modules\Admin\Ui\Facades\TabManager;
-use Modules\Core\Http\Requests\Request;
 
 class ProfileController
 {
@@ -23,7 +23,7 @@ class ProfileController
     /**
      * Update the specified resource in storage.
      *
-     * @param \Modules\Core\Http\Requests\Request $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
