@@ -51,7 +51,7 @@ class App
             'supported_locales' => ['ro'],
             'default_locale' => 'ro',
             'default_timezone' => 'Europe/Bucharest',
-            'supported_currencies' => ['RON', 'EUR', 'USD'],
+            'supported_currencies' => ['RON'],
             'default_currency' => 'RON',
             'currency_rate_exchange_service' => 'national_bank_of_romania',
             'auto_refresh_currency_rate_frequency' => 'daily',
