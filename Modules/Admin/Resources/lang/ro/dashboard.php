@@ -19,7 +19,7 @@ return [
         'latest_search_terms' => [
             'keyword' => 'Cuvant cheie',
             'results' => 'Rezultate',
-            'hits' => 'Indicii',
+            'hits' => 'Hits',
         ],
         'latest_orders' => [
             'order_id' => 'ID',

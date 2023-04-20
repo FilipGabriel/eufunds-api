@@ -41,15 +41,15 @@
                         <div class="tab-content">
                             <div id="general-information" class="tab-pane fade in active">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-12">
                                         <div id="id-field" class="hide">
-                                            {{ Form::text('id', trans('program::attributes.id'), $errors, null, ['disabled' => true]) }}
+                                            {{ Form::text('id', trans('program::attributes.id'), $errors, null, ['disabled' => true, 'labelCol' => 2]) }}
                                         </div>
 
-                                        {{ Form::text('name', trans('program::attributes.name'), $errors, null, ['required' => true]) }}
-                                        {{ Form::select('categories', trans('product::attributes.categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true]) }}
-                                        {{ Form::checkbox('is_active', trans('program::attributes.is_active'), trans('program::programs.form.enable_the_program'), $errors) }}
-                                        {{ Form::checkbox('is_searchable', trans('program::attributes.is_searchable'), trans('program::programs.form.show_this_program_in_search_box'), $errors) }}
+                                        {{ Form::text('name', trans('program::attributes.name'), $errors, null, ['required' => true, 'labelCol' => 2]) }}
+                                        {{ Form::select('categories', trans('product::attributes.categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
+                                        {{ Form::checkbox('is_active', trans('program::attributes.is_active'), trans('program::programs.form.enable_the_program'), $errors, null, ['labelCol' => 2]) }}
+                                        {{ Form::checkbox('is_searchable', trans('program::attributes.is_searchable'), trans('program::programs.form.show_this_program_in_search_box'), $errors, null, ['labelCol' => 2]) }}
                                     </div>
                                 </div>
                             </div>

@@ -170,11 +170,11 @@ return [
         'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,
 
         'mail' => [
-            'to' => env('MAIL_ADMIN_ADDRESS', 'administrator@eufunds.ro'),
+            'to' => env('MAIL_ADMIN_ADDRESS', 'administrator@euprojects.ro'),
 
             'from' => [
-                'address' => env('MAIL_FROM_ADDRESS', 'noreply@eufunds.ro'),
-                'name' => env('MAIL_FROM_NAME', 'EuFunds'),
+                'address' => env('MAIL_FROM_ADDRESS', 'noreply@euprojects.ro'),
+                'name' => env('MAIL_FROM_NAME', 'EUProjects'),
             ],
         ],
 

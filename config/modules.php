@@ -160,8 +160,8 @@ return [
     'composer' => [
         'vendor' => 'smis',
         'author' => [
-            'name' => 'EUFunds',
-            'email' => 'contact@eufunds.ro',
+            'name' => 'EUProjects',
+            'email' => 'contact@euprojects.ro',
         ],
     ],
 

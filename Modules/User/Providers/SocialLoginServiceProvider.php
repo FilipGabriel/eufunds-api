@@ -26,7 +26,7 @@ class SocialLoginServiceProvider extends ServiceProvider
         $this->app['config']->set('services.facebook', [
             'client_id' => setting('facebook_login_app_id'),
             'client_secret' => setting('facebook_login_app_secret'),
-            'redirect' => config('app.frontend_domain', 'eufunds.ro') . '/login?provider=facebook',
+            'redirect' => config('app.frontend_domain', 'euprojects.ro') . '/login?provider=facebook',
         ]);
     }
 
@@ -35,7 +35,7 @@ class SocialLoginServiceProvider extends ServiceProvider
         $this->app['config']->set('services.google', [
             'client_id' => setting('google_login_client_id'),
             'client_secret' => setting('google_login_client_secret'),
-            'redirect' => config('app.frontend_domanin', 'eufunds.ro') . '/login?provider=google',
+            'redirect' => config('app.frontend_domanin', 'euprojects.ro') . '/login?provider=google',
         ]);
     }
 }

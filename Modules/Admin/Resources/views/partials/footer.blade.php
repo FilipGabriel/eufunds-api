@@ -27,5 +27,5 @@
         <i class="fa fa-keyboard-o"></i>
     </a>&nbsp;
 
-    <span>Copyright &copy; {{ date('Y')}} <a href="/" target="_blank">EUFunds</a></span>
+    <span>Copyright &copy; {{ date('Y')}} <a href="/" target="_blank">EUProjects</a></span>
 </footer>
