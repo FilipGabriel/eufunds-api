@@ -84,7 +84,9 @@ trait ProductSearch
     private function getProgramCategories()
     {
         $program = Program::findBySlug(request('program'));
-        $categoryIds = $program->categories->pluck('id')->toArray();
+        $categoryIds = $program->categories->pluck('id')->merge(
+            $program->categories->pluck('parent_id')
+        )->toArray();
 
         return Category::treeIds($categoryIds);
     }
