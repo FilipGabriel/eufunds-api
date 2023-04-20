@@ -25,10 +25,7 @@ class SaveProductRequest extends Request
         return [
             'slug' => $this->getSlugRules(),
             'name' => 'required',
-            'description' => 'required',
             'brand_id' => ['nullable', Rule::exists('brands', 'id')],
-            'tax_class_id' => ['nullable', Rule::exists('tax_classes', 'id')],
-            'virtual' => 'nullable|boolean',
             'is_active' => 'required|boolean',
             'price' => 'required|numeric|min:0|max:99999999999999',
             'special_price' => 'nullable|numeric|min:0|max:99999999999999',
@@ -38,8 +35,6 @@ class SaveProductRequest extends Request
             'manage_stock' => 'nullable|boolean',
             'qty' => 'required_if:manage_stock,1|nullable|numeric',
             'in_stock' => 'nullable|boolean',
-            'new_from' => 'nullable|date',
-            'new_to' => 'nullable|date',
         ];
     }
 

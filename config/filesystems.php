@@ -90,12 +90,5 @@ return [
             // 'ssl' => true,
             // 'timeout' => 30,
         ],
-
-        'media_ftp' => [
-            'driver' => 'ftp',
-            'host' => env('MEDIA_FTP_HOST'),
-            'username' => env('MEDIA_FTP_USERNAME'),
-            'password' => env('MEDIA_FTP_PASSWORD')
-        ],
     ],
 ];

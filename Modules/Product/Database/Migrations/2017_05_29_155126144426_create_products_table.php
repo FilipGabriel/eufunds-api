@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('nod_id')->nullable();
             $table->integer('brand_id')->unsigned()->nullable();
-            $table->string('slug')->unique();
+            $table->text('slug')->unique();
             $table->integer('warranty')->unsigned()->nullable();
             $table->decimal('price', 18, 4)->unsigned();
             $table->decimal('special_price', 18, 4)->unsigned()->nullable();

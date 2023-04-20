@@ -4,7 +4,7 @@ return [
     'name' => 'Nume',
     'slug' => 'URL',
     'description' => 'Descriere',
-    'short_description' => 'Scurta Descriere',
+    'short_description' => 'Descriere Scurta',
     'product_id' => 'NOD ID',
     'brand_id' => 'Brand',
     'warranty' => 'Garantie',
