@@ -98,7 +98,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::group([
             'namespace' => 'Api',
             'prefix' => 'api/v1',
-            'middleware' => ['auth:sanctum'],
+            'middleware' => ['api', 'auth:sanctum', 'throttle'],
         ], function () use ($path) {
             require $path;
         });
