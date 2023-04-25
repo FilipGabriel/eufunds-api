@@ -2,9 +2,9 @@
 
 namespace Modules\User\Http\Requests;
 
-use Modules\Core\Http\Requests\Request;
+use Modules\Core\Http\Requests\SimpleErrorRequest;
 
-class TokenRequest extends Request
+class TokenRequest extends SimpleErrorRequest
 {
     /**
      * Available attributes for users.

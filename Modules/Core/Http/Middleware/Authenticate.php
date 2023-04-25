@@ -14,6 +14,7 @@ class Authenticate
      * @var array
      */
     protected $except = [
+        'api.user.tokens',
         'programs.index'
     ];
 

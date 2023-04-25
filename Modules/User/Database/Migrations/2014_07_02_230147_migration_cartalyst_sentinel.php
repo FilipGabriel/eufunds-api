@@ -33,8 +33,11 @@ class MigrationCartalystSentinel extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nod_id')->nullable();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('manager_name')->nullable();
+            $table->string('manager_email')->nullable();
             $table->string('phone')->nullable();
             $table->text('about')->nullable();
             $table->string('password');

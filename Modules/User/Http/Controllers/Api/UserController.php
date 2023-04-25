@@ -3,11 +3,13 @@
 namespace Modules\User\Http\Controllers\Api;
 
 use Modules\User\Entities\User;
+use Illuminate\Routing\Controller;
 use Modules\User\Http\Requests\TokenRequest;
 use Modules\User\Transformers\UserTransformer;
+use Modules\User\Http\Middleware\AuthorizeRequest;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 
-class UserController
+class UserController extends Controller
 {
     /**
      * Model for the resource.
@@ -22,6 +24,16 @@ class UserController
      * @var string
      */
     protected $label = 'user::users.user';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(AuthorizeRequest::class)->only(['generateToken']);
+    }
 
     /**
      * Get an instance of the currently authenticated user
@@ -47,9 +59,11 @@ class UserController
                 $user->roles()->sync([setting('customer_role')]);
             }
 
-            return $user->createToken('bearer')->plainTextToken;
+            return response()->json([ 'token' => $user->createToken('bearer')->plainTextToken ]);
         } catch (ThrottlingException $e) {
-            abort(403, trans('user::messages.users.account_is_blocked', ['delay' => $e->getDelay()]));
+            return response()->json([
+                'message' => trans('user::messages.users.account_is_blocked', ['delay' => $e->getDelay()])
+            ], 403);
         }
     }
 }
