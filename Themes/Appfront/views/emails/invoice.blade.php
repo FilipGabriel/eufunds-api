@@ -1,264 +1,226 @@
 <!DOCTYPE html>
-<html lang="en" style="-ms-text-size-adjust: 100%;
-                    -webkit-text-size-adjust: 100%;
-                    -webkit-print-color-adjust: exact;"
->
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
 
-        <style>
-            td {
-                vertical-align: top;
+    <style>
+        td {
+            vertical-align: top;
+        }
+
+        @media screen and (max-width: 767px) {
+            .order-details {
+                width: 100% !important;
             }
+        }
+    </style>
+</head>
 
-            @media screen and (max-width: 767px) {
-                .order-details {
-                    width: 100% !important;
-                }
-            }
-        </style>
-    </head>
-
-    <body style="font-family: 'Open Sans', sans-serif;
+<body style="font-family: 'Open Sans', sans-serif;
                 font-size: 15px;
                 min-width: 320px;
                 color: #555555;
                 margin: 0;"
-    >
-        <table style="border-collapse: collapse;
-                    min-width: 320px;
-                    max-width: 900px;
-                    width: 100%;
-                    margin: auto;"
-        >
-            <tbody>
-                <tr>
-                    <td style="padding: 30px 15px;">
-                        <table style="border-collapse: collapse;
-                                    min-width: 320px;
-                                    max-width: 760px;
-                                    width: 100%;
-                                    margin: auto;"
-                        >
-                            <tbody>
-                                <tr>
-                                    <td style="padding: 0;">
-                                        <table style="border-collapse: collapse; width: 100%;">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="padding: 0;">
-                                                        <h5 style="font-family: 'Open Sans', sans-serif;
-                                                                font-weight: 600;
-                                                                font-size: 18px;
-                                                                line-height: 22px;
-                                                                margin: 0 0 8px;
-                                                                color: #444444;"
-                                                        >
-                                                            {{ trans('appfront::invoice.order_details') }}
-                                                        </h5>
-                                                    </td>
-                                                </tr>
+>
 
-                                                <tr>
-                                                    <td style="padding: 0;">
-                                                        <table class="order-details" style="border-collapse: collapse;">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;"
-                                                                    >
-                                                                        {{ trans('appfront::invoice.funding') }}:
-                                                                    </td>
+<table class="v1MsoNormalTable" style="width: 100%; border-collapse: collapse;" border="0" cellspacing="0"
+       cellpadding="0">
+    <tbody>
+    <tr>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px; border-left: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;">
+            <p style="text-align: center;"><em><span
+                        style="font-size: 20.0pt; color: black;">Factura Proforma</span></em></p>
+        </td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px;"></td>
+        <td style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px; border-right: solid black 1px;"></td>
+    </tr>
+    <tr style="height: 21.0pt;">
+        <td style="border: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;" colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span
+                        style="font-size: 14.0pt; color: black;">Program</span></strong></p>
+        </td>
+        <td style="border: 1.0pt solid black;height: 21.0pt;" colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span
+                        style="font-size: 14.0pt; color: black;">Beneficiar</span></strong></p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 21.0pt;" colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span
+                        style="font-size: 14.0pt; color: black;">Tip oferta</span></strong></p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 21.0pt;" colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span
+                        style="font-size: 14.0pt; color: black;">Valabilitate oferta</span></strong></p>
+        </td>
+        <td style="border-top: solid black 1.0pt; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;"
+            colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span
+                        style="font-size: 14.0pt; color: black;">Termen de livrare</span></strong></p>
+        </td>
+    </tr>
+    <tr style="height: 15.0pt;">
+        <td style="border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;"
+            colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                    style="color: black;">{{ $order->funding->name }}</span></p>
+        </td>
+        <td style="border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;"
+            colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><span style="color: black;">{{ $order->business_id }} - {{ $order->company_name }}</span>
+            </p>
+        </td>
+        <td style="border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;"
+            colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><span style="color: black;">Bugetare/Achizitie</span>
+            </p>
+        </td>
+        <td style="border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;"
+            colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><span style="color: black;">30 zile</span>
+            </p>
+        </td>
+        <td style="border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;"
+            colspan="2">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                    style="color: black;">60-90 zile</span></p>
+        </td>
+    </tr>
 
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;
-                                                                            word-break: break-all;"
-                                                                    >
-                                                                        {{ $order->funding->name }}
-                                                                    </td>
-                                                                </tr>
+    <tr style="height: 30.0pt;">
+        <td style="height: 15.0pt; border-bottom: solid black 1px; border-left: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px; border-right: solid black 1px;"></td>
+    </tr>
 
-                                                                <tr>
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;"
-                                                                    >
-                                                                        {{ trans('appfront::invoice.company_name') }}:
-                                                                    </td>
 
-                                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                                            font-weight: 400;
-                                                                            font-size: 15px;
-                                                                            padding: 4px 4px 4px 0;
-                                                                            word-break: break-all;"
-                                                                    >
-                                                                        {{ $order->business_id }} - {{ $order->company_name }}
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
+    <tr style="height: 15.0pt;">
+        <td style="border: solid black 1.0pt; height: 15.0pt;" colspan="1">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span
+                        style="color: black;">Nr crt</span></strong></p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span style="color: black;">Cod produs</span></strong>
+            </p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="3">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span style="color: black;">Denumirea produselor sau a serviciilor</span></strong>
+            </p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span
+                        style="color: black;">UM</span></strong></p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span style="color: black;">Cantitate</span></strong>
+            </p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span style="color: black;">Pret unitar</span></strong>
+            </p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span style="color: black;">Valoare</span></strong>
+            </p>
+        </td>
+        <td style="border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
+            <p class="v1MsoNormal" style="text-align: center;" align="center"><strong><span style="color: black;">Garantie</span></strong>
+            </p>
+        </td>
+    </tr>
 
-                                <tr>
-                                    <td style="padding: 30px 0 0;">
-                                        <table style="border-collapse: collapse;
-                                                    width: 100%;
-                                                    border-bottom: 1px solid #e9e9e9;"
-                                        >
-                                            <tbody>
-                                                @foreach ($order->products as $product)
-                                                    <tr style="border-top: 1px solid #f1f1f1;">
-                                                        <td style="padding: 14px 0 14px;">
-                                                            <table style="border-collapse: collapse;">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td style="padding: 0 0 8px;">
-                                                                            <span
-                                                                                style="font-family: 'Open Sans', sans-serif;
-                                                                                    font-weight: 400;
-                                                                                    font-size: 18px;
-                                                                                    line-height: 22px;
-                                                                                    color: #444444;
-                                                                                    margin: 0;
-                                                                                    text-align: justify;"
-                                                                            >
-                                                                                {!! $product->product->short_description !!}
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
+    @foreach ($order->products as $key => $product)
+        <tr style="height: 30.0pt;">
+            <td style="padding: 10px; border: solid black 1.0pt; border-top: none; height: 30.0pt;" colspan="1">
+                <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                        style="color: black;">{{ $key+1 }}</span></p>
+            </td>
+            <td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; background: white; height: 30.0pt;"
+                colspan="1">
+                <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                        style="color: black;">{{ $product->sku ?: '-' }}</span></p>
+            </td>
+            <td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; background: white; height: 30.0pt;"
+                colspan="3">
+                <p class="v1MsoNormal" style="text-align: center;" align="center">
+                        <span style="color: black;">
+                            {!! $product->product->short_description !!}
+                        </span>
 
-                                                                    @if ($product->hasAnyOption())
-                                                                        <tr>
-                                                                            <td style="padding: 0;">
-                                                                                <table style="border-collapse: collapse; width: 100%;">
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td style="font-family: 'Open Sans', sans-serif;
-                                                                                                    font-weight: 400;
-                                                                                                    font-size: 14px;
-                                                                                                    padding: 0 0 8px;"
-                                                                                            >
-                                                                                                @foreach ($product->options as $option)
-                                                                                                    <span style="color: #9a9a9a;">
-                                                                                                        @if ($option->option->isFieldType())
-                                                                                                            {{ $option->value }}
-                                                                                                        @else
-                                                                                                            {{ $option->values->implode('label', ', ') }}
-                                                                                                        @endif
-                                                                                                    </span>
-                                                                                                @endforeach
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endif
+                    @if ($product->hasAnyOption())
+                        @foreach ($product->options as $option)
+                            <span style="color: #9a9a9a;">
+                                    @if ($option->option->isFieldType())
+                                    {{ $option->value }}
+                                @else
+                                    {{ $option->values->implode('label', ', ') }}
+                                @endif
+                                </span>
+                        @endforeach
+                    @endif
+                </p>
+            </td>
+            <td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
+                colspan="1">
+                <p class="v1MsoNormal" style="text-align: center;" align="center"><span style="color: black;">buc</span>
+                </p>
+            </td>
+            <td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
+                colspan="1">
+                <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                        style="color: black;">{{ $product->qty }}</span></p>
+            </td>
+            <td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
+                colspan="1">
+                <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                        style="color: black;">{{ $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
+                </p>
+            </td>
+            <td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
+                colspan="1">
+                <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                        style="color: black;">{{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
+                </p>
+            </td>
+            <td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
+                colspan="1">
+                <p class="v1MsoNormal" style="text-align: center;" align="center"><span
+                        style="color: black;">{{ $product->warranty ?: '-' }}</span></p>
+            </td>
+        </tr>
+    @endforeach
 
-                                                                    <tr>
-                                                                        <td style="font-family: 'Open Sans', sans-serif;
-                                                                                font-weight: 400;
-                                                                                font-size: 16px;
-                                                                                padding: 0 0 4px;"
-                                                                        >
-                                                                            <span>
-                                                                                {{ trans('appfront::invoice.unit_price') }}:
-                                                                            </span>
-
-                                                                            <span style="margin-left: 5px;">
-                                                                                {{ $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency) }}
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td style="font-family: 'Open Sans', sans-serif;
-                                                                                font-weight: 400;
-                                                                                font-size: 16px;
-                                                                                padding: 0 0 4px;"
-                                                                        >
-                                                                            <span>
-                                                                                {{ trans('appfront::invoice.quantity') }}:
-                                                                            </span>
-
-                                                                            <span style="margin-left: 5px;">
-                                                                                {{ $product->qty }}
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td style="font-family: 'Open Sans', sans-serif;
-                                                                                font-weight: 400;
-                                                                                font-size: 16px;
-                                                                                padding: 0 0 4px;"
-                                                                        >
-                                                                            <span>
-                                                                                {{ trans('appfront::invoice.line_total') }}:
-                                                                            </span>
-
-                                                                            <span style="margin-left: 5px;">
-                                                                                {{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td style="padding: 0;">
-                                        <table style="border-collapse: collapse;
-                                                    width: 300px;
-                                                    margin-top: 10px;
-                                                    float: right;"
-                                        >
-                                            <tbody>
-                                                <tr>
-                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                            font-size: 17px;
-                                                            font-weight: 600;
-                                                            padding: 5px 0;"
-                                                    >
-                                                        {{ trans('appfront::invoice.total') }}
-                                                    </td>
-
-                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                            font-size: 17px;
-                                                            font-weight: 600;
-                                                            padding: 5px 0;
-                                                            float: right;"
-                                                    >
-                                                        {{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
+    <tr style="height: 30.0pt;">
+        <td style="height: 15.0pt; border-bottom: solid black 1px; border-left: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
+        <td style="height: 15.0pt; border-bottom: solid black 1px; border-right: solid black 1px; padding-right: 10px;"
+            colspan="2">
+            <p style="text-align: right; color: black">Total:
+                <strong>{{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</strong>
+            </p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
 </html>
