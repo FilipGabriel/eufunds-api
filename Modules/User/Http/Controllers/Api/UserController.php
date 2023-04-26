@@ -59,7 +59,7 @@ class UserController extends Controller
                 $user->roles()->sync([setting('customer_role')]);
             }
 
-            return $user->createToken('bearer')->plainTextToken;
+            return [ 'token' => $user->createToken('bearer')->plainTextToken];
         } catch (ThrottlingException $e) {
             abort(403, trans('user::messages.users.account_is_blocked', ['delay' => $e->getDelay()]));
         }

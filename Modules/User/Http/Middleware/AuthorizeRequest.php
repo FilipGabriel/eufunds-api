@@ -16,8 +16,7 @@ class AuthorizeRequest
     public function handle($request, Closure $next)
     {
         abort_if(
-            config('app.env') == 'production' && 
-            $request->header('api-user') !== config('services.nod.user')
+            $request->header('Nod-User') !== config('services.nod.user')
         , 403);
 
         return $next($request);
