@@ -25,54 +25,54 @@
                     </td>
 				</tr>
 				<tr style="height: 21.0pt;">
-					<td style="border: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;" colspan="2">
+					<td colspan="3" style="border: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Program</span></strong>
                         </p>
 					</td>
-					<td style="border: 1.0pt solid black;height: 21.0pt;" colspan="2">
+					<td colspan="3" style="border: 1.0pt solid black;height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Beneficiar</span></strong>
                         </p>
 					</td>
-					<td style="border: solid black 1.0pt; border-left: none; height: 21.0pt;" colspan="2">
+					<td colspan="2" style="border: solid black 1.0pt; border-left: none; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Tip oferta</span></strong>
                         </p>
 					</td>
-					<td style="border: solid black 1.0pt; border-left: none; height: 21.0pt;" colspan="2">
+					<td colspan="1" style="border: solid black 1.0pt; border-left: none; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Valabilitate oferta</span></strong>
                         </p>
 					</td>
-					<td colspan="2" style="border-top: solid black 1.0pt; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;">
+					<td colspan="1" style="border-top: solid black 1.0pt; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Termen de livrare</span></strong>
                         </p>
 					</td>
 				</tr>
-				<tr style="height: 15.0pt;">
-					<td colspan="2" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;">
+				<tr>
+					<td colspan="3" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
                             <span style="color: black;">{{ $order->funding->name }}</span>
                         </p>
 					</td>
-					<td colspan="2" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;">
+					<td colspan="3" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
                             <span style="color: black;">{{ $order->business_id }} - {{ $order->company_name }}</span>
 						</p>
 					</td>
-					<td colspan="2" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;">
+					<td colspan="2" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">Bugetare/Achizitie</span>
+                            <span style="color: black;">Bugetare / Achizitie</span>
 						</p>
 					</td>
-					<td colspan="2" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;">
+					<td colspan="1" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
                             <span style="color: black;">30 zile</span>
 						</p>
 					</td>
-					<td colspan="2" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 15.0pt;">
+					<td colspan="1" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
                             <span style="color: black;">60-90 zile</span>
                         </p>
