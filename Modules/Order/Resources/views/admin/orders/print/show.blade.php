@@ -136,7 +136,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="5" style="text-align: justify;">
-                                                    <span>{!! $product->product->description !!}</span>
+                                                    <span>{!! $product->product->short_description !!}</span>
 
                                                     @if ($product->hasAnyOption())
                                                         <div class="option">

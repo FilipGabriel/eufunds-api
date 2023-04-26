@@ -47,7 +47,6 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->groupRoutes("Themes\\{$theme->getName()}\\Http\\Controllers", function () use ($theme) {
             $this->mapAdminRoutes("{$theme->getPath()}/routes/admin.php");
-            $this->mapApiRoutes("{$theme->getPath()}/routes/api.php");
         });
     }
 

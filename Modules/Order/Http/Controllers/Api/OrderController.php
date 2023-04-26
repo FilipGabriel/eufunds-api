@@ -23,6 +23,7 @@ class OrderController
                     'total' => $order->total->format(),
                     'program' => $order->funding->name,
                     'created' => $order->created_at->format('d M Y'),
+                    'offer' => route('account.orders.download', $order->id),
                 ];
             });
 
@@ -91,7 +92,7 @@ class OrderController
             'download' => true,
             'order' => $order,
             'logo' => File::findOrNew(setting('appfront_mail_logo'))->path,
-        ])->setPaper('a4', 'portrait');
+        ])->setPaper('a4', 'landscape');
 
         return $file->download("Oferta {$order->company_name}.pdf");
     }

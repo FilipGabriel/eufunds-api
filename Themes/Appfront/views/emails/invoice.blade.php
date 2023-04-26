@@ -31,108 +31,9 @@
                     min-width: 320px;
                     max-width: 900px;
                     width: 100%;
-                    margin: auto;
-                    border-bottom: 2px solid {{ mail_theme_color() }};"
+                    margin: auto;"
         >
             <tbody>
-                <tr>
-                    <td style="padding: 0;">
-                        <table style="border-collapse: collapse;
-                                    width: 100%;
-                                    background: {{ mail_theme_color() }};"
-                        >
-                            <tbody>
-                                <tr>
-                                    <td style="padding: 0 15px; text-align: center;">
-                                        @if (is_null($logo))
-                                            <h1 style="font-family: 'Open Sans', sans-serif;
-                                                    font-weight: 400;
-                                                    font-size: 32px;
-                                                    line-height: 39px;
-                                                    display: inline-block;
-                                                    color: #444444;
-                                                    margin: 17px 0 0;"
-                                            >
-                                                {{ setting('store_name') }}
-                                            </h1>
-                                        @else
-                                            <div style="display: flex;
-                                                        height: 64px;
-                                                        width: 200px;
-                                                        align-items: center;
-                                                        justify-content: center;
-                                                        margin: auto;"
-                                            >
-                                                <img src="{{ $logo }}" style="max-height: 100%; max-width: 100%;" alt="logo">
-                                            </div>
-                                        @endif
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td style="padding: 0 15px; text-align: center;">
-                                        <span style="font-family: 'Open Sans', sans-serif;
-                                                    font-weight: 400;
-                                                    font-size: 56px;
-                                                    line-height: 68px;
-                                                    display: inline-block;
-                                                    color: #444444;
-                                                    margin: 3px 0 5px;"
-                                        >
-                                            {{ trans('appfront::invoice.invoice') }}
-                                        </span>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td style="padding: 0 15px;">
-                                        <table style="border-collapse: collapse;
-                                                    width: 230px;
-                                                    margin: 0 auto 20px;"
-                                        >
-                                            <tbody>
-                                                <tr>
-                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                            font-size: 16px;
-                                                            font-weight: 400;
-                                                            color: #444444;
-                                                            padding: 0;"
-                                                    >
-                                                        <span>
-                                                            {{ trans('appfront::invoice.order_id') }}:
-                                                        </span>
-
-                                                        <span>
-                                                            #{{ $order->id }}
-                                                        </span>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td style="font-family: 'Open Sans', sans-serif;
-                                                            font-size: 16px;
-                                                            font-weight: 400;
-                                                            color: #444444;
-                                                            padding: 0;"
-                                                    >
-                                                        <span>
-                                                            {{ trans('appfront::invoice.date') }}:
-                                                        </span>
-
-                                                        <span>
-                                                            {{ $order->created_at->format('d M Y') }}
-                                                        </span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-
                 <tr>
                     <td style="padding: 30px 15px;">
                         <table style="border-collapse: collapse;
@@ -233,7 +134,7 @@
                                                                                     margin: 0;
                                                                                     text-align: justify;"
                                                                             >
-                                                                                {!! $product->product->description !!}
+                                                                                {!! $product->product->short_description !!}
                                                                             </span>
                                                                         </td>
                                                                     </tr>
