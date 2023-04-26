@@ -3,8 +3,9 @@
 namespace Modules\Program\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
-use Modules\Option\Entities\OptionValue;
 use Modules\Product\Entities\Product;
+use Modules\Program\Entities\Program;
+use Modules\Option\Entities\OptionValue;
 use Modules\Product\Events\ProductViewed;
 use Modules\Product\Filters\ProductFilter;
 use Modules\Product\Http\Controllers\Api\ProductSearch;
@@ -48,9 +49,13 @@ class ProgramProductController extends Controller
      */
     public function show($program, $slug)
     {
-        request()->merge(['program' => $program ]);
-
         $product = Product::findBySlug($slug);
+        $program = Program::findBySlug($program);
+
+        abort_if(
+            ! array_intersect($program->categories->pluck('id')->toArray(), $product->categories->pluck('id')->toArray()
+        ), 404);
+
         $product->selling_price = $product->getSellingPrice()->amount();
         $product->variants = $product->options->map(function($option) use ($product) {
             return [

@@ -35,31 +35,27 @@ class ImportProductsCommand extends Command
 
     public function handle()
     {
-        $this->getProducts();
-
-        foreach($this->products as $product) {
-            $this->createProduct($product);
-        }
-    }
-
-    private function getProducts($page = 1)
-    {
         try {
-            $response = $this->getRequest("/products?page={$page}");
-            $this->products = array_merge($this->products, $response->result->products);
+            $response = $this->getRequest("/products/full-feed");
+
+            $this->products = $response->products;
         } catch (Exception $e) {
-            Log::info("Page {$page}: {$e->getMessage()}");
+            Log::info("Get products: {$e->getMessage()}");
             return;
         }
 
-        if($response->result->total_pages > $page) {
-            self::getProducts($page+1);
+        foreach($this->products as $product) {
+            try {
+                $this->updateOrCreateProduct($product);
+            } catch (Exception $e) {
+                Log::info("Product {$product->id}: {$e->getMessage()}");
+            }
         }
     }
 
-    private function createProduct($product)
+    private function updateOrCreateProduct($product)
     {
-        $values = [
+        $newProduct = Product::updateOrCreate(['nod_id' => $product->id], [
             'name' => $product->title,
             'brand_id' => Brand::whereNodId($product->manufacturer_id)->first()->id ?? null,
             'warranty' => $product->warranty,
@@ -68,29 +64,26 @@ class ImportProductsCommand extends Command
             'description' => $product->long_description,
             'sku' => $product->code,
             'is_active' => true,
-        ];
+        ]);
 
         $productCategoryId = $product->product_category_id;
-        $newProduct = Product::updateOrCreate(['nod_id' => $product->id], $values);
-
         if(! $newProduct->categories->pluck('id')->contains($productCategoryId)) {
             $categoryIds = Category::getNestCategoryBy($productCategoryId, [$productCategoryId]);
     
             $newProduct->categories()->sync($categoryIds);
         }
         
-        $this->handleImages($product->pictures, $newProduct);
+        $this->handleImages($product->images, $newProduct);
     }
 
     private function handleImages($images, $product)
     {
-        foreach($images as $key => $image) {
+        foreach(explode(',', $images) as $key => $url) {
             $disk = config('filesystems.default');
             $location = $key == 0 ? 'base_image' : 'additional_images';
-            $url = $image->url_overlay_picture;
             $name = substr($url, strrpos($url, '/') + 1);
 
-            if(! $product->files()->whereFilename($name)->exists()) {
+            if($url && ! $product->files()->whereFilename($name)->exists()) {
                 $path = "media/{$location}/{$name}";
                 Storage::disk($disk)->put($path, file_get_contents($url));
                 $file = new SymfonyFile(public_path("storage/{$path}"));

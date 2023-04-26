@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('03:00');
-        $schedule->command("nod:import-manufacturers")->daily()->timezone('Europe/Bucharest')->at('03:00');
+        $schedule->command("nod:import-manufacturers")->daily()->timezone('Europe/Bucharest')->at('03:10');
+        $schedule->command("nod:import-products")->daily()->timezone('Europe/Bucharest')->at('03:20');
     }
 }

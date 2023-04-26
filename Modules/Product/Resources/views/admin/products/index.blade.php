@@ -27,6 +27,8 @@
                 { data: 'price', searchable: false },
                 { data: 'active', name: 'is_active', searchable: false },
                 { data: 'created', name: 'created_at' },
+                { data: 'nod_id', visible: false},
+                { data: 'sku', visible: false},
             ],
         });
     </script>
