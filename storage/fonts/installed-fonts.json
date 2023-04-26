@@ -1,0 +1,10 @@
+{
+    "open sans": {
+        "normal": "C:\\xampp\\htdocs\\eufunds\\storage\\fonts\/\/open_sans_normal_0c50822862df0e4bc3da7bec4af72b54",
+        "600": "open_sans_600_75341019d0aad9d730980a0320d86ab8"
+    },
+    "roboto": {
+        "normal": "C:\\xampp\\htdocs\\eufunds\\storage\\fonts\/\/roboto_normal_9fa47a070a8b30b595086d70bb7ac78c",
+        "500": "roboto_500_d0dcda9e813eb9b854a1cc044831f6fe"
+    }
+}

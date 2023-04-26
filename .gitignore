@@ -20,7 +20,6 @@ yarn-error.log
 yarn.lock
 /storage/framework
 /storage/logs
-/storage/fonts/*
 /storage/app
 /storage/debugbar
 lerna-debug.log
