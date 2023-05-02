@@ -45,17 +45,16 @@ class ImportProductAttributesCommand extends Command
         } catch (\Exception $e) {
             Log::info($e->getMessage());
             Log::info("Product Attributes Page {$page}: {$e->getMessage()}");
-            return;
         }
 
         if($page % 50 == 0) {
             foreach($this->items as $item) {
                 foreach($item->properties as $property) {
                     $this->products[$item->product_id][$property->name_id][] = $property;
-                    $this->attributes[] = [
+                    $this->attributes[$property->name_id] = [
                         'id' => $property->name_id,
                         'name' => $property->name,
-                        'slug' => $this->generateSlug($property->name)
+                        'slug' => $this->generateSlug($property->name_id, $property->name)
                     ];
                     $this->attributeValues[$property->name_id][] = [
                         'id' => $property->value_id ?? null,
@@ -64,7 +63,7 @@ class ImportProductAttributesCommand extends Command
                 }
             }
 
-            Attribute::upsert( $this->attributes, ['id'], ['name', 'slug'] );
+            Attribute::upsert( array_values($this->attributes), ['id', 'slug'], ['name'] );
 
             foreach($this->attributeValues as $attributeId => $values) {
                 $attribute = Attribute::find($attributeId);
@@ -77,30 +76,34 @@ class ImportProductAttributesCommand extends Command
             foreach($this->products as $nodId => $productAttributes) {
                 $product = Product::findByNodId($nodId);
 
-                if($product && $product->attributes->isEmpty()) {
-                    $productAttributeValues = [];
+                if(! $product) { continue; }
 
-                    foreach($productAttributes as $attributeId => $values) {
-                        $productAttribute = $product->attributes()->whereAttributeId($attributeId)->firstOrCreate([
-                            'attribute_id' => $attributeId
-                        ]);
+                $productAttributeValues = [];
 
-                        foreach ($values as $value) {
-                            if(! isset($value->value_id)) {
-                                $newValue = $productAttribute->attribute->values()->create(['value' => $value->value]);
-                            }
-
-                            $productAttributeValues[] = [
-                                'product_attribute_id' => $productAttribute->id,
-                                'attribute_value_id' => $value->value_id ?? $newValue->id,
-                            ];
-                        }
-
-                        $productAttribute->attribute->categories()->syncWithoutDetaching($product->categories->pluck('id')->toArray());
+                foreach($productAttributes as $attributeId => $values) {
+                    if(! Attribute::whereId($attributeId)->exists()) {
+                        continue;
                     }
 
-                    ProductAttributeValue::insert($productAttributeValues);
+                    $productAttribute = $product->attributes()->whereAttributeId($attributeId)->firstOrCreate([
+                        'attribute_id' => $attributeId
+                    ]);
+
+                    foreach ($values as $value) {
+                        if(! isset($value->value_id)) {
+                            $newValue = $productAttribute->attribute->values()->create(['value' => $value->value]);
+                        }
+
+                        $productAttributeValues[] = [
+                            'product_attribute_id' => $productAttribute->id,
+                            'attribute_value_id' => $value->value_id ?? $newValue->id,
+                        ];
+                    }
+
+                    $productAttribute->attribute->categories()->syncWithoutDetaching($product->categories->pluck('id')->toArray());
                 }
+
+                ProductAttributeValue::insertOrIgnore($productAttributeValues);
             }
 
             $this->items = [];
@@ -120,11 +123,11 @@ class ImportProductAttributesCommand extends Command
      * @param string $value
      * @return string
      */
-    private function generateSlug($value)
+    private function generateSlug($id, $value)
     {
         $slug = str_slug($value) ?: slugify($value);
 
-        $query = Attribute::where('slug', $slug)->withoutGlobalScope('active');
+        $query = Attribute::withoutGlobalScope('active')->where('slug', $slug)->where('id', '<>', $id);
 
         if ($query->exists()) {
             $slug .= '-' . str_random(8);
