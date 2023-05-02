@@ -15,8 +15,9 @@ class CreateAttributesTable extends Migration
     {
         Schema::create('attributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('attribute_set_id')->unsigned()->index();
-            $table->boolean('is_filterable');
+            $table->string('name');
+            $table->integer('attribute_set_id')->unsigned()->index()->default(1);
+            $table->boolean('is_filterable')->default(1);
             $table->timestamps();
 
             $table->foreign('attribute_set_id')->references('id')->on('attribute_sets')->onDelete('cascade');

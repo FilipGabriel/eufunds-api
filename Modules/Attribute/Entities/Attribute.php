@@ -5,26 +5,18 @@ namespace Modules\Attribute\Entities;
 use Modules\Support\Eloquent\Model;
 use Modules\Category\Entities\Category;
 use Modules\Support\Eloquent\Sluggable;
-use Modules\Support\Eloquent\Translatable;
 use Modules\Attribute\Admin\AttributeTable;
 
 class Attribute extends Model
 {
-    use Translatable, Sluggable;
-
-    /**
-     * The relations to eager load on every query.
-     *
-     * @var array
-     */
-    protected $with = ['translations'];
+    use Sluggable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['id', 'attribute_set_id', 'slug', 'is_filterable'];
+    protected $fillable = ['id', 'attribute_set_id', 'name', 'slug', 'is_filterable'];
 
     /**
      * The attributes that should be cast to native types.
@@ -34,13 +26,6 @@ class Attribute extends Model
     protected $casts = [
         'is_filterable' => 'boolean',
     ];
-
-    /**
-     * The attributes that are translatable.
-     *
-     * @var array
-     */
-    public $translatedAttributes = ['name'];
 
     /**
      * The attribute that will be slugged.

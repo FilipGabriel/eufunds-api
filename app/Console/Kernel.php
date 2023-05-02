@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\ScaffoldEntityCommand::class,
         Commands\ImportProductsCommand::class,
         Commands\ImportProductCategoriesCommand::class,
+        Commands\ImportProductAttributesCommand::class,
         Commands\ImportProductManufacturersCommand::class,
     ];
 
@@ -31,5 +32,6 @@ class Kernel extends ConsoleKernel
         $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('03:00');
         $schedule->command("nod:import-manufacturers")->daily()->timezone('Europe/Bucharest')->at('03:10');
         $schedule->command("nod:import-products")->daily()->timezone('Europe/Bucharest')->at('03:20');
+        $schedule->command("nod:import-product-attributes")->daily()->timezone('Europe/Bucharest')->at('04:00');
     }
 }

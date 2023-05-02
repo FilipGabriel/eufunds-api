@@ -32,7 +32,7 @@
             columns: [
                 { data: 'checkbox', orderable: false, searchable: false, width: '3%' },
                 { data: 'id', width: '5%' },
-                { data: 'name', name: 'translations.name', orderable: false, defaultContent: '' },
+                { data: 'name', orderable: false, defaultContent: '' },
                 { data: 'attribute_set', name: 'attributeSet.name', searchable: false, orderable: false, defaultContent: '' },
                 { data: 'is_filterable', name: 'is_filterable', searchable: false, orderable: false },
                 { data: 'created', name: 'created_at' },

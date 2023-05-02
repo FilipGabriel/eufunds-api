@@ -564,6 +564,14 @@ class Product extends Model
         ->firstOrFail();
     }
 
+    public static function findByNodId($nodId)
+    {
+        return self::with([ 'categories', 'attributes.attribute.attributeSet' ])
+            ->withoutGlobalScope('active')
+            ->where('nod_id', $nodId)
+            ->first();
+    }
+
     public function clean()
     {
         return array_except($this->toArray(), [

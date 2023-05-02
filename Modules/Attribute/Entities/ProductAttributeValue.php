@@ -6,6 +6,8 @@ use Modules\Support\Eloquent\Model;
 
 class ProductAttributeValue extends Model
 {
+    public $timestamps = false;
+    
     /**
      * The relations to eager load on every query.
      *
