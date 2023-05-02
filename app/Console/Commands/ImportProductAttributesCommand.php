@@ -54,7 +54,8 @@ class ImportProductAttributesCommand extends Command
                     $this->products[$item->product_id][$property->name_id][] = $property;
                     $this->attributes[] = [
                         'id' => $property->name_id,
-                        'name' => $property->name
+                        'name' => $property->name,
+                        'slug' => $this->generateSlug($property->name)
                     ];
                     $this->attributeValues[$property->name_id][] = [
                         'id' => $property->value_id ?? null,
@@ -63,11 +64,14 @@ class ImportProductAttributesCommand extends Command
                 }
             }
 
-            Attribute::upsert( $this->attributes, ['id'], ['name'] );
+            Attribute::upsert( $this->attributes, ['id'], ['name', 'slug'] );
 
             foreach($this->attributeValues as $attributeId => $values) {
                 $attribute = Attribute::find($attributeId);
-                $attribute->saveValues(array_merge($values, $attribute->load('values')->values->toArray()));
+
+                if($attribute) {
+                    $attribute->saveValues(array_merge($values, $attribute->load('values')->values->toArray()));
+                }
             }
 
             foreach($this->products as $nodId => $productAttributes) {
@@ -108,5 +112,24 @@ class ImportProductAttributesCommand extends Command
         if($page <= $response->total_pages) {
             self::getProducts($page+1);
         }
+    }
+
+    /**
+     * Generate slug by the given value.
+     *
+     * @param string $value
+     * @return string
+     */
+    private function generateSlug($value)
+    {
+        $slug = str_slug($value) ?: slugify($value);
+
+        $query = Attribute::where('slug', $slug)->withoutGlobalScope('active');
+
+        if ($query->exists()) {
+            $slug .= '-' . str_random(8);
+        }
+
+        return $slug;
     }
 }
