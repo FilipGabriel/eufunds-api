@@ -28,10 +28,6 @@ class ImportProductAttributesCommand extends Command
     protected $description = 'Import NOD product attributes';
 
     private $now = null;
-    private $items = [];
-    private $products = [];
-    private $attributes = [];
-    private $attributeValues = [];
     
     public function handle()
     {
@@ -42,32 +38,37 @@ class ImportProductAttributesCommand extends Command
 
     private function getProducts($page = 1)
     {
+        $items = [];
+        $products = [];
+        $attributes = [];
+        $attributeValues = [];
+
         try {
             $response = $this->getRequest("/products/attributes?count=2000&page={$page}");
-            $this->items = collect($this->items)->merge($response->items);
+            $items = $response->items;
         } catch (\Exception $e) {
             Log::info($e->getMessage());
             Log::info("Product Attributes Page {$page}: {$e->getMessage()}");
         }
 
-        foreach($this->items as $item) {
+        foreach($items as $item) {
             foreach($item->properties as $property) {
-                $this->products[$item->product_id][$property->name_id][] = $property;
-                $this->attributes[$property->name_id] = [
+                $products[$item->product_id][$property->name_id][] = $property;
+                $attributes[$property->name_id] = [
                     'id' => $property->name_id,
                     'name' => $property->name,
                     'slug' => $this->generateSlug($property->name_id, $property->name)
                 ];
-                $this->attributeValues[$property->name_id][] = [
+                $attributeValues[$property->name_id][] = [
                     'id' => $property->value_id ?? null,
                     'value' => $property->value,
                 ];
             }
         }
 
-        Attribute::upsert( array_values($this->attributes), ['id', 'slug'], ['name'] );
+        Attribute::upsert( array_values($attributes), ['id', 'slug'], ['name'] );
 
-        foreach($this->attributeValues as $attributeId => $values) {
+        foreach($attributeValues as $attributeId => $values) {
             $attribute = Attribute::find($attributeId);
 
             if($attribute) {
@@ -77,7 +78,7 @@ class ImportProductAttributesCommand extends Command
 
         $productAttributeValues = [];
 
-        foreach($this->products as $nodId => $productAttributes) {
+        foreach($products as $nodId => $productAttributes) {
             $product = Product::findByNodId($nodId);
 
             if(! $product) { continue; }
@@ -105,11 +106,6 @@ class ImportProductAttributesCommand extends Command
         }
 
         ProductAttributeValue::insertOrIgnore($productAttributeValues);
-
-        $this->items = [];
-        $this->products = [];
-        $this->attributes = [];
-        $this->attributeValues = [];
 
         if($page <= $response->total_pages) {
             Log::info(now() . ' - ' . now()->diffInMinutes($this->now));

@@ -132,7 +132,7 @@ class QueryStringFilter
     private function getAttributeValueIds($attributeFilters)
     {
         return once(function () use ($attributeFilters) {
-            return AttributeValue::whereTranslationIn('value', array_flatten($attributeFilters))
+            return AttributeValue::whereIn('value', array_flatten($attributeFilters))
                 ->pluck('id')
                 ->implode(',') ?: 'null';
         });
