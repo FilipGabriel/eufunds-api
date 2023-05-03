@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -21,6 +22,8 @@ class CreateAttributeValuesTable extends Migration
 
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });
+
+        DB::statement('ALTER TABLE attribute_values DROP PRIMARY KEY, ADD PRIMARY KEY (`id`, `attribute_id`)');
     }
 
     /**
