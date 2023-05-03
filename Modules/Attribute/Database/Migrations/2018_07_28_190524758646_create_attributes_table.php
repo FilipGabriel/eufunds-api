@@ -18,6 +18,7 @@ class CreateAttributesTable extends Migration
             $table->string('name');
             $table->integer('attribute_set_id')->unsigned()->index()->default(1);
             $table->boolean('is_filterable')->default(1);
+            $table->string('slug')->nullable()->unique();
             $table->timestamps();
 
             $table->foreign('attribute_set_id')->references('id')->on('attribute_sets')->onDelete('cascade');

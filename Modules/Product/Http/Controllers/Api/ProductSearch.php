@@ -58,6 +58,7 @@ trait ProductSearch
                 return [
                     'id' => $product->id,
                     'slug' => $product->slug,
+                    'sku' => $product->sku,
                     'name' => $product->name,
                     'variants' => $product->options->count(),
                     'short_description' => $product->short_description,
