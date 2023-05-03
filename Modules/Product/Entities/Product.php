@@ -165,6 +165,7 @@ class Product extends Model
                 'products.id',
                 'products.slug',
                 'products.in_stock',
+                'products.sku',
                 'products.qty',
             ]);
     }
