@@ -60,7 +60,7 @@ class ImportProductAttributesCommand extends Command
                         'slug' => $this->generateSlug($property->name_id, $property->name)
                     ];
                     $this->attributeValues[$property->name_id][] = [
-                        'nod_id' => $property->value_id ?? null,
+                        'id' => $property->value_id ?? null,
                         'value' => $property->value,
                     ];
                 }
