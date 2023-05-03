@@ -40,77 +40,73 @@ class ImportProductAttributesCommand extends Command
     private function getProducts($page = 1)
     {
         try {
-            $response = $this->getRequest("/products/attributes?page={$page}");
+            $response = $this->getRequest("/products/attributes?count=2000&page={$page}");
             $this->items = collect($this->items)->merge($response->items);
         } catch (\Exception $e) {
             Log::info($e->getMessage());
             Log::info("Product Attributes Page {$page}: {$e->getMessage()}");
         }
 
-        if($page % 50 == 0) {
-            foreach($this->items as $item) {
-                foreach($item->properties as $property) {
-                    $this->products[$item->product_id][$property->name_id][] = $property;
-                    $this->attributes[$property->name_id] = [
-                        'id' => $property->name_id,
-                        'name' => $property->name,
-                        'slug' => $this->generateSlug($property->name_id, $property->name)
-                    ];
-                    $this->attributeValues[$property->name_id][] = [
-                        'id' => $property->value_id ?? null,
-                        'value' => $property->value,
-                    ];
-                }
+        foreach($this->items as $item) {
+            foreach($item->properties as $property) {
+                $this->products[$item->product_id][$property->name_id][] = $property;
+                $this->attributes[$property->name_id] = [
+                    'id' => $property->name_id,
+                    'name' => $property->name,
+                    'slug' => $this->generateSlug($property->name_id, $property->name)
+                ];
+                $this->attributeValues[$property->name_id][] = [
+                    'id' => $property->value_id ?? null,
+                    'value' => $property->value,
+                ];
             }
-
-            Attribute::upsert( array_values($this->attributes), ['id', 'slug'], ['name'] );
-
-            foreach($this->attributeValues as $attributeId => $values) {
-                $attribute = Attribute::find($attributeId);
-
-                if($attribute) {
-                    $attribute->saveValues(array_merge($values, $attribute->load('values')->values->toArray()));
-                }
-            }
-
-            foreach($this->products as $nodId => $productAttributes) {
-                $product = Product::findByNodId($nodId);
-
-                if(! $product) { continue; }
-
-                $productAttributeValues = [];
-
-                foreach($productAttributes as $attributeId => $values) {
-                    if(! Attribute::whereId($attributeId)->exists()) {
-                        continue;
-                    }
-
-                    $productAttribute = $product->attributes()->whereAttributeId($attributeId)->firstOrCreate([
-                        'attribute_id' => $attributeId
-                    ]);
-
-                    foreach ($values as $value) {
-                        if(! isset($value->value_id)) {
-                            $newValue = $productAttribute->attribute->values()->create(['value' => $value->value]);
-                        }
-
-                        $productAttributeValues[] = [
-                            'product_attribute_id' => $productAttribute->id,
-                            'attribute_value_id' => $value->value_id ?? $newValue->id,
-                        ];
-                    }
-
-                    $productAttribute->attribute->categories()->syncWithoutDetaching($product->categories->pluck('id')->toArray());
-                }
-
-                ProductAttributeValue::insertOrIgnore($productAttributeValues);
-            }
-
-            $this->items = [];
-            $this->products = [];
-            $this->attributes = [];
-            $this->attributeValues = [];
         }
+
+        Attribute::upsert( array_values($this->attributes), ['id', 'slug'], ['name'] );
+
+        foreach($this->attributeValues as $attributeId => $values) {
+            $attribute = Attribute::find($attributeId);
+
+            if($attribute) {
+                $attribute->saveValues(array_merge($values, $attribute->load('values')->values->toArray()));
+            }
+        }
+
+        foreach($this->products as $nodId => $productAttributes) {
+            $product = Product::findByNodId($nodId);
+
+            if(! $product) { continue; }
+
+            $productAttributeValues = [];
+
+            foreach($productAttributes as $attributeId => $values) {
+                if(! Attribute::whereId($attributeId)->exists()) { continue; }
+
+                $productAttribute = $product->attributes()->whereAttributeId($attributeId)->firstOrCreate([
+                    'attribute_id' => $attributeId
+                ]);
+
+                foreach ($values as $value) {
+                    if(! isset($value->value_id)) {
+                        $newValue = $productAttribute->attribute->values()->create(['value' => $value->value]);
+                    }
+
+                    $productAttributeValues[] = [
+                        'product_attribute_id' => $productAttribute->id,
+                        'attribute_value_id' => $value->value_id ?? $newValue->id,
+                    ];
+                }
+
+                $productAttribute->attribute->categories()->syncWithoutDetaching($product->categories->pluck('id')->toArray());
+            }
+
+            ProductAttributeValue::insertOrIgnore($productAttributeValues);
+        }
+
+        $this->items = [];
+        $this->products = [];
+        $this->attributes = [];
+        $this->attributeValues = [];
 
         if($page <= $response->total_pages) {
             self::getProducts($page+1);
