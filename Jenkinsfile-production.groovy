@@ -21,7 +21,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh("composer update")
+                sh("composer install")
                 sh("npm install lerna yarn")
                 sh("npm install --save-dev")
                 sh("npm run prod")
