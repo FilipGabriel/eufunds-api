@@ -94,9 +94,19 @@ trait ProductSearch
 
     private function getProductsCategoryIds($productIds)
     {
-        return DB::table('product_categories')
+        $category = Category::findBySlug(request('category'));
+        $categories = Category::whereParentId($category->id)->get();
+
+        if($categories->isEmpty()) {
+            return [$category->id];
+        }
+
+        $categoryIds = DB::table('product_categories')
             ->whereIn('product_id', $productIds)
             ->distinct()
-            ->pluck('category_id');
+            ->pluck('category_id')
+            ->toArray();
+
+        return array_values(array_intersect($categories->pluck('id')->toArray(), $categoryIds));
     }
 }

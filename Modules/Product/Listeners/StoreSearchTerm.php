@@ -21,7 +21,7 @@ class StoreSearchTerm
 
         SearchTerm::updateOrCreate(
             ['term' => request('query')],
-            ['results' => $event->products->count()]
+            ['results' => $event->products->total()]
         )->increment('hits');
     }
 }

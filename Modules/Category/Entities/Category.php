@@ -2,7 +2,6 @@
 
 namespace Modules\Category\Entities;
 
-use Modules\News\Entities\News;
 use Modules\Media\Entities\File;
 use Modules\Support\Eloquent\Model;
 use Modules\Media\Eloquent\HasMedia;
@@ -140,11 +139,6 @@ class Category extends Model
                         ];
                     });
             });
-    }
-
-    public function news()
-    {
-        return $this->belongsToMany(News::class);
     }
 
     public function getLogoAttribute()

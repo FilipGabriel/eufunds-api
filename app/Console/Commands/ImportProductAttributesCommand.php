@@ -76,12 +76,12 @@ class ImportProductAttributesCommand extends Command
             }
         }
 
-        $productAttributeValues = [];
-
         foreach($products as $nodId => $productAttributes) {
             $product = Product::findByNodId($nodId);
 
             if(! $product) { continue; }
+
+            $productAttributeValues = [];
 
             foreach($productAttributes as $attributeId => $values) {
                 if(! Attribute::whereId($attributeId)->exists()) { continue; }
@@ -103,9 +103,9 @@ class ImportProductAttributesCommand extends Command
 
                 $productAttribute->attribute->categories()->syncWithoutDetaching($product->categories->pluck('id')->toArray());
             }
-        }
 
-        ProductAttributeValue::insertOrIgnore($productAttributeValues);
+            ProductAttributeValue::insertOrIgnore($productAttributeValues);
+        }
 
         if($page <= $response->total_pages) {
             Log::info(now() . ' - ' . now()->diffInMinutes($this->now));
