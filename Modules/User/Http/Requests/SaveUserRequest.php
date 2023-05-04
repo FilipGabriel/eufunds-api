@@ -25,7 +25,6 @@ class SaveUserRequest extends Request
             'name' => 'required',
             'email' => ['required', 'email', Rule::unique('users')->ignore($this->id, 'id')],
             'image' =>'nullable|image',
-            'password' => 'nullable|confirmed|min:6',
             'roles' => ['sometimes', Rule::exists('roles', 'id')],
         ];
     }

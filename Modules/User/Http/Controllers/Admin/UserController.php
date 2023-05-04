@@ -68,7 +68,7 @@ class UserController
      */
     public function store(SaveUserRequest $request)
     {
-        $request->merge(['password' => bcrypt($request->password)]);
+        $request->merge(['password' => bcrypt($request->password ?: 'doesntmatter')]);
 
         $user = User::create($request->all());
 

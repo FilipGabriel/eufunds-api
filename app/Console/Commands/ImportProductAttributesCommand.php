@@ -44,7 +44,7 @@ class ImportProductAttributesCommand extends Command
         $attributeValues = [];
 
         try {
-            $response = $this->getRequest("/products/attributes?count=2000&page={$page}");
+            $response = $this->getRequest("/products/attributes?count=1000&page={$page}");
             $items = $response->items;
         } catch (\Exception $e) {
             Log::info($e->getMessage());
