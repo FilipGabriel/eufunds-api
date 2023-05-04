@@ -18,6 +18,7 @@ yarn-error.log
 *.map
 .env
 yarn.lock
+/storage/framework
 /storage/logs
 /storage/app
 /storage/debugbar
