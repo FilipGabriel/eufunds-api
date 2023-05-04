@@ -7,21 +7,21 @@ pipeline {
         DEST_HOST = "euprojects.ro"
         DEST_IP = "128.199.45.244"
         DEST_HOST_USER = "jenkins"
-        DEST_PATH = "/home/jenkins/api.euprojects.ro/releases"
+        DEST_PATH = "/home/jenkins/api-eufunds.smis.ro/releases"
         RELEASE_FOLDER = "${BUILD_NUMBER}"
-        SHARED_FOLDER = '/home/jenkins/api.euprojects.ro/shared'
+        SHARED_FOLDER = '/home/jenkins/api-eufunds.smis.ro/shared'
         ENV_SYM_SRC = '.env'
         STORAGE_SYM_SRC = 'storage'
         PUBLIC_STORAGE_SYM_SRC = 'storage/app/storage'
         ENV_SYM = '.env'
         STORAGE_SYM = 'storage'
         PUBLIC_STORAGE_SYM = 'public/storage'
-        RELEASE_SYMLINK = '/var/www/api.euprojects.ro/html'
+        RELEASE_SYMLINK = '/var/www/api-eufunds.smis.ro/html'
     }
     stages {
         stage('Build') {
             steps {
-                sh("composer install")
+                sh("composer update")
                 sh("npm install lerna yarn")
                 sh("npm install --save-dev")
                 sh("npm run prod")
