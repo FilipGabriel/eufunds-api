@@ -31,20 +31,20 @@ class ImportProductsCommand extends Command
      */
     protected $description = 'Import NOD products';
 
-    private $products = [];
-
     public function handle()
     {
+        $products = [];
+
         try {
             $response = $this->getRequest("/products/full-feed");
 
-            $this->products = $response->products;
+            $products = $response->products;
         } catch (Exception $e) {
             Log::info("Get products: {$e->getMessage()}");
             return;
         }
 
-        foreach($this->products as $product) {
+        foreach($products as $product) {
             try {
                 $this->updateOrCreateProduct($product);
             } catch (Exception $e) {
