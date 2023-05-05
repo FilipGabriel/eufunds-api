@@ -140,6 +140,7 @@ class Program extends Model
                         return [
                             'slug' => $program->slug,
                             'name' => $program->name,
+                            'banner' => $program->banner->path ?? null,
                         ];
                     });
             });
