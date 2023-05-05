@@ -15,7 +15,9 @@ class UserTransformer extends JsonResource
             'phone'   => $this->resource->phone,
             'about' => $this->resource->about,
             'role' => $this->resource->roles->pluck('name'),
-            'logo' => $this->resource->user_logo->path
+            'logo' => $this->resource->user_logo->path,
+            'manager_name' => $this->resource->manager_name,
+            'manager_email' => $this->resource->manager_email
         ];
     }
 }

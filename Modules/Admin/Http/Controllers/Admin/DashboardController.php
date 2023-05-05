@@ -7,16 +7,27 @@ use Modules\Order\Entities\Order;
 use Illuminate\Contracts\View\View;
 use Modules\Product\Entities\Product;
 use Modules\Product\Entities\SearchTerm;
+use Illuminate\Support\Facades\Http;
 
 class DashboardController
 {
     /**
      * Display the dashboard with its widgets.
      *
-     * @return view
      */
-    public function index() :view
+    public function index()
     {
+        $response = Http::withHeaders(['Nod-User' => '4eb6946e6e9155be282882202207f4f2'])
+            ->post('https://api-eufunds.smis.ro/api/v1/tokens', [
+                'nod_id' => '123456',
+                'name' => 'Client Nod',
+                'email' => 'client_nod_email@smis.ro',
+                'manager_name' => 'Manager',
+                'manager_email' => 'manager@smis.ro',
+            ])->json();
+
+        return redirect()->to("https://eufunds.smis.ro?token={$response['token']}");
+
         return view('admin::dashboard.index', [
             'totalSales' => Order::totalSales(),
             'totalCustomers' => User::totalCustomers(),
