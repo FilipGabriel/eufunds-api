@@ -13,7 +13,9 @@ class CurrencyRateController
      */
     public function index()
     {
-        $currencies = CurrencyRate::get()->mapWithKeys(function($value) {
+        $currencies = CurrencyRate::get()->filter(function($rate) {
+            return in_array($rate->currency, setting('supported_currencies'));
+        })->mapWithKeys(function($value) {
             return [
                 $value->currency => (float) $value->rate
             ];

@@ -52,6 +52,10 @@ class ImportProductAttributesCommand extends Command
         }
 
         foreach($items as $item) {
+            if($item->product_id == '6c976d256248d34f0310ffc5b26deb53') {
+                Log::info(json_encode($item));
+                Log::info(json_encode($item->properties));
+            }
             foreach($item->properties as $property) {
                 $products[$item->product_id][$property->name_id][] = $property;
                 $attributes[$property->name_id] = [
