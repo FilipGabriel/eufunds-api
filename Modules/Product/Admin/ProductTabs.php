@@ -5,6 +5,7 @@ namespace Modules\Product\Admin;
 use Modules\Admin\Ui\Tab;
 use Modules\Admin\Ui\Tabs;
 use Modules\Brand\Entities\Brand;
+use Modules\Program\Entities\Program;
 use Modules\Category\Entities\Category;
 
 class ProductTabs extends Tabs
@@ -31,6 +32,7 @@ class ProductTabs extends Tabs
             $tab->fields(['name', 'description', 'brand_id', 'tax_class_id', 'is_active']);
             $tab->view('product::admin.products.tabs.general', [
                 'brands' => $this->brands(),
+                'programs' => Program::treeList(),
                 'categories' => Category::treeList(),
             ]);
         });

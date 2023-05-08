@@ -4,6 +4,7 @@
 
 <div class="row">
     <div class="col-md-8">
+        {{ Form::select('programs', trans('product::attributes.programs'), $errors, $programs, $product, ['class' => 'selectize prevent-creation', 'multiple' => true]) }}
         {{ Form::select('categories', trans('product::attributes.categories'), $errors, $categories, $product, ['class' => 'selectize prevent-creation', 'multiple' => true]) }}
         {{ Form::select('brand_id', trans('product::attributes.brand_id'), $errors, $brands, $product) }}
         {{ Form::text('warranty', trans('product::attributes.warranty'), $errors, $product) }}

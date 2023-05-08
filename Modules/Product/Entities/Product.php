@@ -204,6 +204,11 @@ class Product extends Model
         return $this->belongsToMany(Category::class, 'product_categories');
     }
 
+    public function programs()
+    {
+        return $this->belongsToMany(Program::class, 'product_programs');
+    }
+
     public function attributes()
     {
         return $this->hasMany(ProductAttribute::class);
@@ -622,6 +627,7 @@ class Product extends Model
      */
     public function saveRelations($attributes = [])
     {
+        $this->programs()->sync(array_get($attributes, 'programs', []));
         $this->categories()->sync(array_get($attributes, 'categories', []));
         $this->upSellProducts()->sync(array_get($attributes, 'up_sells', []));
         $this->relatedProducts()->sync(array_get($attributes, 'related_products', []));

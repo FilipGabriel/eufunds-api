@@ -8,6 +8,7 @@ return [
     'product_id' => 'NOD ID',
     'brand_id' => 'Brand',
     'warranty' => 'Garantie',
+    'programs' => 'Programe',
     'categories' => 'Categorii',
     'virtual' => 'Virtual',
     'is_active' => 'Status',

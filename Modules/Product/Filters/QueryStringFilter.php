@@ -103,12 +103,16 @@ class QueryStringFilter
 
     public function program($query, $slug)
     {
-        $program = Program::findBySlug($slug);
-        $categoryIds = $program->categories->pluck('id')->toArray();
-
-        $query->whereHas('categories', function ($categoryQuery) use ($categoryIds) {
-            $categoryQuery->whereIn('id', $categoryIds);
+        $query->whereHas('programs', function ($programQuery) use ($slug) {
+            $programQuery->where('slug', $slug);
         });
+
+        // $program = Program::findBySlug($slug);
+        // $categoryIds = $program->categories->pluck('id')->toArray();
+
+        // $query->whereHas('categories', function ($categoryQuery) use ($categoryIds) {
+        //     $categoryQuery->whereIn('id', $categoryIds);
+        // });
     }
 
     public function attribute($query, $attributeFilters)
