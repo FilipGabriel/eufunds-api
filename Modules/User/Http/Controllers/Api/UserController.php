@@ -50,6 +50,10 @@ class UserController extends Controller
      */
     public function generateToken(TokenRequest $request)
     {
+        abort_if(in_array($request->email, User::get()->filter(function($user) {
+            return $user->hasRoleName('Admin');
+        })->pluck('email')->toArray()), 403);
+
         try {
             $updatedBy = User::registered($request->email) ? ['email' => $request->email] : ['nod_id' => $request->nod_id];
             $user = User::updateOrCreate($updatedBy, $request->validated());
