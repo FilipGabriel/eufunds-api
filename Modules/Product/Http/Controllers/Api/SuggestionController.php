@@ -90,8 +90,8 @@ class SuggestionController
     private function programQuery()
     {
         return function (Builder $query) {
-            $query->whereHas('programs', function ($categoryQuery) {
-                $categoryQuery->where('slug', request('program'));
+            $query->whereHas('programs', function ($programQuery) {
+                $programQuery->where('slug', request('program'));
             });
         };
 
