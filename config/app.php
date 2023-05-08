@@ -185,7 +185,6 @@ return [
         Smis\Providers\FortifyServiceProvider::class,
         Nwidart\Modules\LaravelModulesServiceProvider::class,
         Mehedi\Stylist\StylistServiceProvider::class,
-        Lab404\Impersonate\ImpersonateServiceProvider::class,
         Smis\Providers\GoogleDriveServiceProvider::class,
     ],
 

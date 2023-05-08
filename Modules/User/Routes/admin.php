@@ -30,12 +30,6 @@ Route::post('users', [
     'middleware' => 'can:admin.users.create',
 ]);
 
-Route::get('users/{user}/impersonate/{redirect?}', [
-    'as' => 'admin.users.impersonate',
-    'uses' => 'UserController@impersonate',
-    'middleware' => 'can:admin.users.edit',
-]);
-
 Route::get('users/{id}/edit', [
     'as' => 'admin.users.edit',
     'uses' => 'UserController@edit',

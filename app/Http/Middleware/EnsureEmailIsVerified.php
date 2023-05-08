@@ -33,7 +33,7 @@ class EnsureEmailIsVerified
         if (
             ! auth()->user() ||
             (auth()->user() instanceof MustVerifyEmail &&
-            ! auth()->user()->hasVerifiedEmail() && ! auth()->user()->isImpersonated())
+            ! auth()->user()->hasVerifiedEmail())
         ) {
             $shouldResendEmail = $this->shouldResendEmail();
 
@@ -73,7 +73,7 @@ class EnsureEmailIsVerified
 
     private function shouldResendEmail()
     {
-        if(! auth()->user() || auth()->user()->isImpersonated() || auth()->user()->hasVerifiedEmail()) {
+        if(! auth()->user() || auth()->user()->hasVerifiedEmail()) {
             return false;
         }
 

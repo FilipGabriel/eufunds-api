@@ -115,14 +115,4 @@ class UserController
             $user->delete();
         });
     }
-
-    /**
-     * Impersonate
-     */
-    public function impersonate(User $user)
-    {
-        auth()->user()->impersonate($user);
-
-        return redirect()->to(env('FRONTEND_DOMAIN', ''));
-    }
 }

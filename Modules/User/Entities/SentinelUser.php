@@ -9,7 +9,6 @@ use Modules\User\Entities\UserToken;
 use Illuminate\Notifications\Notifiable;
 use Modules\User\Repositories\Permission;
 use Cartalyst\Sentinel\Users\EloquentUser;
-use Lab404\Impersonate\Models\Impersonate;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -18,7 +17,6 @@ class SentinelUser extends EloquentUser implements AuthenticatableContract
 {
     use Authenticatable,
         HasApiTokens,
-        Impersonate,
         Notifiable;
 
     /**

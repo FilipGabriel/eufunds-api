@@ -11,7 +11,7 @@ class UserTable extends AdminTable
      *
      * @var array
      */
-    protected $rawColumns = ['last_login', 'impersonate', 'utm_source'];
+    protected $rawColumns = ['last_login', 'utm_source'];
 
     /**
      * Make table response for the resource.

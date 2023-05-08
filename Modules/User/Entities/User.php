@@ -9,7 +9,6 @@ use Modules\Order\Entities\Order;
 use Modules\Media\Eloquent\HasMedia;
 use Modules\Support\Search\Searchable;
 use Modules\User\Repositories\Permission;
-use Lab404\Impersonate\Models\Impersonate;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Cartalyst\Sentinel\Permissions\PermissibleTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,7 +20,6 @@ class User extends Authenticatable
 {
     use PermissibleTrait,
         HasApiTokens,
-        Impersonate,
         HasMedia,
         CanResetPassword,
         Searchable;
@@ -52,22 +50,6 @@ class User extends Authenticatable
         'user_logo',
         'user_email',
     ];
-
-    /**
-     * @return bool
-     */
-    public function canImpersonate()
-    {
-        return $this->hasRoleName('Admin');
-    }
-
-    /**
-     * @return bool
-     */
-    public function canBeImpersonated()
-    {
-        return $this->hasRoleName('Customer') && $this->id !== auth()->user()->id;
-    }
 
     public static function registered($email)
     {
