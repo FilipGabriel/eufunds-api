@@ -89,13 +89,19 @@ class SuggestionController
      */
     private function programQuery()
     {
-        $program = Program::findBySlug(request('program'));
-        $categoryIds = $program->categories->pluck('id')->toArray();
-
-        return function (Builder $query) use ($categoryIds) {
-            $query->whereHas('categories', function ($categoryQuery) use ($categoryIds) {
-                $categoryQuery->whereIn('id', $categoryIds);
+        return function (Builder $query) {
+            $query->whereHas('programs', function ($categoryQuery) {
+                $categoryQuery->where('slug', request('program'));
             });
         };
+
+        // $program = Program::findBySlug(request('program'));
+        // $categoryIds = $program->categories->pluck('id')->toArray();
+
+        // return function (Builder $query) use ($categoryIds) {
+        //     $query->whereHas('categories', function ($categoryQuery) use ($categoryIds) {
+        //         $categoryQuery->whereIn('id', $categoryIds);
+        //     });
+        // };
     }
 }
