@@ -15,7 +15,9 @@ class Authenticate
      */
     protected $except = [
         'api.user.tokens',
-        'programs.index'
+        'programs.index',
+        'currency_rates.index',
+        'current_currency.store',
     ];
 
     /**
