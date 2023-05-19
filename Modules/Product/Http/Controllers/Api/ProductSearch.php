@@ -42,7 +42,8 @@ trait ProductSearch
             'products' => $this->transform($products),
             'attributes' => $this->getAttributes($productIds),
             'categories' => $this->getProgramCategories(),
-            'program' => Program::findBySlug(request('program'))
+            'program' => Program::findBySlug(request('program')),
+            'brands' => $this->getBrandsBy($productIds)
         ]);
     }
 
@@ -90,6 +91,16 @@ trait ProductSearch
         )->toArray();
 
         return Category::treeIds($categoryIds);
+    }
+
+    private function getBrandsBy($productIds)
+    {
+        return Product::whereIn('id', $productIds)->distinct('brand_id')->get()->map(function ($product) {
+            return [
+                'slug' => $product->brand->slug,
+                'name' => $product->brand->name
+            ];
+        });
     }
 
     private function getProductsCategoryIds($productIds)
