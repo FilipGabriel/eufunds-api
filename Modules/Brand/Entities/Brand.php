@@ -28,7 +28,7 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['nod_id', 'slug', 'is_active'];
+    protected $fillable = ['nod_id', 'slug', 'is_searchable', 'is_active'];
 
     /**
      * The attributes that should be cast to native types.
@@ -37,6 +37,7 @@ class Brand extends Model
      */
     protected $casts = [
         'is_active' => 'boolean',
+        'is_searchable' => 'boolean',
     ];
 
     /**
@@ -124,6 +125,22 @@ class Brand extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public static function searchable()
+    {
+        return Cache::tags('brands')
+            ->rememberForever(md5('brands.searchable:' . locale()), function () {
+                return static::where('is_searchable', true)
+                    ->get()
+                    ->map(function ($brand) {
+                        return [
+                            'slug' => $brand->slug,
+                            'name' => $brand->name,
+                            'logo' => $brand->logo->path ?? null,
+                        ];
+                    });
+            });
     }
 
     /**

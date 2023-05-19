@@ -19,6 +19,7 @@
                 <th>{{ trans('admin::admin.table.id') }}</th>
                 <th>{{ trans('brand::brands.table.logo') }}</th>
                 <th>{{ trans('brand::brands.table.name') }}</th>
+                <th>{{ trans('brand::attributes.is_searchable') }}</th>
                 <th>{{ trans('admin::admin.table.status') }}</th>
                 <th data-sort>{{ trans('admin::admin.table.created') }}</th>
             </tr>
@@ -34,6 +35,7 @@
                 { data: 'id', width: '5%' },
                 { data: 'logo', orderable: false, searchable: false, width: '10%' },
                 { data: 'name', name: 'translations.name', orderable: false, defaultContent: '' },
+                { data: 'is_searchable', searchable: false },
                 { data: 'active', name: 'is_active', searchable: false },
                 { data: 'created', name: 'created_at' },
             ],

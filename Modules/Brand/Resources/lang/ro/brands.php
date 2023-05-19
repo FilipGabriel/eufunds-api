@@ -16,6 +16,7 @@ return [
         'images' => 'Images',
     ],
     'form' => [
+        'is_searchable' => 'Afiseaza in lista brandurilor',
         'enable_the_brand' => 'Enable the brand',
         'logo' => 'Logo',
         'banner' => 'Banner',
