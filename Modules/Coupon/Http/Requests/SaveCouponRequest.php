@@ -24,7 +24,7 @@ class SaveCouponRequest extends Request
             'name' => 'required',
             'code' => 'required',
             'is_percent' => 'required|boolean',
-            'value' => 'numeric|min:0|max:99999999999999',
+            'value' => 'numeric|max:99999999999999',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'is_active' => 'required|boolean',
