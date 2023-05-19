@@ -95,12 +95,12 @@ trait ProductSearch
 
     private function getBrandsBy($productIds)
     {
-        return Product::whereIn('id', $productIds)->distinct('brand_id')->get()->map(function ($product) {
+        return Product::whereIn('id', $productIds)->get()->map(function ($product) {
             return [
                 'slug' => $product->brand->slug,
                 'name' => $product->brand->name
             ];
-        });
+        })->unique();
     }
 
     private function getProductsCategoryIds($productIds)
