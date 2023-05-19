@@ -30,6 +30,7 @@ class BrandProductController
 
         return response()->json([
             'brandName' => $brand->name,
+            'brandLogo' => $brand->logo->path,
             'brandBanner' => $brand->banner->path,
             'products' => $this->transform($products),
         ]);
