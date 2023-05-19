@@ -18,6 +18,12 @@ Route::get('users', [
     'middleware' => 'can:admin.users.index',
 ]);
 
+Route::post('users/import', [
+    'as' => 'admin.users.import',
+    'uses' => 'UserController@import',
+    'middleware' => 'can:admin.users.create',
+]);
+
 Route::get('users/create', [
     'as' => 'admin.users.create',
     'uses' => 'UserController@create',

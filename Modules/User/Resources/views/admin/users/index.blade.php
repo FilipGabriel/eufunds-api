@@ -11,6 +11,20 @@
     @slot('resource', 'users')
     @slot('name', trans('user::users.user'))
 
+    <div style="text-align: center; display: flex; flex-direction: column;">
+        <form method="post" action="{{ route('admin.users.import') }}" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form-group form-inline choose-file-group">
+                <label for="file">Încarcă fișierul excel (Nume, Email) &nbsp;</label>
+                <input type="file" value="" class="form-control file-name" name="file" id="file" readonly="" style="padding: 8px 30px">
+
+                <button type="submit" class="btn btn-primary form-control" data-loading>
+                    Importa
+                </button>
+            </div>
+        </form>
+    </div>
+
     @slot('thead')
         <tr>
             @include('admin::partials.table.select_all')
