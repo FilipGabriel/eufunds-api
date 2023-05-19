@@ -4,6 +4,7 @@ return [
     'product' => 'Produs',
     'products' => 'Produse',
     'table' => [
+        'please_select' => 'Selectati categoria',
         'thumbnail' => 'Thumbnail',
         'name' => 'Nume',
         'price' => 'Pret',

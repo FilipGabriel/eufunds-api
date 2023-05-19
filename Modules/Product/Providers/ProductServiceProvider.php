@@ -23,5 +23,7 @@ class ProductServiceProvider extends ServiceProvider
         $this->addAdminAssets('admin.products.(create|edit)', [
             'admin.media.css', 'admin.media.js', 'admin.product.css', 'admin.product.js',
         ]);
+
+        $this->addAdminAssets('admin.products.index', ['admin.filter.js']);
     }
 }

@@ -8,6 +8,7 @@ return [
     | These assets are registered on the asset manager
     */
     'all_assets' => [
+        'admin.filter.js' => ['module' => 'product:admin/js/filter.js'],
         'admin.product.js' => ['module' => 'product:admin/js/product.js'],
         'admin.product.css' => ['module' => 'product:admin/css/product.css'],
     ],

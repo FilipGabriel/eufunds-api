@@ -608,12 +608,17 @@ class Product extends Model
     {
         $query = $this->newQuery()
             ->withoutGlobalScope('active')
+            ->with('categories')
             ->withName()
             ->withBaseImage()
             ->withPrice()
-            ->addSelect(['id', 'nod_id', 'sku', 'is_active', 'created_at'])
+            ->addSelect(['products.id', 'nod_id', 'sku', 'products.is_active', 'products.created_at'])
             ->when($request->has('except'), function ($query) use ($request) {
                 $query->whereNotIn('id', explode(',', $request->except));
+            })->when($request->has('category_id'), function ($query) use ($request) {
+                $query->whereHas('categories', function ($categoryQuery) use ($request) {
+                    $categoryQuery->whereId($request->category_id);
+                });
             });
 
         return new ProductTable($query);
