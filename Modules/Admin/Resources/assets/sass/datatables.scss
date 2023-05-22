@@ -171,6 +171,10 @@ div.dataTables_wrapper {
         }
     }
 
+    div.dataTables_processing>div:last-child {
+        display: none;
+    }
+
     .dataTables_paginate {
         margin-top: 8px !important;
 
