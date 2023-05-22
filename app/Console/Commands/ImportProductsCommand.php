@@ -62,8 +62,9 @@ class ImportProductsCommand extends Command
             'price' => $product->ron_promo_price,
             'short_description' => $product->description,
             'description' => $product->long_description,
+            'qty' => $product->stock_value,
             'sku' => $product->code,
-            'is_active' => true,
+            'manage_stock' => true,
         ]);
 
         $productCategoryId = $product->product_category_id;

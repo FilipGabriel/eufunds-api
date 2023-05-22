@@ -31,7 +31,7 @@ class CreateProductsTable extends Migration
             $table->boolean('in_stock');
             $table->integer('viewed')->unsigned()->default(0);
             $table->boolean('virtual')->default(false);
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(false);
             $table->datetime('new_from')->nullable();
             $table->datetime('new_to')->nullable();
             $table->softDeletes();
