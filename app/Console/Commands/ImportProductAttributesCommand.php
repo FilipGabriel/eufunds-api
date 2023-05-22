@@ -26,13 +26,9 @@ class ImportProductAttributesCommand extends Command
      * @var string
      */
     protected $description = 'Import NOD product attributes';
-
-    private $now = null;
     
     public function handle()
     {
-        $this->now = now();
-        Log::info($this->now);
         $this->getProducts();
     }
 
@@ -52,10 +48,6 @@ class ImportProductAttributesCommand extends Command
         }
 
         foreach($items as $item) {
-            if($item->product_id == '6c976d256248d34f0310ffc5b26deb53') {
-                Log::info(json_encode($item));
-                Log::info(json_encode($item->properties));
-            }
             foreach($item->properties as $property) {
                 $products[$item->product_id][$property->name_id][] = $property;
                 $attributes[$property->name_id] = [
@@ -112,11 +104,8 @@ class ImportProductAttributesCommand extends Command
         }
 
         if($page <= $response->total_pages) {
-            Log::info(now() . ' - ' . now()->diffInMinutes($this->now));
             self::getProducts($page+1);
         }
-
-        Log::info(now() . ' - ' . now()->diffInMinutes($this->now));
     }
 
     /**
