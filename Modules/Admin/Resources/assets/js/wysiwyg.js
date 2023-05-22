@@ -1,6 +1,6 @@
 import tinyMCE from 'tinymce';
 
-tinyMCE.baseURL = `${SMIS.baseUrl}/modules/admin/js/wysiwyg`;
+tinyMCE.baseURL = `${window.SMIS.baseUrl}/modules/admin/js/wysiwyg`;
 
 tinyMCE.init({
     selector: '.wysiwyg',
