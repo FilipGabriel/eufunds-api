@@ -61,6 +61,8 @@ trait ProductSearch
                     'slug' => $product->slug,
                     'sku' => $product->sku,
                     'name' => $product->name,
+                    'qty' => $product->qty,
+                    'in_stock' => $product->isInStock(),
                     'variants' => $product->options->count(),
                     'short_description' => $product->short_description,
                     'base_image' => $product->base_image->path ?? null,
