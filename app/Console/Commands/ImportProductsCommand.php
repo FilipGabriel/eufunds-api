@@ -55,7 +55,7 @@ class ImportProductsCommand extends Command
 
     private function updateOrCreateProduct($product)
     {
-        $newProduct = Product::updateOrCreate(['nod_id' => $product->id], [
+        $newProduct = Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
             'name' => $product->title,
             'brand_id' => Brand::whereNodId($product->manufacturer_id)->first()->id ?? null,
             'warranty' => $product->warranty,
