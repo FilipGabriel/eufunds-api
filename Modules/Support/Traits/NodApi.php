@@ -47,6 +47,7 @@ trait NodApi
                 'X-NodWS-Date' => gmdate('r'),
                 'X-NodWS-User' => $this->_client,
                 'X-NodWS-Auth' => $this->_getSignatureString($this->_authKey, 'GET', rawurldecode($queryString)),
+                'X-NodWS-Navigation' => 1,
                 'X-NodWS-Accept' => 'json'
             ]
         ]))->get($queryString);
