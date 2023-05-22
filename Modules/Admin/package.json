@@ -14,7 +14,7 @@
         "mousetrap": "^1.6.1",
         "nprogress": "^0.2.0",
         "selectize": "0.12.6",
-        "sortablejs": "https://github.com/RubaXa/Sortable",
+        "sortablejs": "1.7.0",
         "tinymce": "5.2.2"
     }
 }
