@@ -153,7 +153,7 @@
 							</span>
 							@if ($product->hasAnyOption())
 							@foreach ($product->options as $option)
-							<span style="color: #9a9a9a;">
+							<br /><span style="color: #9a9a9a;">
 							@if ($option->option->isFieldType())
 							{{ $option->value }}
 							@else
