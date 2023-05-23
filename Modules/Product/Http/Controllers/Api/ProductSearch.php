@@ -54,7 +54,7 @@ trait ProductSearch
      *
      * @return \Illuminate\Support\Collection
      */
-    private function transform($products, $programTypes = ['budget'])
+    private function transform($products, $programTypes = ['acquisition'])
     {
         return $products->setCollection(
             $products->getCollection()->map(function($product) use ($programTypes) {
@@ -70,7 +70,7 @@ trait ProductSearch
                     'short_description' => $product->short_description,
                     'base_image' => $product->base_image->path ?? null,
                     'selling_price' => $product->getSellingPrice(),
-                    'manage_stock' => $product->manage_stock && in_array('budget', $programTypes)
+                    'manage_stock' => $product->manage_stock && in_array('acquisition', $programTypes)
                 ];
             })
         );
