@@ -57,6 +57,7 @@ class ProgramProductController extends Controller
         ), 404);
 
         $product->selling_price = $product->getSellingPrice()->amount();
+        $product->manage_stock = $product->manage_stock && in_array('budget', $program->types ?? ['budget']);
         $product->variants = $product->options->map(function($option) use ($product) {
             return [
                 'id' => $option->id,
