@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration
             $table->date('special_price_end')->nullable();
             $table->decimal('selling_price', 18, 4)->unsigned()->nullable();
             $table->string('sku')->nullable();
+            $table->text('rma')->nullable();
+            $table->text('documents')->nullable();
             $table->boolean('manage_stock');
             $table->integer('qty')->nullable();
             $table->boolean('in_stock');
