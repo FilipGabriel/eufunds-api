@@ -68,7 +68,7 @@ class ProgramProductController extends Controller
                     return [
                         'id' => $value->id,
                         'label' => $value->label . $value->formattedPriceForProduct($product),
-                        'amount' => (float) $value->priceForProduct($product)->amount(),
+                        'amount' => (float) $value->priceForProduct($product)->convertToCurrentCurrency()->amount(),
                     ];
                 })
             ];
