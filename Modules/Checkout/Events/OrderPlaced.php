@@ -15,6 +15,7 @@ class OrderPlaced
      * @var \Modules\Order\Entities\Order
      */
     public $order;
+    public $type;
 
     /**
      * Create a new event instance.
@@ -22,8 +23,9 @@ class OrderPlaced
      * @param \Modules\Order\Entities\Order $order
      * @return void
      */
-    public function __construct(Order $order)
+    public function __construct(Order $order, $type)
     {
         $this->order = $order;
+        $this->type = $type;
     }
 }

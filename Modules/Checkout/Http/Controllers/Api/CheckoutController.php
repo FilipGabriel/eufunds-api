@@ -40,7 +40,7 @@ class CheckoutController extends Controller
             return response()->json([ 'message' => $e->getMessage() ], 422);
         }
 
-        event(new OrderPlaced($order));
+        event(new OrderPlaced($order, $request->type));
 
         return response()->json([ 'orderId' => $order->id ]);
     }
