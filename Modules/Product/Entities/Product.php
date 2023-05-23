@@ -47,6 +47,8 @@ class Product extends Model
         'warranty',
         'slug',
         'sku',
+        'rma',
+        'documents',
         'price',
         'special_price',
         'special_price_type',
@@ -68,6 +70,7 @@ class Product extends Model
      * @var array
      */
     protected $casts = [
+        'documents' => 'array',
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
         'is_active' => 'boolean',
