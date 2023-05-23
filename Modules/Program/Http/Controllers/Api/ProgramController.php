@@ -18,4 +18,14 @@ class ProgramController
             'activePrograms' => Program::searchable()
         ]);
     }
+    
+    /**
+     * Display the specified resource.
+     */
+    public function show($slug)
+    {
+        return response()->json([
+            'types' => Program::findBySlug($slug)->types
+        ]);
+    }
 }
