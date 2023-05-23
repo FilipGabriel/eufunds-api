@@ -18,6 +18,7 @@ class OrderController
             ->map(function($order) {
                 return [
                     'id' => $order->id,
+                    'type' => $order->type,
                     'business_id' => $order->business_id,
                     'company_name' => $order->company_name,
                     'total' => $order->total->format(),
@@ -44,6 +45,7 @@ class OrderController
 
         return response()->json([
             'id' => $order->id,
+            'type' => $order->type,
             'business_id' => $order->business_id,
             'company_name' => $order->company_name,
             'total' => $order->total->format(),

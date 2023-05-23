@@ -56,6 +56,7 @@ class ProgramProductController extends Controller
             ! array_intersect($program->categories->pluck('id')->toArray(), $product->categories->pluck('id')->toArray()
         ), 404);
 
+        $product->stock = $product->qty;
         $product->selling_price = $product->getSellingPrice()->amount();
         $product->manage_stock = $product->manage_stock && in_array('budget', $program->types ?? ['budget']);
         $product->variants = $product->options->map(function($option) use ($product) {
