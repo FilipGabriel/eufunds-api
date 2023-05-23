@@ -27,7 +27,7 @@ class Program extends Model
      *
      * @var array
      */
-    protected $fillable = ['parent_id', 'slug', 'position', 'is_searchable', 'is_active'];
+    protected $fillable = ['parent_id', 'slug', 'types', 'position', 'is_searchable', 'is_active'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -42,6 +42,7 @@ class Program extends Model
      * @var array
      */
     protected $casts = [
+        'types' => 'array',
         'is_searchable' => 'boolean',
         'is_active' => 'boolean',
     ];
@@ -67,6 +68,12 @@ class Program extends Model
      */
     protected static function booted()
     {
+        static::saving(function ($program) {
+            if (! request('types')) {
+                $program->types = null;
+            }
+        });
+
         static::saved(function ($program) {
             if (! empty(request()->all())) {
                 $program->saveRelations(request()->all());

@@ -98,6 +98,7 @@ export default class {
         
         $('#id').val(program.id);
         $('#name').val(program.name);
+        this.addProgramTypes(program.types);
         this.addProgramCategories(program.categories);
 
         $('#slug').val(program.slug);
@@ -132,6 +133,15 @@ export default class {
         
         categories.forEach(category => {
             categoryValues.addItem(category.id);
+        });
+    }
+
+    addProgramTypes(types) {
+        let typeValues = $('#types\\[\\]')[0].selectize;
+        typeValues.clear();
+        
+        types.forEach(type => {
+            typeValues.addItem(type);
         });
     }
 
