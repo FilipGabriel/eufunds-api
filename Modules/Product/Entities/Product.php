@@ -168,6 +168,7 @@ class Product extends Model
                 'products.id',
                 'products.slug',
                 'products.in_stock',
+                'products.manage_stock',
                 'products.sku',
                 'products.qty',
             ]);
@@ -333,7 +334,8 @@ class Product extends Model
 
     public function isInStock()
     {
-        if ($this->manage_stock && $this->qty === 0) {
+        // $this->manage_stock && 
+        if ($this->qty === 0) {
             return false;
         }
 

@@ -47,6 +47,7 @@
                                         </div>
 
                                         {{ Form::text('name', trans('program::attributes.name'), $errors, null, ['required' => true, 'labelCol' => 2]) }}
+                                        {{ Form::select('types', trans('program::attributes.types'), $errors, trans('program::programs.types'), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
                                         {{ Form::select('categories', trans('product::attributes.categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
                                         {{ Form::checkbox('is_active', trans('program::attributes.is_active'), trans('program::programs.form.enable_the_program'), $errors, null, ['labelCol' => 2]) }}
                                         {{ Form::checkbox('is_searchable', trans('program::attributes.is_searchable'), trans('program::programs.form.show_this_program_in_search_box'), $errors, null, ['labelCol' => 2]) }}

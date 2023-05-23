@@ -64,7 +64,7 @@
 					</td>
 					<td colspan="2" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">Bugetare / Achizitie</span>
+                            <span style="color: black;">{{ trans("program::programs.types.{$order->type}") }}</span>
 						</p>
 					</td>
 					<td colspan="1" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">

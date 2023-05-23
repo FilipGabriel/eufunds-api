@@ -19,4 +19,8 @@ return [
         'enable_the_program' => 'Enable the program',
         'banner' => 'Banner',
     ],
+    'types' => [
+        'budget' => 'Bugetare',
+        'acquisition' => 'Achizitie'
+    ]
 ];

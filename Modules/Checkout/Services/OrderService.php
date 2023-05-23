@@ -16,6 +16,7 @@ class OrderService
         return Order::create([
             'customer_id' => auth()->id(),
             'program' => $request->program,
+            'type' => $request->type,
             'company_name' => $request->company_name,
             'business_id' => $request->business_id,
             'customer_email' => auth()->user()->email,

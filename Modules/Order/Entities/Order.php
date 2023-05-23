@@ -2,18 +2,19 @@
 
 namespace Modules\Order\Entities;
 
-use Modules\Checkout\CartItem;
 use Modules\Support\Money;
 use Modules\Support\State;
 use Modules\Support\Country;
+use Modules\Checkout\CartItem;
+use Modules\User\Entities\User;
 use Modules\Media\Entities\File;
 use Illuminate\Support\Collection;
 use Modules\Order\OrderCollection;
 use Modules\Coupon\Entities\Coupon;
 use Modules\Order\Admin\OrderTable;
 use Modules\Support\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Program\Entities\Program;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Transaction\Entities\Transaction;
 
 class Order extends Model
@@ -50,6 +51,11 @@ class Order extends Model
     protected $appends = [
         'funding'
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
 
     public static function totalSales()
     {

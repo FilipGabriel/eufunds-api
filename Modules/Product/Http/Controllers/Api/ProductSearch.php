@@ -38,11 +38,13 @@ trait ProductSearch
 
         event(new ShowingProductList($products));
 
+        $program = Program::findBySlug(request('program'));
+
         return response()->json([
-            'products' => $this->transform($products),
+            'products' => $this->transform($products, $program->types),
             'attributes' => $this->getAttributes($productIds),
             'categories' => $this->getProgramCategories(),
-            'program' => Program::findBySlug(request('program')),
+            'program' => $program,
             'brands' => $this->getBrandsByCategory()
         ]);
     }
@@ -52,21 +54,23 @@ trait ProductSearch
      *
      * @return \Illuminate\Support\Collection
      */
-    private function transform($products)
+    private function transform($products, $programTypes = ['budget'])
     {
         return $products->setCollection(
-            $products->getCollection()->map(function($product) {
+            $products->getCollection()->map(function($product) use ($programTypes) {
                 return [
                     'id' => $product->id,
                     'slug' => $product->slug,
                     'sku' => $product->sku,
                     'name' => $product->name,
-                    'qty' => $product->qty,
+                    'qty' => 1,
+                    'stock' => $product->qty,
                     'in_stock' => $product->isInStock(),
                     'variants' => $product->options->count(),
                     'short_description' => $product->short_description,
                     'base_image' => $product->base_image->path ?? null,
-                    'selling_price' => $product->getSellingPrice()
+                    'selling_price' => $product->getSellingPrice(),
+                    'manage_stock' => $product->manage_stock && in_array('budget', $programTypes)
                 ];
             })
         );
