@@ -6,27 +6,25 @@
     <li class="active">{{ trans('order::orders.orders') }}</li>
 @endcomponent
 
-@section('content')
-    <div class="box box-primary">
-        <div class="box-body index-table" id="orders-table">
-            @component('admin::components.table')
-                @slot('thead')
-                    <tr>
-                        <th>{{ trans('admin::admin.table.id') }}</th>
-                        <th width="25%">{{ trans('order::orders.table.funding') }}</th>
-                        <th>{{ trans('order::orders.table.business_id') }}</th>
-                        <th>{{ trans('order::orders.table.company_name') }}</th>
-                        <th>{{ trans('order::orders.table.customer_name') }}</th>
-                        <th>{{ trans('order::orders.table.customer_email') }}</th>
-                        <th>{{ trans('admin::admin.table.status') }}</th>
-                        <th>{{ trans('order::orders.table.total') }}</th>
-                        <th data-sort>{{ trans('admin::admin.table.created') }}</th>
-                    </tr>
-                @endslot
-            @endcomponent
-        </div>
-    </div>
-@endsection
+@component('admin::components.page.index_table')
+    @slot('buttons', ['export', 'export_products'])
+    @slot('resource', 'orders')
+    @slot('name', trans('order::orders.orders'))
+
+    @slot('thead')
+        <tr>
+            <th>{{ trans('admin::admin.table.id') }}</th>
+            <th width="25%">{{ trans('order::orders.table.funding') }}</th>
+            <th>{{ trans('order::orders.table.business_id') }}</th>
+            <th>{{ trans('order::orders.table.company_name') }}</th>
+            <th>{{ trans('order::orders.table.customer_name') }}</th>
+            <th>{{ trans('order::orders.table.customer_email') }}</th>
+            <th>{{ trans('program::attributes.types') }}</th>
+            <th>{{ trans('order::orders.table.total') }}</th>
+            <th data-sort>{{ trans('admin::admin.table.created') }}</th>
+        </tr>
+    @endslot
+@endcomponent
 
 @push('scripts')
     <script>
@@ -43,7 +41,7 @@
                 { data: 'company_name' },
                 { data: 'customer_name', orderable: false, searchable: false },
                 { data: 'customer_email' },
-                { data: 'status' },
+                { data: 'type' },
                 { data: 'total' },
                 { data: 'created', name: 'created_at' },
             ],

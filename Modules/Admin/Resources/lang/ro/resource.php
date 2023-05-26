@@ -6,5 +6,5 @@ return [
     'edit' => 'Editeaza :resource',
     'delete' => 'Sterge :resource',
     'export' => 'Exporta :resource',
-    'build_frontend' => 'Build frontend',
+    'export_products' => 'Exporta Produse',
 ];
