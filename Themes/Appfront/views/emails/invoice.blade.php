@@ -179,13 +179,13 @@
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
 						colspan="1">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">{{ $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
+                            <span style="color: black;">{{ $product->unit_price->format() }}</span>
 						</p>
 					</td>
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
 						colspan="1">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">{{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
+                            <span style="color: black;">{{ $product->line_total->format() }}</span>
 						</p>
 					</td>
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
@@ -208,7 +208,7 @@
 					<td style="height: 15.0pt; border-bottom: solid black 1px; border-right: solid black 1px; padding-right: 10px;"
 						colspan="2">
 						<p style="text-align: right; color: black">Total:
-							<strong>{{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</strong>
+							<strong>{{ $order->total->format() }}</strong>
 						</p>
 					</td>
 				</tr>
