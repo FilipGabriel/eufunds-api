@@ -11,7 +11,7 @@ class OrderService
 {
     public function create($request)
     {
-        $currency = $request->currency ?? currency();
+        $currency = currency();
 
         return Order::create([
             'customer_id' => auth()->id(),
