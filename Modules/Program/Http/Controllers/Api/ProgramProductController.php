@@ -59,6 +59,7 @@ class ProgramProductController extends Controller
         $product->stock = $product->qty;
         $product->qty = 1;
         $product->has_dnsh = $product->has_dnsh;
+        $product->brand_name = $product->brand->name;
         $product->selling_price = $product->getSellingPrice()->amount();
         $product->manage_stock = $product->manage_stock && in_array('acquisition', $program->types ?? ['acquisition']);
         $product->variants = $product->options->map(function($option) use ($product) {
