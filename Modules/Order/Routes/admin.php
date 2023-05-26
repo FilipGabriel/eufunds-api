@@ -8,6 +8,18 @@ Route::get('orders', [
     'middleware' => 'can:admin.orders.index',
 ]);
 
+Route::get('orders/export', [
+    'as' => 'admin.orders.export',
+    'uses' => 'OrderController@export',
+    'middleware' => 'can:admin.orders.index'
+]);
+
+Route::get('orders/export-products', [
+    'as' => 'admin.orders.export_products',
+    'uses' => 'OrderController@exportProducts',
+    'middleware' => 'can:admin.orders.index'
+]);
+
 Route::get('orders/{id}', [
     'as' => 'admin.orders.show',
     'uses' => 'OrderController@show',

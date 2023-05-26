@@ -231,6 +231,7 @@ class Order extends Model
             ->select([
                 'id',
                 'program',
+                'type',
                 'company_name',
                 'business_id',
                 'customer_first_name',

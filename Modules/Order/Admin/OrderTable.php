@@ -23,8 +23,8 @@ class OrderTable extends AdminTable
             ->editColumn('total', function ($order) {
                 return $order->total->format();
             })
-            ->editColumn('status', function ($order) {
-                return $order->status();
+            ->editColumn('type', function ($order) {
+                return $order->type ? trans("program::programs.types.{$order->type}") : '';
             });
     }
 }
