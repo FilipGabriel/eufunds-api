@@ -21,7 +21,7 @@ class OrderController
                     'type' => $order->type,
                     'business_id' => $order->business_id,
                     'company_name' => $order->company_name,
-                    'total' => $order->total->format(),
+                    'total' => $order->total->format('RON'),
                     'program' => $order->funding->name,
                     'created' => $order->created_at->format('d M Y'),
                     'offer' => route('account.orders.download', $order->id),
