@@ -382,6 +382,38 @@ class Product extends Model
         return $sellingPrice;
     }
 
+    public function getHasDnshAttribute()
+    {
+        $programDnsh = $categoryDnsh = false;
+        $program = Program::findBySlug(request('program'));
+        $dnshCoupon = Coupon::findByCode('product-dnsh');
+        $categoryIds = $this->categories->pluck('id');
+
+        foreach($this->getCouponsByProgram($program->id) as $couponId) {
+            $coupon = Coupon::find($couponId);
+
+            if(
+                $coupon && $coupon->valid() && ! $coupon->usageLimitReached() && $couponId == $dnshCoupon->id &&
+                ! $coupon->perCustomerUsageLimitReached() && ! $coupon->excludePrograms->contains($program->id)
+            ) {
+                $programDnsh = true;
+            }
+        }
+        
+        foreach($this->getCouponsByCategory($categoryIds) as $couponId) {
+            $coupon = Coupon::find($couponId);
+
+            if(
+                $coupon && $coupon->valid() && ! $coupon->usageLimitReached() && ! $coupon->perCustomerUsageLimitReached() &&
+                $coupon->excludeCategories->intersect($this->categories)->isEmpty() && $couponId == $dnshCoupon->id
+            ) {
+                $categoryDnsh = true;
+            }
+        }
+
+        return $programDnsh || $categoryDnsh;
+    }
+
     private function applyProgramDiscounts($sellingPrice)
     {
         $program = Program::findBySlug(request('program'));
