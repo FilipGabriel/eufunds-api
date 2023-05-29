@@ -65,6 +65,7 @@ trait ProductSearch
                     'name' => $product->name,
                     'qty' => 1,
                     'stock' => $product->qty,
+                    'has_dnsh' => $product->has_dnsh,
                     'in_stock' => $product->isInStock(),
                     'variants' => $product->options->count(),
                     'short_description' => $product->short_description,
