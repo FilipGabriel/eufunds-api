@@ -14,7 +14,7 @@ class CurrentCurrencyController
     {
         abort_if(! in_array($currency, setting('supported_currencies')), 403);
 
-        $cookie = cookie()->forever('currency', $currency, null, '.smis.ro', null, false);
+        $cookie = cookie()->forever('currency', $currency, null, '.smis.ro', true, false, false, 'none');
 
         return response()->json()->withCookie($cookie);
     }
