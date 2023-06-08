@@ -21,6 +21,7 @@ yarn.lock
 /storage/framework
 /storage/logs
 /storage/app
+/storage/offers
 /storage/debugbar
 lerna-debug.log
 

@@ -82,20 +82,15 @@ class OrderController
             ->where('id', $id)
             ->firstOrFail();
 
-        // $html = view('emails.invoice', [
-        //     'download' => true,
-        //     'order' => $order,
-        //     'logo' => null,
-        // ])->render();
-        // echo $html;
-        // die();
+        $path = storage_path("offers") . "/Oferta {$order->company_name}.pdf";
 
-        $file = Pdf::loadView('emails.invoice', [
+        Pdf::loadView('emails.invoice', [
             'download' => true,
             'order' => $order,
             'logo' => File::findOrNew(setting('appfront_mail_logo'))->path,
-        ])->setPaper('a4', 'landscape');
+        ])->setPaper('a4', 'landscape')->save($path);
 
-        return $file->download("Oferta {$order->company_name}.pdf");
+        return response()->download($path, "Oferta {$order->company_name}.pdf", ['Content-Type' => 'pdf']);
+        // return $file->download("Oferta {$order->company_name}.pdf");
     }
 }
