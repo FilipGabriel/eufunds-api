@@ -17,9 +17,10 @@ class SuggestionController
     public function index(Product $model)
     {
         $products = $this->getProducts($model);
+        $searchQuery = preg_replace("/[^A-Za-z0-9]+/i", " ", request('query'));
 
         return new SuggestionsResponse(
-            request('query'),
+            $searchQuery,
             $products,
             $products->pluck('categories')->flatten(),
             $this->getTotalResults($model)
@@ -34,7 +35,9 @@ class SuggestionController
      */
     private function getTotalResults(Product $model)
     {
-        return $model->search(request('query'))
+        $searchQuery = preg_replace("/[^A-Za-z0-9]+/i", " ", request('query'));
+
+        return $model->search($searchQuery)
             ->query()
             ->when(request()->filled('program'), $this->programQuery())
             ->when(request()->filled('category'), $this->categoryQuery())
@@ -49,17 +52,12 @@ class SuggestionController
      */
     private function getProducts(Product $model)
     {
-        return $model->search(request('query'))
-            ->query()
-            ->limit(10)
-            ->withName()
-            ->withBaseImage()
-            ->withPrice()
-            ->addSelect([
-                'products.id',
-                'products.slug',
-                'products.qty',
-            ])
+        $searchQuery = preg_replace("/[^A-Za-z0-9]+/i", " ", request('query'));
+
+        return $model->search($searchQuery)->query()
+            ->orWhere('sku', request('query'))
+            ->limit(10)->withName()->withBaseImage()->withPrice()
+            ->addSelect([ 'products.id', 'products.slug', 'products.sku', 'products.qty'])
             ->with(['files', 'categories' => function ($query) {
                 $query->limit(5);
             }])

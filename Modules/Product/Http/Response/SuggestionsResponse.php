@@ -86,6 +86,7 @@ class SuggestionsResponse implements Responsable
     private function highlight($text)
     {
         $query = str_replace(' ', '|', preg_quote($this->query));
+        $query = preg_replace("/[^A-Za-z0-9]+/i", " ", $query);
 
         return preg_replace("/($query)/i", '<strong>$1</strong>', $text);
     }

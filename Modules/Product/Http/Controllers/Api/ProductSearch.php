@@ -22,9 +22,10 @@ trait ProductSearch
     public function searchProducts(Product $model, ProductFilter $productFilter)
     {
         $productIds = [];
+        $searchQuery = preg_replace("/[^A-Za-z0-9]+/i", " ", request('query'));
 
         if (request()->filled('query')) {
-            $model = $model->search(request('query'));
+            $model = $model->search($searchQuery);
             $productIds = $model->keys();
         }
 
