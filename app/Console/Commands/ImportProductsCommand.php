@@ -80,6 +80,8 @@ class ImportProductsCommand extends Command
 
     private function handleImages($images, $product)
     {
+        $storage = public_path('storage');
+        
         foreach(explode(',', $images) as $key => $url) {
             $disk = config('filesystems.default');
             $location = $key == 0 ? 'base_image' : 'additional_images';
@@ -88,7 +90,7 @@ class ImportProductsCommand extends Command
             if($url && ! $product->files()->whereFilename($name)->exists()) {
                 $path = "media/{$location}/{$name}";
                 Storage::disk($disk)->put($path, file_get_contents($url));
-                $file = new SymfonyFile(public_path("storage/{$path}"));
+                $file = new SymfonyFile("{$storage}/{$path}");
 
                 $newFile = File::create([
                     'user_id' => 1,
