@@ -20,5 +20,6 @@ return [
         'enable_the_brand' => 'Enable the brand',
         'logo' => 'Logo',
         'banner' => 'Banner',
+        'slider_banner' => 'Slider Banner',
     ],
 ];
