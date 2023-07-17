@@ -49,15 +49,22 @@ class ImportProductAttributesCommand extends Command
 
         foreach($items as $item) {
             foreach($item->properties as $property) {
-                $products[$item->product_id][$property->name_id][] = $property;
-                $attributes[$property->name_id] = [
-                    'id' => $property->name_id,
-                    'name' => $property->name,
-                    'slug' => $this->generateSlug($property->name_id, $property->name)
+                $productId = $item->product_id;
+                $nameId = $property->name_id;
+                $valueId = $property->value_id ?? null;
+                $propertyName = $property->name;
+                $propertyValue = $property->value;
+
+                $products[$productId][$nameId][] = $property;
+                $attributes[$nameId] = [
+                    'id' => $nameId,
+                    'name' => $propertyName,
+                    'slug' => $this->generateSlug($nameId, $propertyName)
                 ];
-                $attributeValues[$property->name_id][] = [
-                    'id' => $property->value_id ?? null,
-                    'value' => $property->value,
+                
+                $attributeValues[$nameId][] = [
+                    'id' => $valueId ?? null,
+                    'value' => $propertyValue,
                 ];
             }
         }

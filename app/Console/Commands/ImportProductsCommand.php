@@ -9,7 +9,6 @@ use Modules\Brand\Entities\Brand;
 use Modules\Support\Traits\NodApi;
 use Illuminate\Support\Facades\Log;
 use Modules\Product\Entities\Product;
-use Illuminate\Support\Facades\Storage;
 use Modules\Category\Entities\Category;
 use Symfony\Component\HttpFoundation\File\File as SymfonyFile;
 
@@ -83,13 +82,17 @@ class ImportProductsCommand extends Command
         $storage = public_path('storage');
         
         foreach(explode(',', $images) as $key => $url) {
-            $disk = config('filesystems.default');
-            $location = $key == 0 ? 'base_image' : 'additional_images';
-            $name = substr($url, strrpos($url, '/') + 1);
-
-            if($url && ! $product->files()->whereFilename($name)->exists()) {
+            $name = basename($url);
+            
+            if ($url && ! $product->files()->whereFilename($name)->exists()) {
+                $location = $key === 0 ? 'base_image' : 'additional_images';
                 $path = "media/{$location}/{$name}";
-                Storage::disk($disk)->put($path, file_get_contents($url));
+                
+                if (file_exists($storage . '/' . $path)) {
+                    continue; // Skip if the file already exists
+                }
+                
+                file_put_contents($storage . '/' . $path, file_get_contents($url));
                 $file = new SymfonyFile("{$storage}/{$path}");
 
                 $newFile = File::create([

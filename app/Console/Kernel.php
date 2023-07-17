@@ -30,10 +30,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('03:00');
-        $schedule->command("nod:import-manufacturers")->daily()->timezone('Europe/Bucharest')->at('03:10');
-        $schedule->command("nod:import-products")->daily()->timezone('Europe/Bucharest')->at('03:20');
-        $schedule->command("nod:import-product-attributes")->daily()->timezone('Europe/Bucharest')->at('04:00');
-        $schedule->command("nod:import-product-info")->hourly();
+        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('01:00')
+            ->then(function() use ($schedule) {
+                $schedule->command("nod:import-manufacturers")
+                    ->then(function() use ($schedule) {
+                        $schedule->command("nod:import-products")
+                            ->then(function() use ($schedule) {
+                                $schedule->command("nod:import-product-attributes");
+                            });
+                    });
+            });
+
+        $schedule->command("nod:import-product-info")->hourly()->timezone('Europe/Bucharest')->between('08:00', '00:00');
     }
 }
