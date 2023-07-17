@@ -59,7 +59,11 @@
 					</td>
 					<td colspan="3" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
+							@if($order->business_id)
                             <span style="color: black;">{{ $order->business_id }} - {{ $order->company_name }}</span>
+							@else
+                            <span style="color: black;">{{ $order->company_name }}</span>
+							@endif
 						</p>
 					</td>
 					<td colspan="2" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
