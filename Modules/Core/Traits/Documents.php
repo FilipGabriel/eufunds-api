@@ -26,6 +26,16 @@ trait Documents
         return "</w:t><w:t>{$text}</w:t><w:t>";
     }
 
+    protected function checkbox()
+    {
+        return '</w:t></w:r><w:r w:rsidR="00E54FE3"><w:rPr><w:rFonts w:ascii="Segoe UI Emoji" w:hAnsi="Segoe UI Emoji" w:cs="Segoe UI Emoji"/><w:color w:val="323E4F" w:themeColor="text2" w:themeShade="BF"/><w:kern w:val="0"/><w:sz w:val="20"/><w:szCs w:val="20"/><w14:ligatures w14:val="none"/></w:rPr><w:t>✅</w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Segoe UI Emoji" w:hAnsi="Segoe UI Emoji" w:cs="Segoe UI Emoji"/><w:color w:val="323E4F" w:themeColor="text2" w:themeShade="BF"/><w:kern w:val="0"/><w:sz w:val="20"/><w:szCs w:val="20"/><w14:ligatures w14:val="none"/></w:rPr><w:t>';
+    }
+
+    protected function prohibited()
+    {
+        return '</w:t></w:r><w:r w:rsidR="00E54FE3"><w:rPr><w:rFonts w:ascii="Segoe UI Emoji" w:hAnsi="Segoe UI Emoji" w:cs="Segoe UI Emoji"/><w:color w:val="323E4F" w:themeColor="text2" w:themeShade="BF"/><w:kern w:val="0"/><w:sz w:val="20"/><w:szCs w:val="20"/><w14:ligatures w14:val="none"/></w:rPr><w:t>🚫</w:t></w:r><w:r><w:rPr><w:rFonts w:ascii="Segoe UI Emoji" w:hAnsi="Segoe UI Emoji" w:cs="Segoe UI Emoji"/><w:color w:val="323E4F" w:themeColor="text2" w:themeShade="BF"/><w:kern w:val="0"/><w:sz w:val="20"/><w:szCs w:val="20"/><w14:ligatures w14:val="none"/></w:rPr><w:t>';
+    }
+
     protected function formatString($text)
     {
         if(is_null($text) || empty($text)) { return null; }

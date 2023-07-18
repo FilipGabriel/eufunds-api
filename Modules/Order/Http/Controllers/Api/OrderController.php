@@ -110,7 +110,7 @@ class OrderController
         
         $params = $document->getData($order);
         $path = public_path("templates/order.docx");
-        Settings::setOutputEscapingEnabled(true);
+        // Settings::setOutputEscapingEnabled(true);
         $template = new TemplateProcessor($path);
         $template->setValues($params);
 
