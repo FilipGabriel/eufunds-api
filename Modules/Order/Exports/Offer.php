@@ -29,7 +29,6 @@ class Offer
     public function getExtraRules(Order $order, TemplateProcessor $template)
     {
         $template->setComplexBlock('products_table', $this->getProductsTable($order));
-        // dd($template);
 
         return $template;
     }
@@ -70,7 +69,7 @@ class Offer
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->sku ?: '-', $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->name, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText('Buc', $this->defaultFont, $this->noSpace);
-            $table->addCell(null, ['valign' => 'center'])->addText($product->product->has_dnsh ? '✅' : '🚫', $this->defaultFont, $this->noSpace);
+            $table->addCell(null, ['valign' => 'center'])->addText($product->product->has_dnsh ? $this->checkbox() : $this->prohibited(), $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->qty, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->unit_price->format('RON'), $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->line_total->format('RON'), $this->defaultFont, $this->noSpace);
