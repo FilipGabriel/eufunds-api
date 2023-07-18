@@ -31,6 +31,7 @@
         "nao-pon/flysystem-google-drive": "~1.1",
         "nwidart/laravel-modules": "^8.0",
         "phpoffice/phpspreadsheet": "^1.16",
+        "phpoffice/phpword": "^0.18.2",
         "rairlie/laravel-locking-session": "^1.1",
         "rap2hpoutre/fast-excel": "^3.0",
         "spatie/laravel-backup": "^6.14",

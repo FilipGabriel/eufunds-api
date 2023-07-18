@@ -7,7 +7,7 @@
 	</head>
 
 	<body style="font-family: 'Open Sans', sans-serif;
-		font-size: 15px;
+		font-size: 10px;
 		min-width: 320px;
 		color: #555555;
 		margin: 0;

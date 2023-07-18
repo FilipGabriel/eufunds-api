@@ -21,6 +21,6 @@ return [
     ],
     'types' => [
         'budget' => 'Bugetare',
-        'acquisition' => 'Achizitie'
+        'acquisition' => 'Ofertă'
     ]
 ];
