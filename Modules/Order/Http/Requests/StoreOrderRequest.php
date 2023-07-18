@@ -15,7 +15,7 @@ class StoreOrderRequest extends Request
     {
         return [
             'company_name' => ['required'],
-            'business_id' => ['required'],
+            // 'business_id' => ['required'],
             'products' => ['required'],
             'program' => ['required'],
             'terms_and_conditions' => 'accepted',

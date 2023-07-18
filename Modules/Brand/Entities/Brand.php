@@ -28,7 +28,7 @@ class Brand extends Model
      *
      * @var array
      */
-    protected $fillable = ['nod_id', 'slug', 'is_searchable', 'is_active'];
+    protected $fillable = ['nod_id', 'title', 'description', 'slug', 'is_searchable', 'is_active'];
 
     /**
      * The attributes that should be cast to native types.
@@ -118,6 +118,16 @@ class Brand extends Model
     }
 
     /**
+     * Get the brand's slider banner.
+     *
+     * @return \Modules\Media\Entities\File
+     */
+    public function getSliderBannerAttribute()
+    {
+        return $this->files->where('pivot.zone', 'slider_banner')->first() ?: new File;
+    }
+
+    /**
      * Get related products.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -137,7 +147,10 @@ class Brand extends Model
                         return [
                             'slug' => $brand->slug,
                             'name' => $brand->name,
+                            'title' => $brand->title,
+                            'description' => $brand->description,
                             'logo' => $brand->logo->path ?? null,
+                            'slider_banner' => $brand->slider_banner->path ?? null,
                         ];
                     });
             });

@@ -83,7 +83,11 @@
                         <tbody>
                             <tr>
                                 <td>{{ trans('order::orders.company_name') }}</td>
+                                @if($order->business_id)
                                 <td>{{ $order->business_id }} - {{ $order->company_name }}</td>
+                                @else
+                                <td>{{ $order->company_name }}</td>
+                                @endif
                             </tr>
                             <tr>
                                 <td>{{ trans('order::orders.customer_name') }}</td>
