@@ -51,7 +51,7 @@ class Offer
         $table->addCell(500, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Garanție (luni)', $this->titleStyle, $this->noSpace);
 
         if($order->products->isEmpty()) {
-            $table->addRow();
+            $table->addRow(500);
             $table->addCell()->addText('-', $this->defaultFont, $this->noSpace);
             $table->addCell()->addText('-', $this->defaultFont, $this->noSpace);
             $table->addCell()->addText('-', $this->defaultFont, $this->noSpace);
@@ -64,7 +64,7 @@ class Offer
         }
 
         foreach($order->products as $key => $product) {
-            $table->addRow();
+            $table->addRow(500);
             $table->addCell(null, ['valign' => 'center'])->addText($key+1, $this->defaultFont, $this->noSpace);
             
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->sku ?: '-', $this->defaultFont, $this->noSpace);
@@ -78,7 +78,7 @@ class Offer
         }
 
         if($order->products->isNotEmpty()) {
-            $table->addRow();
+            $table->addRow(500);
             $cell = $table->addCell(null, ['valign' => 'center']);
             $cell->getStyle()->setGridSpan(7);
             $cell->addText('TOTAL', $this->titleStyle, $this->noSpace);
