@@ -34,8 +34,11 @@ class ProgramController
      */
     public function listCategories($slug)
     {
+        $program = Program::findBySlug($slug);
+
         return response()->json([
-            'list_categories' => Program::findBySlug($slug)->list_categories->map(function ($program) {
+            'program' => $program,
+            'list_categories' => $program->list_categories->map(function ($program) {
                 return [
                     'slug' => $program->slug,
                     'name' => $program->name,
