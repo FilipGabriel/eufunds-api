@@ -100,6 +100,7 @@ export default class {
         $('#name').val(program.name);
         this.addProgramTypes(program.types);
         this.addProgramCategories(program.categories);
+        this.addProgramListCategories(program.list_categories);
 
         $('#slug').val(program.slug);
         $('#slug-field').removeClass('hide');
@@ -136,6 +137,15 @@ export default class {
         });
     }
 
+    addProgramListCategories(categories) {
+        let categoryValues = $('#list_categories\\[\\]')[0].selectize;
+        categoryValues.clear();
+        
+        categories.forEach(category => {
+            categoryValues.addItem(category.id);
+        });
+    }
+
     addProgramTypes(types) {
         let typeValues = $('#types\\[\\]')[0].selectize;
         typeValues.clear();
@@ -152,6 +162,8 @@ export default class {
         $('#name').val('');
         let categoryValues = $('#categories\\[\\]')[0].selectize;
         categoryValues.clear();
+        let listCategoryValues = $('#list_categories\\[\\]')[0].selectize;
+        listCategoryValues.clear();
 
         $('#slug').val('');
         $('#slug-field').addClass('hide');

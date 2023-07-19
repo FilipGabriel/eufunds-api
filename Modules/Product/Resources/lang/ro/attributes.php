@@ -10,6 +10,7 @@ return [
     'warranty' => 'Garantie',
     'programs' => 'Programe',
     'categories' => 'Categorii',
+    'list_categories' => 'Categorii listate',
     'virtual' => 'Virtual',
     'is_active' => 'Status',
     'price' => 'Pret',

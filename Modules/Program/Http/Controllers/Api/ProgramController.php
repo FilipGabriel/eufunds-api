@@ -28,4 +28,23 @@ class ProgramController
             'types' => Program::findBySlug($slug)->types
         ]);
     }
+    
+    /**
+     * Display the specified resource.
+     */
+    public function listCategories($slug)
+    {
+        $program = Program::findBySlug($slug);
+
+        return response()->json([
+            'program' => $program,
+            'list_categories' => $program->list_categories->map(function ($program) {
+                return [
+                    'slug' => $program->slug,
+                    'name' => $program->name,
+                    'logo' => $program->logo->path ?? null,
+                ];
+            })
+        ]);
+    }
 }

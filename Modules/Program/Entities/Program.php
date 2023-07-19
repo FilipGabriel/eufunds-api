@@ -48,6 +48,15 @@ class Program extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'has_list_categories'
+    ];
+
+    /**
      * The attributes that are translatable.
      *
      * @var array
@@ -91,6 +100,11 @@ class Program extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'program_categories');
+    }
+
+    public function list_categories()
+    {
+        return $this->belongsToMany(Category::class, 'program_list_categories');
     }
 
     public function isRoot()
@@ -148,9 +162,15 @@ class Program extends Model
                             'slug' => $program->slug,
                             'name' => $program->name,
                             'banner' => $program->banner->path ?? null,
+                            'has_list_categories' => $program->has_list_categories
                         ];
                     });
             });
+    }
+
+    public function getHasListCategoriesAttribute()
+    {
+        return $this->list_categories->isNotEmpty();
     }
 
     public function getBannerAttribute()
@@ -192,5 +212,6 @@ class Program extends Model
     public function saveRelations($attributes = [])
     {
         $this->categories()->sync(array_get($attributes, 'categories', []));
+        $this->list_categories()->sync(array_get($attributes, 'list_categories', []));
     }
 }
