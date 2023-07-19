@@ -48,6 +48,15 @@ class Program extends Model
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'has_list_categories'
+    ];
+
+    /**
      * The attributes that are translatable.
      *
      * @var array
@@ -153,10 +162,15 @@ class Program extends Model
                             'slug' => $program->slug,
                             'name' => $program->name,
                             'banner' => $program->banner->path ?? null,
-                            'has_list_categories' => $program->list_categories->isNotEmpty()
+                            'has_list_categories' => $program->has_list_categories
                         ];
                     });
             });
+    }
+
+    public function getHasListCategoriesAttribute()
+    {
+        return $this->list_categories->isNotEmpty();
     }
 
     public function getBannerAttribute()
