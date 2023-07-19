@@ -93,6 +93,11 @@ class Program extends Model
         return $this->belongsToMany(Category::class, 'program_categories');
     }
 
+    public function list_categories()
+    {
+        return $this->belongsToMany(Category::class, 'program_list_categories');
+    }
+
     public function isRoot()
     {
         return $this->exists && is_null($this->parent_id);
@@ -192,5 +197,6 @@ class Program extends Model
     public function saveRelations($attributes = [])
     {
         $this->categories()->sync(array_get($attributes, 'categories', []));
+        $this->list_categories()->sync(array_get($attributes, 'list_categories', []));
     }
 }

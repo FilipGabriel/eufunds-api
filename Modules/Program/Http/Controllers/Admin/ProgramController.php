@@ -46,7 +46,7 @@ class ProgramController
      */
     public function show($id)
     {
-        return Program::with(['files', 'categories'])->withoutGlobalScope('active')->find($id);
+        return Program::with(['files', 'categories', 'list_categories'])->withoutGlobalScope('active')->find($id);
     }
 
     /**
