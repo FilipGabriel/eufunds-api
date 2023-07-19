@@ -153,6 +153,7 @@ class Program extends Model
                             'slug' => $program->slug,
                             'name' => $program->name,
                             'banner' => $program->banner->path ?? null,
+                            'has_list_categories' => $program->list_categories->isNotEmpty()
                         ];
                     });
             });
