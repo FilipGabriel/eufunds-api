@@ -94,11 +94,9 @@ class QueryStringFilter
         });
     }
 
-    public function stock($query, $value)
+    public function stock($query)
     {
-        if(! is_null($value)) {
-            $query->whereInStock((bool) $value);
-        }
+        $query->whereInStock(true);
     }
 
     public function category($query, $slug)

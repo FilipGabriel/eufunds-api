@@ -44,6 +44,7 @@ class ImportProductInfoCommand extends Command
             'price' => $product->ron_promo_price,
             'qty' => $product->stock_value,
             'in_stock' => $product->stock_value > 0,
+            'special_price_end' => $product->special_price_valid_to,
             'documents' => collect($product->documents)->map(function($doc) {
                 return [
                     'name' => $doc->document_name,
