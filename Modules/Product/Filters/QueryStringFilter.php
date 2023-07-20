@@ -96,7 +96,9 @@ class QueryStringFilter
 
     public function stock($query, $value)
     {
-        $query->whereInStock((bool) $value);
+        if(! is_null($value)) {
+            $query->whereInStock((bool) $value);
+        }
     }
 
     public function category($query, $slug)
