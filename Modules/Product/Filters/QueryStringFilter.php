@@ -94,6 +94,11 @@ class QueryStringFilter
         });
     }
 
+    public function stock($query, $value)
+    {
+        $query->whereInStock((bool) $value);
+    }
+
     public function category($query, $slug)
     {
         $query->whereHas('categories', function ($categoryQuery) use ($slug) {
