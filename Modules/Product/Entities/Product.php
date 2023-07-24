@@ -62,6 +62,7 @@ class Product extends Model
         'is_active',
         'new_from',
         'new_to',
+        'special_price_valid_to',
     ];
 
     /**
@@ -86,6 +87,7 @@ class Product extends Model
         'special_price_end',
         'new_from',
         'new_to',
+        'special_price_valid_to',
         'start_date',
         'end_date',
         'deleted_at',
@@ -183,6 +185,7 @@ class Product extends Model
             'products.selling_price',
             'products.special_price_start',
             'products.special_price_end',
+            'products.special_price_valid_to',
         ]);
     }
 
