@@ -28,6 +28,7 @@ class QueryStringFilter
         'special_price_type',
         'special_price_start',
         'special_price_end',
+        'special_price_valid_to',
         'in_stock',
         'manage_stock',
         'qty',
@@ -92,6 +93,11 @@ class QueryStringFilter
         $query->whereHas('brand', function ($brandQuery) use ($slug) {
             $brandQuery->where('slug', $slug);
         });
+    }
+
+    public function stock($query)
+    {
+        $query->whereInStock(true);
     }
 
     public function category($query, $slug)
