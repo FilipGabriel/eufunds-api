@@ -62,7 +62,7 @@ class ProgramProductController extends Controller
         $product->brand_name = $product->brand->name;
         $product->selling_price = $product->getSellingPrice()->amount();
         $product->manage_stock = $product->manage_stock && in_array('acquisition', $program->types ?? ['acquisition']);
-        $product->special_price_valid_to = $product->special_price_valid_to ? $product->special_price_valid_to->format('d.m.Y') : null;
+        $product->end_special_price = $product->special_price_valid_to ? $product->special_price_valid_to->format('d.m.Y') : null;
         $product->variants = $product->options->map(function($option) use ($product) {
             return [
                 'id' => $option->id,
