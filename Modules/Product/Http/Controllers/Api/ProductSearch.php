@@ -73,7 +73,7 @@ trait ProductSearch
                     'base_image' => $product->base_image->path ?? null,
                     'selling_price' => $product->getSellingPrice(),
                     'special_price_valid_to' => $product->special_price_valid_to ? $product->special_price_valid_to->format('d.m.Y') : null,
-                    'manage_stock' => $product->manage_stock && in_array('acquisition', $programTypes)
+                    'manage_stock' => $product->manage_stock && $programTypes == ['acquisition']
                 ];
             })
         );
