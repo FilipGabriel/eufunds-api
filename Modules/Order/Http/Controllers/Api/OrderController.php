@@ -2,8 +2,8 @@
 
 namespace Modules\Order\Http\Controllers\Api;
 
-use PhpOffice\PhpWord\Settings;
 use Modules\Support\TemplateProcessor;
+use Modules\Checkout\Events\OrderPlaced;
 
 class OrderController
 {
@@ -40,8 +40,7 @@ class OrderController
     public function show($id)
     {
         $order = auth()->user()->orders()->with(['products'])
-            ->where('id', $id)
-            ->firstOrFail();
+            ->findOrFail($id);
 
         return response()->json([
             'id' => $order->id,
@@ -69,6 +68,25 @@ class OrderController
             }),
             'created' => $order->created_at->format('d M Y'),
         ]);
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function transform($id)
+    {
+        $order = auth()->user()->orders()->with(['products'])
+            ->findOrFail($id);
+
+        abort_if($order->type == 'acquisition', 403);
+
+        $order->type = 'acquisition';
+        $order->save();
+
+        event(new OrderPlaced($order, 'acquisition'));
+
+        return response()->json([ 'message' => 'Comanda ta a fost plasata cu succes!' ], 200);
     }
 
     // /**
@@ -102,8 +120,7 @@ class OrderController
     public function download(int $id)
     {
         $order = auth()->user()->orders()->with(['products'])
-            ->where('id', $id)
-            ->firstOrFail();
+            ->findOrFail($id);
 
         $class = 'Modules\\Order\\Exports\\Offer';
         $document = new $class();
