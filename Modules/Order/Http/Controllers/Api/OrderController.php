@@ -2,6 +2,8 @@
 
 namespace Modules\Order\Http\Controllers\Api;
 
+use Exception;
+use Modules\Program\Entities\Program;
 use Modules\Support\TemplateProcessor;
 use Modules\Checkout\Events\OrderPlaced;
 
@@ -81,6 +83,18 @@ class OrderController
 
         abort_if($order->type == 'acquisition', 403);
 
+        $program = Program::findBySlug($order->program);
+        $categoryIds = $program->categories->pluck('id')->toArray();
+
+        try {
+            foreach($order->products as $cartItem) {
+                $this->checkCategoriesAndPrice($cartItem, $categoryIds);
+                $this->checkQuantity($cartItem);
+            }
+        } catch (Exception $e) {
+            return response()->json([ 'message' => $e->getMessage() ], 422);
+        }
+
         $order->type = 'acquisition';
         $order->save();
 
@@ -158,5 +172,27 @@ class OrderController
         $template->saveAs($file);
 
         return $file;
+    }
+
+    private function checkCategoriesAndPrice($cartItem, $categoryIds)
+    {
+        if (! $cartItem->product || ! array_intersect($cartItem->product->categories->pluck('id')->toArray(), $categoryIds)) {
+            throw new Exception(trans('checkout::messages.product_unavailable', ['product' => $cartItem->product->name]));
+        }
+
+        if ((float) $cartItem->unit_price->amount() != $cartItem->product->getSellingPrice()->amount()) {
+            throw new Exception(trans('checkout::messages.product_has_changed_price', ['product' => $cartItem->product->name]));
+        }
+    }
+
+    private function checkQuantity($cartItem)
+    {
+        if ($cartItem->product->isOutOfStock()) {
+            throw new Exception(trans('checkout::messages.product_is_out_of_stock', ['product' => $cartItem->product->name]));
+        }
+
+        if (($cartItem->product->qty - $cartItem->qty) < 0) {
+            throw new Exception(trans('checkout::messages.product_doesn\'t_have_enough_stock', ['product' => $cartItem->product->name]));
+        }
     }
 }
