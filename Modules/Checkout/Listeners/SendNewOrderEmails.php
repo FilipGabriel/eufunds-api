@@ -2,7 +2,6 @@
 
 namespace Modules\Checkout\Listeners;
 
-use Illuminate\Support\Facades\Log;
 use Swift_TransportException;
 use Modules\Checkout\Mail\Invoice;
 use Illuminate\Support\Facades\Mail;

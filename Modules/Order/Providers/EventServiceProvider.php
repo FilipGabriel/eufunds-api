@@ -14,7 +14,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         \Modules\Order\Events\OrderStatusChanged::class => [
             \Modules\Order\Listeners\SendOrderStatusChangedEmail::class,
-            \Modules\Order\Listeners\SendOrderStatusChangedSms::class,
         ],
     ];
 }

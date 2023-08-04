@@ -40,7 +40,11 @@ export default class {
                 hideSelected: false,
                 allowEmptyOption: true,
                 onItemAdd(value) {
-                    this.getItem(value)[0].innerHTML = this.getItem(value)[0].innerHTML.replace(/¦––\s/g, '');
+                    let item = this.getItem(value);
+
+                    if(item && item[0]) {
+                        item[0].innerHTML = item[0].innerHTML.replace(/¦––\s/g, '');
+                    }
                 },
                 onInitialize() {
                     for (let index in this.options) {
@@ -62,6 +66,10 @@ export default class {
                 create = false;
 
                 plugins.remove('restore_on_backspace');
+            }
+
+            if (select.hasClass('draggable')) {
+                plugins.push('drag_drop');
             }
 
             select.selectize(_.merge(options, { create, plugins }));

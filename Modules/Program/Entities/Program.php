@@ -104,7 +104,7 @@ class Program extends Model
 
     public function list_categories()
     {
-        return $this->belongsToMany(Category::class, 'program_list_categories');
+        return $this->belongsToMany(Category::class, 'program_list_categories')->withPivot('id')->orderByPivot('id');
     }
 
     public function isRoot()
@@ -212,6 +212,16 @@ class Program extends Model
     public function saveRelations($attributes = [])
     {
         $this->categories()->sync(array_get($attributes, 'categories', []));
-        $this->list_categories()->sync(array_get($attributes, 'list_categories', []));
+        $this->list_categories()->detach();
+        $this->list_categories()->sync(
+            $this->makeSyncList(array_get($attributes, 'list_categories', []), ['id' => null])
+        );
+    }
+
+    private function makeSyncList($items, $pivotData)
+    {
+        $pivotData = array_fill(0, count($items), $pivotData);
+
+        return array_combine($items, $pivotData);
     }
 }

@@ -2,6 +2,7 @@ window._ = require('lodash');
 window.Sortable = require('sortablejs');
 window.$ = window.jQuery = require('jquery');
 
+require('jquery-ui/ui/widgets/sortable');
 require('bootstrap');
 require('selectize');
 require('flatpickr');
