@@ -55,7 +55,6 @@ class SuggestionController
         $searchQuery = preg_replace("/[^A-Za-z0-9]+/i", " ", request('query'));
 
         return $model->search($searchQuery)->query()
-            ->orWhere('sku', request('query'))
             ->limit(10)->withName()->withBaseImage()->withPrice()
             ->addSelect([ 'products.id', 'products.slug', 'products.sku', 'products.qty'])
             ->with(['files', 'categories' => function ($query) {

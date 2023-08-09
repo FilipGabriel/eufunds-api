@@ -35,10 +35,6 @@ trait ProductSearch
             $productIds = (clone $query)->select('products.id')->resetOrders()->pluck('id');
         }
 
-        if(request()->filled('query')) {
-            $query = $query->orWhere('sku', request('query'));
-        }
-
         $products = $query->paginate(request('perPage', 30));
 
         event(new ShowingProductList($products));
