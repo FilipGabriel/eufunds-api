@@ -2,6 +2,8 @@
 
 namespace Modules\Support\Search;
 
+use Illuminate\Support\Facades\Schema;
+
 class Builder
 {
     /**
@@ -55,7 +57,15 @@ class Builder
      */
     public function query()
     {
-        $query = $this->model->whereIn($this->model->getQualifiedKeyName(), $this->keys());
+        $query = $this->model->whereIn($this->model->getQualifiedKeyName(), $this->keys())
+            ->orWhereHas('translations', function($query) {
+                $searchQuery = preg_replace("/[^A-Za-z0-9]+/i", " ", request('query'));
+
+                $query->where('name', 'like', "%{$searchQuery}%");
+            })
+            ->when(Schema::hasColumn($this->model->getTable(), 'sku'), function($query) {
+                $query->orWhere('sku', request('query'));
+            });
 
         if ($this->shouldOrderByRelevance()) {
             $this->orderByRelevance($query);
