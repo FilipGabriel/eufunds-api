@@ -20,7 +20,7 @@ return [
         'banner' => 'Banner',
     ],
     'types' => [
-        'budget' => 'Bugetare',
-        'acquisition' => 'Ofertă'
+        'budget' => 'Ofertă',
+        'acquisition' => 'Comandă'
     ]
 ];

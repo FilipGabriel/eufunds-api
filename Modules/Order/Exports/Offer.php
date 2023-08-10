@@ -43,7 +43,8 @@ class Offer
         $table->addCell(4000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Codul produsului', $this->titleStyle, $this->noSpace);
         $table->addCell(8000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Denumirea produsului sau a serviciilor', $this->titleStyle, $this->noSpace);
         $table->addCell(500, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('UM', $this->titleStyle, $this->noSpace);
-        $table->addCell(1000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('DNSH*', $this->titleStyle, $this->noSpace);
+        // $table->addCell(1000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('DNSH*', $this->titleStyle, $this->noSpace);
+        $table->addCell(1000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Stoc', $this->titleStyle, $this->noSpace);
         $table->addCell(1000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Cantitate', $this->titleStyle, $this->noSpace);
         $table->addCell(2000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Preț unitar (Lei) Fără TVA', $this->titleStyle, $this->noSpace);
         $table->addCell(2000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Valoare totală (Lei) Fără TVA', $this->titleStyle, $this->noSpace);
@@ -69,7 +70,8 @@ class Offer
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->sku ?: '-', $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->name, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText('Buc', $this->defaultFont, $this->noSpace);
-            $table->addCell(null, ['valign' => 'center'])->addText($product->hasAnyOption() ? $this->checkbox() : $this->prohibited(), $this->defaultFont, $this->noSpace);
+            // $table->addCell(null, ['valign' => 'center'])->addText($product->hasAnyOption() ? $this->checkbox() : $this->prohibited(), $this->defaultFont, $this->noSpace);
+            $table->addCell(null, ['valign' => 'center'])->addText($product->product->qty, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->qty, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->unit_price->format('RON'), $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->line_total->format('RON'), $this->defaultFont, $this->noSpace);
