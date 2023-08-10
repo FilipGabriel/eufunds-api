@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'subject' => 'Proforma #:id',
-    'invoice' => 'PROFORMA',
+    'subject' => 'Ofertă #:id',
+    'invoice' => 'OFERTA',
     'order_id' => 'Numar',
     'date' => 'Data',
     'order_details' => 'Detalii comanda',
