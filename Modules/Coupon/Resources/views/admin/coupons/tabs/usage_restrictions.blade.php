@@ -20,8 +20,8 @@
                 'multiple' => true
             ])
         }}
-        {{ Form::select('products', trans('coupon::attributes.products'), $errors, $products, $coupon, ['class' => 'selectize prevent-creation', 'data-url' => route('admin.products.index'), 'multiple' => true]) }}
-        {{ Form::select('exclude_products', trans('coupon::attributes.exclude_products'), $errors, $excludeProducts, $coupon, ['class' => 'selectize prevent-creation', 'data-url' => route('admin.products.index'), 'multiple' => true]) }}
+        <!-- {{ Form::select('products', trans('coupon::attributes.products'), $errors, $products, $coupon, ['class' => 'selectize prevent-creation', 'data-url' => route('admin.products.index'), 'multiple' => true]) }}
+        {{ Form::select('exclude_products', trans('coupon::attributes.exclude_products'), $errors, $excludeProducts, $coupon, ['class' => 'selectize prevent-creation', 'data-url' => route('admin.products.index'), 'multiple' => true]) }} -->
         {{ Form::select('categories', trans('coupon::attributes.categories'), $errors, $categories, $coupon, ['class' => 'selectize prevent-creation', 'multiple' => true]) }}
         {{ Form::select('exclude_categories', trans('coupon::attributes.exclude_categories'), $errors, $categories, $coupon, ['class' => 'selectize prevent-creation', 'multiple' => true]) }}
         {{ Form::select('programs', trans('coupon::attributes.programs'), $errors, $programs, $coupon, ['class' => 'selectize prevent-creation', 'multiple' => true]) }}
