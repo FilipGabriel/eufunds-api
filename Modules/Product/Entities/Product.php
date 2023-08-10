@@ -396,7 +396,7 @@ class Product extends Model
             $coupon = Coupon::find($couponId);
 
             if(
-                $coupon && $coupon->valid() && ! $coupon->usageLimitReached() && $couponId == $dnshCoupon->id &&
+                $dnshCoupon && $coupon && $coupon->valid() && ! $coupon->usageLimitReached() && $couponId == $dnshCoupon->id &&
                 ! $coupon->perCustomerUsageLimitReached() && ! $coupon->excludePrograms->contains($program->id)
             ) {
                 $programDnsh = true;
@@ -407,14 +407,14 @@ class Product extends Model
             $coupon = Coupon::find($couponId);
 
             if(
-                $coupon && $coupon->valid() && ! $coupon->usageLimitReached() && ! $coupon->perCustomerUsageLimitReached() &&
+                $dnshCoupon && $coupon && $coupon->valid() && ! $coupon->usageLimitReached() && ! $coupon->perCustomerUsageLimitReached() &&
                 $coupon->excludeCategories->intersect($this->categories)->isEmpty() && $couponId == $dnshCoupon->id
             ) {
                 $categoryDnsh = true;
             }
         }
 
-        return $programDnsh || $categoryDnsh;
+        return $programDnsh || $categoryDnsh || $this->hasAnyOption();
     }
 
     private function applyProgramDiscounts($sellingPrice)
