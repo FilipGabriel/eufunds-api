@@ -17,39 +17,39 @@
 		>
 		<table style="width: 100%; border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0">
 			<tbody>
-				<tr>
+				<!-- <tr>
 					<td colspan="10" style="height: 30pt; border-bottom: solid black 1px; border-top: solid black 1px; border-left: solid black 1px; border-right: solid black 1px;">
                         <p style="text-align: center;">
                             <em><span style="font-size: 20.0pt; color: black;">Factura Proforma</span></em>
                         </p>
                     </td>
-				</tr>
+				</tr> -->
 				<tr style="height: 21.0pt;">
 					<td colspan="3" style="border: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Program</span></strong>
                         </p>
 					</td>
-					<td colspan="3" style="border: 1.0pt solid black;height: 21.0pt;">
+					<td colspan="4" style="border: 1.0pt solid black;height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Beneficiar</span></strong>
                         </p>
 					</td>
 					<td colspan="2" style="border: solid black 1.0pt; border-left: none; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Tip oferta</span></strong>
+                            <strong><span style="color: black;">Tip ofertă</span></strong>
                         </p>
 					</td>
-					<td colspan="1" style="border: solid black 1.0pt; border-left: none; height: 21.0pt;">
+					<td colspan="2" style="border: solid black 1.0pt; border-left: none; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Valabilitate oferta</span></strong>
+                            <strong><span style="color: black;">Valabilitate ofertă</span></strong>
                         </p>
 					</td>
-					<td colspan="1" style="border-top: solid black 1.0pt; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;">
+					<!-- <td colspan="1" style="border-top: solid black 1.0pt; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 21.0pt;">
 						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Termen de livrare</span></strong>
                         </p>
-					</td>
+					</td> -->
 				</tr>
 				<tr>
 					<td colspan="3" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
@@ -57,7 +57,7 @@
                             <span style="color: black;">{{ $order->funding->name }}</span>
                         </p>
 					</td>
-					<td colspan="3" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
+					<td colspan="4" style="padding: 10px; border-top: none; border-left: solid black 1.0pt; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
 							@if($order->business_id)
                             <span style="color: black;">{{ $order->business_id }} - {{ $order->company_name }}</span>
@@ -71,19 +71,20 @@
                             <span style="color: black;">{{ trans("program::programs.types.{$order->type}") }}</span>
 						</p>
 					</td>
-					<td colspan="1" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
+					<td colspan="2" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">30 zile</span>
+                            <span style="color: black;">15 zile</span>
 						</p>
 					</td>
-					<td colspan="1" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
+					<!-- <td colspan="1" style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt;">
 						<p style="text-align: center;" align="center">
                             <span style="color: black;">60-90 zile</span>
                         </p>
-					</td>
+					</td> -->
 				</tr>
 				<tr style="height: 30.0pt;">
 					<td style="height: 15.0pt; border-bottom: solid black 1px; border-left: solid black 1px;"></td>
+					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
 					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
 					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
 					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
@@ -102,12 +103,12 @@
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Cod produs</span></strong>
+                            <strong><span style="color: black;">Codul produsului</span></strong>
 						</p>
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="3">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Denumirea produselor sau a serviciilor</span></strong>
+                            <strong><span style="color: black;">Denumirea produsului sau a serviciilor</span></strong>
 						</p>
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
@@ -117,22 +118,27 @@
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
 						<p style="text-align: center;" align="center">
+                            <strong><span style="color: black;">Stoc</span></strong>
+						</p>
+					</td>
+					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
+						<p style="text-align: center;" align="center">
                             <strong><span style="color: black;">Cantitate</span></strong>
 						</p>
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Pret unitar</span></strong>
+                            <strong><span style="color: black;">Preț unitar (Lei) Fără TVA</span></strong>
 						</p>
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Valoare</span></strong>
+                            <strong><span style="color: black;">Valoare totală (Lei) Fără TVA</span></strong>
 						</p>
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Garantie</span></strong>
+                            <strong><span style="color: black;">Garanție (luni)</span></strong>
 						</p>
 					</td>
 				</tr>
@@ -177,6 +183,12 @@
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
 						colspan="1">
 						<p style="text-align: center;" align="center">
+                            <span style="color: black;">{{ $product->product->qty }}</span>
+						</p>
+					</td>
+					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
+						colspan="1">
+						<p style="text-align: center;" align="center">
                             <span style="color: black;">{{ $product->qty }}</span>
                         </p>
 					</td>
@@ -202,6 +214,7 @@
 				@endforeach
 				<tr style="height: 30.0pt;">
 					<td style="height: 15.0pt; border-bottom: solid black 1px; border-left: solid black 1px;"></td>
+					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
 					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
 					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
 					<td style="height: 15.0pt; border-bottom: solid black 1px;"></td>
