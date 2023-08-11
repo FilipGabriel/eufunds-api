@@ -64,7 +64,10 @@ class ImportProductsCommand extends Command
             'qty' => $product->stock_value,
             'sku' => $product->code,
             'manage_stock' => true,
-            'in_stock' => $product->stock_value > 0
+            'in_stock' => $product->stock_value > 0,
+            'supplier_stock' => $product->supplier_stock_value,
+            'supplier_stock_date' => $product->supplier_stock_delivery_date,
+            'reserved_stock' => $product->reserved_stock_value,
         ]);
 
         $productCategoryId = $product->product_category_id;

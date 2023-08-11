@@ -45,6 +45,9 @@ class ImportProductInfoCommand extends Command
             'qty' => $product->stock_value,
             'in_stock' => $product->stock_value > 0,
             'special_price_valid_to' => $product->special_price_valid_to,
+            'supplier_stock' => $product->supplier_stock_value,
+            'supplier_stock_date' => $product->supplier_stock_delivery_date,
+            'reserved_stock' => $product->reserved_stock_value,
             'documents' => collect($product->documents)->map(function($doc) {
                 return [
                     'name' => $doc->document_name,
