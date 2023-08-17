@@ -57,12 +57,16 @@ class Product extends Model
         'selling_price',
         'manage_stock',
         'qty',
+        'supplier_stock',
+        'supplier_stock_date',
+        'reserved_stock',
         'in_stock',
         'virtual',
         'is_active',
         'new_from',
         'new_to',
         'special_price_valid_to',
+        'is_on_demand_only',
     ];
 
     /**
@@ -75,6 +79,7 @@ class Product extends Model
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
         'is_active' => 'boolean',
+        'is_on_demand_only' => 'boolean',
     ];
 
     /**
@@ -88,6 +93,7 @@ class Product extends Model
         'new_from',
         'new_to',
         'special_price_valid_to',
+        'supplier_stock_date',
         'start_date',
         'end_date',
         'deleted_at',
@@ -173,6 +179,10 @@ class Product extends Model
                 'products.manage_stock',
                 'products.sku',
                 'products.qty',
+                'products.reserved_stock',
+                'products.supplier_stock',
+                'products.supplier_stock_date',
+                'products.is_on_demand_only',
             ]);
     }
 
