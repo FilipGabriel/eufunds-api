@@ -35,7 +35,7 @@ class ImportProductsCommand extends Command
         $products = [];
 
         try {
-            $response = $this->getRequest("/products/full-feed");
+            $response = $this->getRequest("/products/full-feed?show_extended_info=1");
 
             $products = $response->products;
         } catch (Exception $e) {
@@ -68,6 +68,7 @@ class ImportProductsCommand extends Command
             'supplier_stock' => $product->supplier_stock_value,
             'supplier_stock_date' => $product->supplier_stock_delivery_date,
             'reserved_stock' => $product->reserved_stock_value,
+            'is_on_demand_only' => $product->is_on_demand_only,
         ]);
 
         $productCategoryId = $product->product_category_id;

@@ -68,6 +68,7 @@ trait ProductSearch
                     'stock' => $product->qty,
                     'reserved_stock' => $product->reserved_stock,
                     'supplier_stock' => $product->supplier_stock,
+                    'is_on_demand_only' => $product->is_on_demand_only,
                     'supplier_stock_date' => $product->supplier_stock_date ? $product->supplier_stock_date->format('d.m.Y') : null,
                     'has_dnsh' => $product->has_dnsh,
                     'in_stock' => $product->isInStock(),

@@ -30,7 +30,7 @@ class ImportProductInfoCommand extends Command
     {
         Product::whereNotNull('nod_id')->get()->map(function($product) {
             try {
-                $response = $this->getRequest("/products/{$product->nod_id}");
+                $response = $this->getRequest("/products/{$product->nod_id}?show_extended_info=1");
                 $this->updateOrCreateProduct($response->product);
             } catch (Exception $e) {
                 Log::info("Get product info {$product->nod_id}: {$e->getMessage()}");
@@ -48,6 +48,7 @@ class ImportProductInfoCommand extends Command
             'supplier_stock' => $product->supplier_stock_value,
             'supplier_stock_date' => $product->supplier_stock_delivery_date,
             'reserved_stock' => $product->reserved_stock_value,
+            'is_on_demand_only' => $product->is_on_demand_only,
             'documents' => collect($product->documents)->map(function($doc) {
                 return [
                     'name' => $doc->document_name,

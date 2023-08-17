@@ -66,6 +66,7 @@ class Product extends Model
         'new_from',
         'new_to',
         'special_price_valid_to',
+        'is_on_demand_only',
     ];
 
     /**
@@ -78,6 +79,7 @@ class Product extends Model
         'manage_stock' => 'boolean',
         'in_stock' => 'boolean',
         'is_active' => 'boolean',
+        'is_on_demand_only' => 'boolean',
     ];
 
     /**
@@ -180,6 +182,7 @@ class Product extends Model
                 'products.reserved_stock',
                 'products.supplier_stock',
                 'products.supplier_stock_date',
+                'products.is_on_demand_only',
             ]);
     }
 

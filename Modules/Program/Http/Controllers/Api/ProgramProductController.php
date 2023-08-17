@@ -60,6 +60,7 @@ class ProgramProductController extends Controller
         $product->qty = 1;
         $product->reserved_stock = $product->reserved_stock;
         $product->supplier_stock = $product->supplier_stock;
+        $product->is_on_demand_only = $product->is_on_demand_only;
         $product->supplier_stock_date = $product->supplier_stock_date ? $product->supplier_stock_date->format('d.m.Y') : null;
         $product->has_dnsh = $product->has_dnsh;
         $product->brand_name = $product->brand->name;
