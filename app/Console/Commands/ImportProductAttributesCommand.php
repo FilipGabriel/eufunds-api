@@ -45,6 +45,7 @@ class ImportProductAttributesCommand extends Command
         } catch (\Exception $e) {
             Log::info($e->getMessage());
             Log::info("Product Attributes Page {$page}: {$e->getMessage()}");
+            return;
         }
 
         foreach($items as $item) {

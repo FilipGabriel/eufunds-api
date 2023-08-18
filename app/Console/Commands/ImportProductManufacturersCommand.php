@@ -33,6 +33,7 @@ class ImportProductManufacturersCommand extends Command
             $manufacturers = $response->manufacturers;
         } catch (Exception $e) {
             Log::info($e->getMessage());
+            return;
         }
 
         foreach($manufacturers as $manufacturer) {
