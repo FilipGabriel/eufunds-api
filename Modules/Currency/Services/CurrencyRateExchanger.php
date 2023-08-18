@@ -36,7 +36,7 @@ class CurrencyRateExchanger
         try {
             return $this->swap->latest("{$fromCurrency}/{$toCurrency}")->getValue();
         } catch (Exception $e) {
-            return 1;
+            return null;
         }
     }
 }
