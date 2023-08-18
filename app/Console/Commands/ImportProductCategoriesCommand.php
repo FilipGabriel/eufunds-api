@@ -34,6 +34,7 @@ class ImportProductCategoriesCommand extends Command
             $productCategories = $response->product_categories;
         } catch (Exception $e) {
             Log::info($e->getMessage());
+            return;
         }
 
         foreach($productCategories as $category) {

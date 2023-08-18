@@ -36,7 +36,6 @@ class ImportProductsCommand extends Command
 
         try {
             $response = $this->getRequest("/products/full-feed?show_extended_info=1");
-
             $products = $response->products;
         } catch (Exception $e) {
             Log::info("Get products: {$e->getMessage()}");
