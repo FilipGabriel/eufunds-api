@@ -31,7 +31,7 @@ class SettingDatabaseSeeder extends Seeder
             'newsletter_enabled' => false,
             'search_engine' => 'mysql',
             'translatable' => [
-                'app_name' => 'EUProjects',
+                'app_name' => 'EUFunds',
             ],
             'appfront_copyright_text' => 'Copyright © <a href="{{ app_url }}">{{ app_name }}</a> {{ year }}. All rights reserved.',
         ]);
