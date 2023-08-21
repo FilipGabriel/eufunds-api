@@ -9,7 +9,7 @@ return [
     'verify_your_email' => 'Poți confirma adresa de email folosind butonul de mai jos.',
     'received_a_password_reset_request' => 'Primești acest mail, pentru că am primit o cerere de restare a parolei pentru contul tău.',
     'reset_password' => 'Resetare Parola',
-    'thanks' => 'Îți mulțumim pentru folosirea aplicației noastre! <br/><br/> Salutări,<br/> Echipa EUProjects',
+    'thanks' => 'Îți mulțumim pentru folosirea aplicației noastre! <br/><br/> Salutări,<br/> Echipa EUFunds',
     'no_further_action_is_required' => 'Dacă nu ai solicitat o resetare a parolei, te rugăm să ignori acest email.',
     'if_you\’re_having_trouble' => 'Dacă nu poți apăsa butonul ":button_name", copiază URL-ul de mai jos și lipește-l in web browser-ul tău',
 ];
