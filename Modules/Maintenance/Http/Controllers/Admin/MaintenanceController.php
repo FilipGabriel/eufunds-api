@@ -1,7 +1,6 @@
 <?php
 
 namespace Modules\Maintenance\Http\Controllers\Admin;
-use GuzzleHttp\Client;
 
 class MaintenanceController
 {
@@ -20,14 +19,6 @@ class MaintenanceController
 
     public function logs(string $logFile = null)
     {
-        $request = (new Client([
-            'base_uri' => 'https://api.superplatforma.smis.ro',
-        ]))->get('api/v1/smartlabs');
-
-        $response = json_decode($request->getBody()->getContents());
-
-        dd($response, config('services.nod.user'), config('services.nod.key'), config('services.nod.url'));
-
         $logsPath = storage_path('logs');
 
         $logs = glob("{$logsPath}/*.log", GLOB_BRACE);
