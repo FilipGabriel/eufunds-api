@@ -98,6 +98,7 @@ export default class {
         
         $('#id').val(program.id);
         $('#name').val(program.name);
+        $('#title').val(program.title);
         this.addProgramTypes(program.types);
         this.addProgramCategories(program.categories);
         this.addProgramListCategories(program.list_categories);
@@ -110,6 +111,7 @@ export default class {
         $('#is_active').prop('checked', program.is_active);
 
         $('.banner .image-holder-wrapper').html(this.programImage('banner', program.banner));
+        $('.small-banner .image-holder-wrapper').html(this.programImage('small_banner', program.small_banner));
 
         $('#program-form input[name="parent_id"]').remove();
     }
@@ -160,6 +162,7 @@ export default class {
 
         $('#id').val('');
         $('#name').val('');
+        $('#title').val('');
         let categoryValues = $('#categories\\[\\]')[0].selectize;
         categoryValues.clear();
         let listCategoryValues = $('#list_categories\\[\\]')[0].selectize;
@@ -173,6 +176,7 @@ export default class {
         $('#is_active').prop('checked', false);
 
         $('.banner .image-holder-wrapper').html(this.imagePlaceholder());
+        $('.small-banner .image-holder-wrapper').html(this.imagePlaceholder());
 
         $('.btn-delete').addClass('hide');
         $('.form-group .help-block').remove();

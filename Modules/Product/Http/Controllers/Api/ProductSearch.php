@@ -122,7 +122,7 @@ trait ProductSearch
                 'slug' => $product->brand->slug,
                 'name' => $product->brand->name
             ];
-        })->unique()->toArray();
+        })->unique()->values()->toArray();
     }
 
     private function getProductsCategoryIds($productIds)

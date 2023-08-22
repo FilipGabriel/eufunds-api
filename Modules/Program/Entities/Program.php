@@ -61,7 +61,7 @@ class Program extends Model
      *
      * @var array
      */
-    protected $translatedAttributes = ['name'];
+    protected $translatedAttributes = ['name', 'title'];
 
     /**
      * The attribute that will be slugged.
@@ -161,6 +161,8 @@ class Program extends Model
                         return [
                             'slug' => $program->slug,
                             'name' => $program->name,
+                            'title' => $program->title,
+                            'small_banner' => $program->small_banner->path ?? null,
                             'banner' => $program->banner->path ?? null,
                             'has_list_categories' => $program->has_list_categories
                         ];
@@ -176,6 +178,11 @@ class Program extends Model
     public function getBannerAttribute()
     {
         return $this->files->where('pivot.zone', 'banner')->first() ?: new File;
+    }
+
+    public function getSmallBannerAttribute()
+    {
+        return $this->files->where('pivot.zone', 'small_banner')->first() ?: new File;
     }
 
     public function forCard()
@@ -196,6 +203,11 @@ class Program extends Model
                     'id' => $this->banner->id,
                     'path' => $this->banner->path,
                     'exists' => $this->banner->exists,
+                ],
+                'small_banner' => [
+                    'id' => $this->small_banner->id,
+                    'path' => $this->small_banner->path,
+                    'exists' => $this->small_banner->exists,
                 ],
             ];
         }
