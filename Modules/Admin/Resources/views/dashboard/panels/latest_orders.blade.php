@@ -10,7 +10,7 @@
             <thead>
                 <tr>
                     <th>{{ trans('admin::dashboard.table.latest_orders.order_id') }}</th>
-                    <th>{{ trans('admin::dashboard.table.latest_orders.business_id') }}</th>
+                    <th></th>
                     <th>{{ trans('admin::dashboard.table.latest_orders.company_name') }}</th>
                     <th>{{ trans('admin::dashboard.table.customer') }}</th>
                     <th>{{ trans('admin::dashboard.table.latest_orders.total') }}</th>
@@ -24,11 +24,7 @@
                                 {{ $latestOrder->id }}
                             </a>
                         </td>
-                        <td>
-                            <a href="{{ route('admin.orders.show', $latestOrder) }}">
-                                {{ $latestOrder->business_id }}
-                            </a>
-                        </td>
+                        <td></td>
                         <td>
                             <a href="{{ route('admin.orders.show', $latestOrder) }}">
                                 {{ $latestOrder->company_name }}
