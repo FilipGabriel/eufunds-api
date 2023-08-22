@@ -47,6 +47,7 @@
                                         </div>
 
                                         {{ Form::text('name', trans('program::attributes.name'), $errors, null, ['required' => true, 'labelCol' => 2]) }}
+                                        {{ Form::text('title', trans('program::attributes.title'), $errors, null, ['required' => true, 'labelCol' => 2]) }}
                                         {{ Form::select('types', trans('program::attributes.types'), $errors, trans('program::programs.types'), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
                                         {{ Form::select('categories', trans('product::attributes.categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
                                         {{ Form::select('list_categories', trans('product::attributes.list_categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation draggable', 'multiple' => true, 'labelCol' => 2]) }}
@@ -58,13 +59,28 @@
 
                             @if (auth()->user()->hasAccess('admin.media.index'))
                                 <div id="image" class="tab-pane fade">
-                                    <div class="banner">
-                                        @include('media::admin.image_picker.single', [
-                                            'title' => trans('program::programs.form.banner'),
-                                            'inputName' => 'files[banner]',
-                                            'file' => (object) ['exists' => false],
-                                            'location' => "programs",
-                                        ])
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="banner">
+                                                @include('media::admin.image_picker.single', [
+                                                    'title' => trans('program::programs.form.banner'),
+                                                    'inputName' => 'files[banner]',
+                                                    'file' => (object) ['exists' => false],
+                                                    'location' => "programs",
+                                                ])
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="small-banner">
+                                                @include('media::admin.image_picker.single', [
+                                                    'title' => trans('program::programs.form.small_banner'),
+                                                    'inputName' => 'files[small_banner]',
+                                                    'file' => (object) ['exists' => false],
+                                                    'location' => "programs",
+                                                ])
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endif

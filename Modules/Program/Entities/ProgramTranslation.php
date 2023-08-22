@@ -11,5 +11,5 @@ class ProgramTranslation extends TranslationModel
      *
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'title'];
 }

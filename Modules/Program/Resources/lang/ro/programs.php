@@ -18,6 +18,7 @@ return [
         'show_this_program_in_search_box' => 'Afiseaza in lista finantarilor active',
         'enable_the_program' => 'Enable the program',
         'banner' => 'Banner',
+        'small_banner' => 'Banner landing page',
     ],
     'types' => [
         'budget' => 'Ofertă',

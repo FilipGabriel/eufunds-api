@@ -32,11 +32,11 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('01:00')
             ->then(function() use ($schedule) {
-                $schedule->command("nod:import-manufacturers")
+                $schedule->call("nod:import-manufacturers")
                     ->then(function() use ($schedule) {
-                        $schedule->command("nod:import-products")
+                        $schedule->call("nod:import-products")
                             ->then(function() use ($schedule) {
-                                $schedule->command("nod:import-product-attributes");
+                                $schedule->call("nod:import-product-attributes");
                             });
                     });
             });
