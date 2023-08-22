@@ -42,13 +42,13 @@
                                     </td>
 
                                     <td>
-                                        {{ $product->unit_price->format() }}
+                                        {{ $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                     </td>
 
                                     <td class="text-center">{{ $product->qty }}</td>
 
                                     <td>
-                                        {{ $product->line_total->format() }}
+                                        {{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}
                                     </td>
                                 </tr>
                             @endforeach

@@ -44,6 +44,8 @@ class DashboardController
             'company_name',
             'customer_first_name',
             'total',
+            'currency',
+            'currency_rate',
             'created_at',
         ])->latest()->take(5)->get();
     }

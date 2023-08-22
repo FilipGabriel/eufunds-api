@@ -6,7 +6,7 @@
                     <tbody>
                         <tr>
                             <td>{{ trans('order::orders.total') }}</td>
-                            <td class="text-right">{{ $order->total->format() }}</td>
+                            <td class="text-right">{{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</td>
                         </tr>
                     </tbody>
                 </table>

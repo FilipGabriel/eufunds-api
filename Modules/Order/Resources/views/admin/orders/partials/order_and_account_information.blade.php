@@ -27,30 +27,13 @@
                                 <td>{{ trans('order::orders.order_date') }}</td>
                                 <td>{{ $order->created_at->format('d M Y') }}</td>
                             </tr>
-
-                            <tr>
-                                <td>{{ trans('order::orders.order_status') }}</td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-sm-12">
-                                            <select id="order-status" class="form-control custom-select-black" data-id="{{ $order->id }}">
-                                                @foreach (trans('order::statuses') as $name => $label)
-                                                    <option value="{{ $name }}" {{ $order->status === $name ? 'selected' : '' }}>
-                                                        {{ $label }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
                             
                             <tr>
                                 <td>{{ trans('order::orders.table.funding') }}</td>
                                 <td>{{ $order->funding->name }}</td>
                             </tr>
 
-                            @if (is_multilingual())
+                            @if (currency() != $order->currency)
                                 <tr>
                                     <td>{{ trans('order::orders.currency') }}</td>
                                     <td>{{ $order->currency }}</td>
@@ -97,11 +80,6 @@
                             <tr>
                                 <td>{{ trans('order::orders.customer_email') }}</td>
                                 <td>{{ $order->customer_email }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>{{ trans('order::orders.customer_phone') }}</td>
-                                <td>{{ $order->customer_phone }}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -84,11 +84,6 @@
                                                     <td>{{ trans('order::print.email') }}:</td>
                                                     <td>{{ $order->customer_email }}</td>
                                                 </tr>
-
-                                                <tr>
-                                                    <td>{{ trans('order::print.phone') }}:</td>
-                                                    <td>{{ $order->customer_phone }}</td>
-                                                </tr>
                                                 @endif
                                             </tbody>
                                         </table>
@@ -126,7 +121,7 @@
 
                                                 <td>
                                                     <label class="visible-xs">{{ trans('order::print.unit_price') }}:</label>
-                                                    <span>{{ $product->unit_price->convert($order->currency, $order->currency_rate)->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
+                                                    <span>{{ $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
                                                 </td>
 
                                                 <td>

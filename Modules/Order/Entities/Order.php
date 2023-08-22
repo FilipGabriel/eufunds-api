@@ -238,6 +238,7 @@ class Order extends Model
                 'customer_last_name',
                 'customer_email',
                 'currency',
+                'currency_rate',
                 'total',
                 'status',
                 'created_at',

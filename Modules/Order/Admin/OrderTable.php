@@ -21,7 +21,7 @@ class OrderTable extends AdminTable
                 return $order->customer_full_name;
             })
             ->editColumn('total', function ($order) {
-                return $order->total->format();
+                return $order->total->convert($order->currency, $order->currency_rate)->format($order->currency);
             })
             ->editColumn('type', function ($order) {
                 return $order->type ? trans("program::programs.types.{$order->type}") : '';

@@ -37,7 +37,7 @@
                         </td>
                         <td>
                             <a href="{{ route('admin.orders.show', $latestOrder) }}">
-                                {{ $latestOrder->total->format() }}
+                                {{ $latestOrder->total->convert($latestOrder->currency, $latestOrder->currency_rate)->format($latestOrder->currency) }}
                             </a>
                         </td>
                     </tr>

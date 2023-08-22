@@ -46,8 +46,8 @@ class Offer
         // $table->addCell(1000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('DNSH*', $this->titleStyle, $this->noSpace);
         $table->addCell(1000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Stoc', $this->titleStyle, $this->noSpace);
         $table->addCell(1000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Cantitate', $this->titleStyle, $this->noSpace);
-        $table->addCell(2000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Preț unitar (Lei) Fără TVA', $this->titleStyle, $this->noSpace);
-        $table->addCell(2000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Valoare totală (Lei) Fără TVA', $this->titleStyle, $this->noSpace);
+        $table->addCell(2000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText("Preț unitar ({$order->currency}) Fără TVA", $this->titleStyle, $this->noSpace);
+        $table->addCell(2000, array_merge(['valign' => 'center'], $this->cellBgColor))->addText("Valoare totală ({$order->currency}) Fără TVA", $this->titleStyle, $this->noSpace);
         $table->addCell(500, array_merge(['valign' => 'center'], $this->cellBgColor))->addText('Garanție (luni)', $this->titleStyle, $this->noSpace);
 
         if($order->products->isEmpty()) {
@@ -73,8 +73,8 @@ class Offer
             // $table->addCell(null, ['valign' => 'center'])->addText($product->hasAnyOption() ? $this->checkbox() : $this->prohibited(), $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->qty, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->qty, $this->defaultFont, $this->noSpace);
-            $table->addCell(null, ['valign' => 'center'])->addText($product->unit_price->format('RON'), $this->defaultFont, $this->noSpace);
-            $table->addCell(null, ['valign' => 'center'])->addText($product->line_total->format('RON'), $this->defaultFont, $this->noSpace);
+            $table->addCell(null, ['valign' => 'center'])->addText($product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency), $this->defaultFont, $this->noSpace);
+            $table->addCell(null, ['valign' => 'center'])->addText($product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency), $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->warranty ?: '-', $this->defaultFont, $this->noSpace);
         }
 
@@ -86,7 +86,7 @@ class Offer
 
             $cell = $table->addCell(null, ['valign' => 'center']);
             $cell->getStyle()->setGridSpan(2);
-            $cell->addText($order->total->format('RON'), ['name' => 'Roboto Condensed', 'size' => 16, 'color' => '323E4F', 'bold' => true], $this->noSpace);
+            $cell->addText($order->total->convert($order->currency, $order->currency_rate)->format($order->currency), ['name' => 'Roboto Condensed', 'size' => 16, 'color' => '323E4F', 'bold' => true], $this->noSpace);
         }
 
         return $table;
