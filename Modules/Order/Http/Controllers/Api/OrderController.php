@@ -163,11 +163,11 @@ class OrderController
      */
     private function saveFile(string $fileName, TemplateProcessor $template): string
     {
-        if (! is_dir(storage_path('app/offers'))) {
-            mkdir(storage_path("app/offers"));
+        if (! is_dir(storage_path('app/public/offers'))) {
+            mkdir(storage_path("app/public/offers"));
         }
 
-        $path = storage_path("app/offers");
+        $path = storage_path("app/public/offers");
         $file = "{$path}/{$fileName}.doc";
         $template->saveAs($file);
 
