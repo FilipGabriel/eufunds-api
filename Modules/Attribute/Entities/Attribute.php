@@ -58,7 +58,7 @@ class Attribute extends Model
 
     public function values()
     {
-        return $this->hasMany(AttributeValue::class)->orderBy('position');
+        return $this->hasMany(AttributeValue::class)->orderBy('value');
     }
 
     public function table()

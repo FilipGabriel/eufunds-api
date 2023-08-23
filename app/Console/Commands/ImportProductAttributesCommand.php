@@ -4,7 +4,6 @@ namespace Smis\Console\Commands;
 
 use Illuminate\Console\Command;
 use Modules\Support\Traits\NodApi;
-use Illuminate\Support\Facades\Log;
 use Modules\Product\Entities\Product;
 use Modules\Attribute\Entities\Attribute;
 use Modules\Attribute\Entities\ProductAttributeValue;
@@ -29,90 +28,87 @@ class ImportProductAttributesCommand extends Command
     
     public function handle()
     {
-        $this->getProducts();
-    }
+        $currentPage = 1;
+        $batchSize = 1000;
 
-    private function getProducts($page = 1)
-    {
-        $items = [];
-        $products = [];
-        $attributes = [];
-        $attributeValues = [];
-
-        try {
-            $response = $this->getRequest("/products/attributes?count=1000&page={$page}");
+        $response = $this->getRequest("/products/attributes?count={$batchSize}&page={$currentPage}");
+        
+        while ($currentPage <= $response->total_pages) {
             $items = $response->items;
-        } catch (\Exception $e) {
-            Log::info($e->getMessage());
-            Log::info("Product Attributes Page {$page}: {$e->getMessage()}");
-            return;
-        }
+            $products = [];
+            $attributes = [];
+            $attributeValues = [];
 
-        foreach($items as $item) {
-            foreach($item->properties as $property) {
-                $productId = $item->product_id;
-                $nameId = $property->name_id;
-                $valueId = $property->value_id ?? null;
-                $propertyName = $property->name;
-                $propertyValue = $property->value;
-
-                $products[$productId][$nameId][] = $property;
-                $attributes[$nameId] = [
-                    'id' => $nameId,
-                    'name' => $propertyName,
-                    'slug' => $this->generateSlug($nameId, $propertyName)
-                ];
-                
-                $attributeValues[$nameId][] = [
-                    'id' => $valueId ?? null,
-                    'value' => $propertyValue,
-                ];
-            }
-        }
-
-        Attribute::upsert( array_values($attributes), ['id', 'slug'], ['name'] );
-
-        foreach($attributeValues as $attributeId => $values) {
-            $attribute = Attribute::find($attributeId);
-
-            if($attribute) {
-                $attribute->saveValues(array_merge($values, $attribute->load('values')->values->toArray()));
-            }
-        }
-
-        foreach($products as $nodId => $productAttributes) {
-            $product = Product::findByNodId($nodId);
-
-            if(! $product) { continue; }
-
-            $productAttributeValues = [];
-
-            foreach($productAttributes as $attributeId => $values) {
-                if(! Attribute::whereId($attributeId)->exists()) { continue; }
-
-                $productAttribute = $product->attributes()->whereAttributeId($attributeId)->firstOrCreate([
-                    'attribute_id' => $attributeId
-                ]);
-
-                foreach ($values as $value) {
-                    if(! isset($value->value_id)) {
-                        $newValue = $productAttribute->attribute->values()->create(['value' => $value->value]);
-                    }
-
-                    $productAttributeValues[] = [
-                        'product_attribute_id' => $productAttribute->id,
-                        'attribute_value_id' => $value->value_id ?? $newValue->id,
+            foreach($items as $item) {
+                foreach($item->properties as $property) {
+                    $productId = $item->product_id;
+                    $nameId = $property->name_id;
+                    $valueId = $property->value_id ?? null;
+                    $propertyName = $property->name;
+                    $propertyValue = $property->value;
+    
+                    $products[$productId][$nameId][] = $property;
+                    $attributes[$nameId] = [
+                        'id' => $nameId,
+                        'name' => $propertyName,
+                        'slug' => $this->generateSlug($nameId, $propertyName)
                     ];
+                    
+                    if($valueId) {
+                        $attributeValues[$nameId][] = [
+                            'id' => $valueId,
+                            'value' => $propertyValue,
+                        ];
+                    }
                 }
-
-                $productAttribute->attribute->categories()->syncWithoutDetaching($product->categories->pluck('id')->toArray());
+            }
+    
+            Attribute::upsert( array_values($attributes), ['id', 'slug'], ['name'] );
+    
+            foreach($attributeValues as $attributeId => $values) {
+                $attribute = Attribute::find($attributeId);
+    
+                if($attribute) {
+                    $attribute->saveValues(array_merge($values, $attribute->load('values')->values->toArray()));
+                }
+            }
+    
+            foreach($products as $nodId => $productAttributes) {
+                $product = Product::findByNodId($nodId);
+    
+                if(! $product) { continue; }
+    
+                $productAttributeValues = [];
+    
+                foreach($productAttributes as $attributeId => $values) {
+                    if(! Attribute::whereId($attributeId)->exists()) { continue; }
+    
+                    $productAttribute = $product->attributes()->whereAttributeId($attributeId)->firstOrCreate([
+                        'attribute_id' => $attributeId
+                    ]);
+    
+                    foreach ($values as $value) {
+                        if(! isset($value->value_id)) {
+                            $newValue = $productAttribute->attribute->values()->firstOrCreate(['value' => $value->value]);
+                        }
+    
+                        $productAttributeValues[] = [
+                            'product_attribute_id' => $productAttribute->id,
+                            'attribute_value_id' => $value->value_id ?? $newValue->id,
+                        ];
+                    }
+    
+                    $productAttribute->attribute->categories()->syncWithoutDetaching($product->categories->pluck('id')->toArray());
+                }
+    
+                ProductAttributeValue::insertOrIgnore($productAttributeValues);
             }
 
-            ProductAttributeValue::insertOrIgnore($productAttributeValues);
-        }
-
-        if($page <= $response->total_pages) {
-            self::getProducts($page+1);
+            // Increment current page
+            $currentPage++;
+            
+            // Fetch the next batch of data
+            $response = $this->getRequest("/products/attributes?count={$batchSize}&page={$currentPage}");
         }
     }
 

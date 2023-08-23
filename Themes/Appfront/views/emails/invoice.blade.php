@@ -128,12 +128,12 @@
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Preț unitar (Lei) Fără TVA</span></strong>
+                            <strong><span style="color: black;">Preț unitar ({{ $order->currency }}) Fără TVA</span></strong>
 						</p>
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
 						<p style="text-align: center;" align="center">
-                            <strong><span style="color: black;">Valoare totală (Lei) Fără TVA</span></strong>
+                            <strong><span style="color: black;">Valoare totală ({{ $order->currency }}) Fără TVA</span></strong>
 						</p>
 					</td>
 					<td style="padding: 10px; border: solid black 1.0pt; border-left: none; height: 15.0pt;" colspan="1">
@@ -195,13 +195,13 @@
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
 						colspan="1">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">{{ $product->unit_price->format('RON') }}</span>
+                            <span style="color: black;">{{ $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
 						</p>
 					</td>
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
 						colspan="1">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">{{ $product->line_total->format('RON') }}</span>
+                            <span style="color: black;">{{ $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</span>
 						</p>
 					</td>
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
@@ -225,7 +225,7 @@
 					<td style="height: 15.0pt; border-bottom: solid black 1px; border-right: solid black 1px; padding-right: 10px;"
 						colspan="2">
 						<p style="text-align: right; color: black">Total:
-							<strong>{{ $order->total->format('RON') }}</strong>
+							<strong>{{ $order->total->convert($order->currency, $order->currency_rate)->format($order->currency) }}</strong>
 						</p>
 					</td>
 				</tr>

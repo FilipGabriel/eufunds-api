@@ -23,7 +23,7 @@ class OrderController
                     'type' => $order->type,
                     'business_id' => $order->business_id,
                     'company_name' => $order->company_name,
-                    'total' => $order->total->format('RON'),
+                    'total' => $order->total->convert($order->currency, $order->currency_rate)->format($order->currency),
                     'program' => $order->funding->name,
                     'created' => $order->created_at->format('d M Y'),
                     'offer' => route('account.orders.download', $order->id),
@@ -49,20 +49,20 @@ class OrderController
             'type' => $order->type,
             'business_id' => $order->business_id,
             'company_name' => $order->company_name,
-            'total' => $order->total->format(),
+            'total' => $order->total->convert($order->currency, $order->currency_rate)->format($order->currency),
             'program' => [
                 'slug' => $order->program,
                 'name' => $order->funding->name
             ],
-            'products' => $order->products->map(function($product) {
+            'products' => $order->products->map(function($product) use ($order) {
                 return [
                     'id' => $product->id,
                     'slug' => $product->slug,
                     'name' => $product->name,
                     'base_image' => $product->product->base_image->path ?? null,
                     'qty' => $product->qty,
-                    'unit_price' => $product->unit_price->format(),
-                    'total' => $product->line_total->format(),
+                    'unit_price' => $product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency),
+                    'total' => $product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency),
                     'variants' => $product->options->map(function($option) {
                         return $option->values->implode('label', ', ');
                     })
