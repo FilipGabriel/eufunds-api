@@ -153,7 +153,7 @@ class OrderController
         $fileName = "Oferta - {$name}";
         $file = $this->saveFile($fileName, $template);
 
-        return response()->download($file, "{$fileName}.doc", ['Content-Type' => 'application/msword']);
+        return response()->download($file, "{$fileName}.doc");
     }
 
     /**
