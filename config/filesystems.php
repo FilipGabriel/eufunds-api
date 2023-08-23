@@ -63,6 +63,7 @@ return [
         'offers' => [
             'driver' => 'local',
             'root' => storage_path('offers'),
+            'visibility' => 'public',
         ],
 
         's3' => [
