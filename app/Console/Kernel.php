@@ -30,21 +30,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('11:10')
-        //     ->then(function() use ($schedule) {
-        //         $schedule->call("nod:import-manufacturers")
-        //             ->then(function() use ($schedule) {
-        //                 $schedule->call("nod:import-products")
-        //                     ->then(function() use ($schedule) {
-        //                         $schedule->call("nod:import-product-attributes");
-        //                     });
-        //             });
-        //     });
-
-        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('11:25');
-        $schedule->command("nod:import-manufacturers")->daily()->timezone('Europe/Bucharest')->at('11:30');
-        $schedule->command("nod:import-products")->daily()->timezone('Europe/Bucharest')->at('11:35');
-        $schedule->command("nod:import-product-attributes")->daily()->timezone('Europe/Bucharest')->at('12:00');
-        // $schedule->command("nod:import-product-info")->hourly()->timezone('Europe/Bucharest')->between('08:00', '00:00');
+        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('01:00');
+        $schedule->command("nod:import-manufacturers")->daily()->timezone('Europe/Bucharest')->at('01:05');
+        $schedule->command("nod:import-products")->daily()->timezone('Europe/Bucharest')->at('01:10');
+        $schedule->command("nod:import-product-attributes")->daily()->timezone('Europe/Bucharest')->at('03:10');
+        $schedule->command("nod:import-product-info")->hourly()->timezone('Europe/Bucharest')->between('08:00', '00:00');
     }
 }
