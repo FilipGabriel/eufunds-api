@@ -22,16 +22,16 @@ class Offer
             // 'funding_name' => $order->funding->name ?? $this->getMissingTag('Program de finanțare'),
             // 'account_manager' => $order->customer->manager_name,
             // 'account_manager_email' => $order->customer->manager_email,
-            // 'created' => $order->created_at->format('d M Y')
+            'created' => $order->created_at->format('d M Y')
         ];
     }
 
-    // public function getExtraRules(Order $order, TemplateProcessor $template)
-    // {
-    //     $template->setComplexBlock('products_table', $this->getProductsTable($order));
+    public function getExtraRules(Order $order, TemplateProcessor $template)
+    {
+        $template->setComplexBlock('products_table', $this->getProductsTable($order));
 
-    //     return $template;
-    // }
+        return $template;
+    }
 
     private function getProductsTable(Order $order)
     {
