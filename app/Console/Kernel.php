@@ -41,7 +41,6 @@ class Kernel extends ConsoleKernel
                     });
             });
 
-        $schedule->command("nod:import-product-info")->everyTenMinutes()->timezone('Europe/Bucharest');
-        // $schedule->command("nod:import-product-info")->hourly()->timezone('Europe/Bucharest')->between('08:00', '00:00');
+        $schedule->command("nod:import-product-info")->hourly()->timezone('Europe/Bucharest')->between('08:00', '00:00');
     }
 }
