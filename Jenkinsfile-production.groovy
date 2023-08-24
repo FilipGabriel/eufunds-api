@@ -4,7 +4,7 @@ pipeline {
     environment {
         SRC_PATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/archive"
         ZIP_FILE = "release.zip"
-        DEST_HOST = "staging.smis.ro"
+        DEST_HOST = "euprojects.ro"
         DEST_IP = "128.199.45.244"
         DEST_HOST_USER = "jenkins"
         DEST_PATH = "/home/jenkins/api.euprojects.ro/releases"

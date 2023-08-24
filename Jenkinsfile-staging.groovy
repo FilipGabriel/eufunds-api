@@ -4,18 +4,18 @@ pipeline {
     environment {
         SRC_PATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_NUMBER}/archive"
         ZIP_FILE = "release.zip"
-        DEST_HOST = "staging.smis.ro"
+        DEST_HOST = "staging.euprojects.ro"
         DEST_HOST_USER = "jenkins"
-        DEST_PATH = "/home/jenkins/staging.api.smis.ro/releases"
+        DEST_PATH = "/home/jenkins/staging.api.euprojects.ro/releases"
         RELEASE_FOLDER = "${BUILD_NUMBER}"
-        SHARED_FOLDER = '/home/jenkins/staging.api.smis.ro/shared'
+        SHARED_FOLDER = '/home/jenkins/staging.api.euprojects.ro/shared'
         ENV_SYM_SRC = '.env'
         STORAGE_SYM_SRC = 'storage'
         PUBLIC_STORAGE_SYM_SRC = 'storage/app/storage'
         ENV_SYM = '.env'
         STORAGE_SYM = 'storage'
         PUBLIC_STORAGE_SYM = 'public/storage'
-        RELEASE_SYMLINK = '/var/www/staging.api.smis.ro/html'
+        RELEASE_SYMLINK = '/var/www/staging.api.euprojects.ro/html'
     }
     stages {
         stage('Build') {
