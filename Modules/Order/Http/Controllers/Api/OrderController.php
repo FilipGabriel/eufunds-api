@@ -4,7 +4,7 @@ namespace Modules\Order\Http\Controllers\Api;
 
 use Exception;
 use Modules\Program\Entities\Program;
-use Modules\Support\TemplateProcessor;
+use PhpOffice\PhpWord\TemplateProcessor;
 use Modules\Checkout\Events\OrderPlaced;
 
 class OrderController
