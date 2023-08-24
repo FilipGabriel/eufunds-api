@@ -94,7 +94,7 @@ trait ProductSearch
             ->where('is_filterable', true)
             ->whereHas('categories', function ($query) use ($productIds) {
                 $query->whereIn('id', $this->getProductsCategoryIds($productIds));
-            })->orderBy('name')->distinct('name')->get()->unique('name')->flatten();
+            })->orderBy('name')->get()->flatten();
     }
 
     private function getProgramCategories()
