@@ -3,6 +3,7 @@
 namespace Modules\Order\Http\Controllers\Api;
 
 use Exception;
+use PhpOffice\PhpWord\Settings;
 use Modules\Program\Entities\Program;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Modules\Checkout\Events\OrderPlaced;
@@ -141,7 +142,7 @@ class OrderController
         
         $params = $document->getData($order);
         $path = public_path("templates/order.docx");
-        // Settings::setOutputEscapingEnabled(true);
+        Settings::setOutputEscapingEnabled(true);
         $template = new TemplateProcessor($path);
         $template->setValues($params);
 

@@ -18,10 +18,10 @@ class Offer
     {
         return [
             'company_name' => $order->company_name ?? $this->getMissingTag('Beneficiar'),
-            // 'offer_type' => trans("program::programs.types.{$order->type}"),
-            // 'funding_name' => $order->funding->name ?? $this->getMissingTag('Program de finanțare'),
-            // 'account_manager' => $order->customer->manager_name,
-            // 'account_manager_email' => $order->customer->manager_email,
+            'offer_type' => trans("program::programs.types.{$order->type}"),
+            'funding_name' => $order->funding->name ?? $this->getMissingTag('Program de finanțare'),
+            'account_manager' => $order->customer->manager_name,
+            'account_manager_email' => $order->customer->manager_email,
             'created' => $order->created_at->format('d M Y')
         ];
     }
