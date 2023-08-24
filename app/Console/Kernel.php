@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('11:00')
+        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('11:10')
             ->then(function() use ($schedule) {
                 $schedule->call("nod:import-manufacturers")
                     ->then(function() use ($schedule) {
