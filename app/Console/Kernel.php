@@ -30,7 +30,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('01:00')
+        $schedule->command("nod:import-categories")->daily()->timezone('Europe/Bucharest')->at('11:00')
             ->then(function() use ($schedule) {
                 $schedule->call("nod:import-manufacturers")
                     ->then(function() use ($schedule) {
@@ -41,6 +41,6 @@ class Kernel extends ConsoleKernel
                     });
             });
 
-        $schedule->command("nod:import-product-info")->hourly()->timezone('Europe/Bucharest')->between('08:00', '00:00');
+        // $schedule->command("nod:import-product-info")->hourly()->timezone('Europe/Bucharest')->between('08:00', '00:00');
     }
 }
