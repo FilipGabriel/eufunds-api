@@ -17,14 +17,8 @@ class SendNewOrderEmails
      */
     public function handle(OrderPlaced $event)
     {
-        $mailTo = [$event->order->customer_email];
-
-        if($event->type == 'acquisition') {
-            array_push($mailTo, $event->order->customer->manager_email);
-        }
-
         try {
-            Mail::to($mailTo)
+            Mail::to([$event->order->customer_email, $event->order->customer->manager_email])
                 ->send(new Invoice($event->order));
         } catch (Swift_TransportException $e) {
             //

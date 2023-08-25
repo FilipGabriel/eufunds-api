@@ -71,7 +71,7 @@ class Offer
             $table->addCell(null, ['valign' => 'center'])->addText($product->product->name, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText('Buc', $this->defaultFont, $this->noSpace);
             // $table->addCell(null, ['valign' => 'center'])->addText($product->hasAnyOption() ? $this->checkbox() : $this->prohibited(), $this->defaultFont, $this->noSpace);
-            $table->addCell(null, ['valign' => 'center'])->addText($product->product->qty, $this->defaultFont, $this->noSpace);
+            $table->addCell(null, ['valign' => 'center'])->addText($product->product->getRealStock(), $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->qty, $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->unit_price->convert($order->currency, $order->currency_rate)->format($order->currency), $this->defaultFont, $this->noSpace);
             $table->addCell(null, ['valign' => 'center'])->addText($product->line_total->convert($order->currency, $order->currency_rate)->format($order->currency), $this->defaultFont, $this->noSpace);

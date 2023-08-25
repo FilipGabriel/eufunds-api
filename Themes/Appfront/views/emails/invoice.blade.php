@@ -183,7 +183,7 @@
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"
 						colspan="1">
 						<p style="text-align: center;" align="center">
-                            <span style="color: black;">{{ $product->product->qty }}</span>
+                            <span style="color: black;">{{ $product->product->getRealStock() }}</span>
 						</p>
 					</td>
 					<td style="padding: 10px; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; height: 30.0pt;"

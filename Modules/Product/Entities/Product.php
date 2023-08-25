@@ -535,6 +535,33 @@ class Product extends Model
         }
     }
 
+    public function getRealStock()
+    {
+        if ($this->isInStock()) {
+            $stock = "Stoc: {$this->qty}";
+
+            if($this->reserved_stock) {
+                $stock .= "\n Stoc rezervat: {$this->reserved_stock}";
+            }
+
+            return $stock;
+        }
+        
+        if ($this->reserved_stock) {
+            return "Stoc rezervat: {$this->reserved_stock}";
+        } 
+        
+        $stock = "\n Stoc: indisponibil";
+
+        if($this->supplier_stock) {
+            $stock .= "\n {$this->supplier_stock} bucati disponibile de la {$this->supplier_stock_date->format('d.m.Y')}";
+        } else if ($this->is_on_demand_only) {
+            $stock .= " (Disponibil doar la cerere)";
+        }
+
+        return $stock;
+    }
+
     public function hasSpecialPrice()
     {
         if (is_null($this->special_price)) {
