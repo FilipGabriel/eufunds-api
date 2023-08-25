@@ -11,7 +11,7 @@ return [
     | any other location as required by the application or its packages.
     */
     'name' => 'EUFunds',
-    'frontend_domain' => env('FRONTEND_DOMAIN', 'eufunds.nod.ro'),
+    'frontend_domain' => env('FRONTEND_DOMAIN', 'euprojects.ro'),
 
     'installed' => env('APP_INSTALLED', false),
 
