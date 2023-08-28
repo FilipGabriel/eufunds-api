@@ -40,7 +40,7 @@ class ImportProductInfoCommand extends Command
 
     private function updateOrCreateProduct($product)
     {
-        Product::withoutGlobalScope('active')->makeHidden(['options'])->updateOrCreate(['nod_id' => $product->id], [
+        Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
             'price' => $product->ron_promo_price,
             'qty' => $product->stock_value,
             'in_stock' => $product->stock_value > 0,
