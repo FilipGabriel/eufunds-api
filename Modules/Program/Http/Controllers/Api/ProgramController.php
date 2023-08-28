@@ -2,6 +2,7 @@
 
 namespace Modules\Program\Http\Controllers\Api;
 
+use Modules\Media\Entities\File;
 use Modules\Program\Entities\Program;
 
 class ProgramController
@@ -46,5 +47,14 @@ class ProgramController
                 ];
             })
         ]);
+    }
+
+    public function download($id)
+    {
+        $file = File::where('id', decrypt($id))->firstOrFail();
+
+        abort_if(is_null($file) || ! file_exists($file->realPath()), 404);
+
+        return response()->download($file->realPath(), $file->filename);
     }
 }

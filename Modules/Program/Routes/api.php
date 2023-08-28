@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('programs', 'ProgramController@index')->name('programs.index');
+Route::get('programs/download/{id}', 'ProgramController@download')->name('program.downloads');
 Route::get('programs/{program}', 'ProgramController@show')->name('programs.show');
 Route::get('programs/{program}/list-categories', 'ProgramController@listCategories')->name('programs.list_categories');
 
