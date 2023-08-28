@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Modules\Support\Traits\NodApi;
 use Illuminate\Support\Facades\Log;
 use Modules\Product\Entities\Product;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ImportProductInfoCommand extends Command
 {
@@ -31,14 +32,18 @@ class ImportProductInfoCommand extends Command
         Product::whereNotNull('nod_id')->get()->map(function($product) {
             try {
                 $response = $this->getRequest("/products/{$product->nod_id}?show_extended_info=1");
-                $this->updateOrCreateProduct($response->product);
+                $this->updateOrCreateProduct($response->product, $product->options ?? []);
             } catch (Exception $e) {
                 Log::info("Get product info {$product->nod_id}: {$e->getMessage()}");
+
+                if($e instanceof NotFoundHttpException) {
+                    Log::info("Not found");
+                }
             }
         });
     }
 
-    private function updateOrCreateProduct($product)
+    private function updateOrCreateProduct($product, $options)
     {
         Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
             'price' => $product->ron_promo_price,
@@ -54,7 +59,8 @@ class ImportProductInfoCommand extends Command
                     'name' => $doc->document_name,
                     'path' => $doc->document_data
                 ];
-            })->toArray()
+            })->toArray(),
+            'options' => $options
         ]);
     }
 }

@@ -53,6 +53,8 @@ class ImportProductsCommand extends Command
 
     private function updateOrCreateProduct($product)
     {
+        $oldProduct = Product::findByNodId($product->id);
+
         $newProduct = Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
             'name' => $product->title,
             'brand_id' => Brand::whereNodId($product->manufacturer_id)->first()->id ?? null,
@@ -68,6 +70,7 @@ class ImportProductsCommand extends Command
             'supplier_stock_date' => $product->supplier_stock_delivery_date,
             'reserved_stock' => $product->reserved_stock_value,
             'is_on_demand_only' => $product->is_on_demand_only,
+            'options' => $oldProduct->options ?? []
         ]);
 
         $productCategoryId = $product->product_category_id;
