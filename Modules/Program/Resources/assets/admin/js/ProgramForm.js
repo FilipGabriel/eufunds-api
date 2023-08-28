@@ -1,8 +1,14 @@
 import ProgramTree from './ProgramTree';
+import Download from './Download';
+import Offer from './Offer';
 
 export default class {
     constructor() {
         let tree = $('.program-tree');
+        this.downloadsCount = 0;
+        this.offersCount = 0;
+        this.downloads = [];
+        this.offers = [];
 
         new ProgramTree(this, tree);
 
@@ -11,9 +17,16 @@ export default class {
         this.addRootProgram();
         this.addSubProgram();
 
+        this.addDownloads(this.downloads);
+        this.addOffers(this.offers);
+
+        this.attachEventListeners();
+        this.makeDownloadsSortable();
+        this.makeOffersSortable();
+
         $('#program-form').on('submit', this.submit);
 
-        window.admin.removeSubmitButtonOffsetOn('#image', '.program-details-tab li > a');
+        window.admin.removeSubmitButtonOffsetOn('#image', '.program-details-tab li > a', '#downloads', '#offers');
     }
 
     collapseAll(tree) {
@@ -95,6 +108,24 @@ export default class {
         $('#confirmation-form').attr('action', route('admin.programs.destroy', program.id));
 
         $('#id-field').removeClass('hide');
+
+        $('#downloads-wrapper tr').remove();
+
+        this.downloadsCount = 0;
+        this.downloads = program.files.filter((file) => {
+            return file.location == 'downloads';
+        });
+
+        this.addDownloads(this.downloads);
+
+        $('#offers-wrapper tr').remove();
+
+        this.offersCount = 0;
+        this.offers = program.files.filter((file) => {
+            return file.location == 'download_offers';
+        });
+
+        this.addOffers(this.offers);
         
         $('#id').val(program.id);
         $('#name').val(program.name);
@@ -167,6 +198,20 @@ export default class {
         categoryValues.clear();
         let listCategoryValues = $('#list_categories\\[\\]')[0].selectize;
         listCategoryValues.clear();
+        
+        $('#downloads-wrapper tr').remove();
+        
+        this.downloads = [];
+        this.downloadsCount = 0;
+
+        this.addDownloads(this.downloads);
+        
+        $('#offers-wrapper tr').remove();
+        
+        this.offers = [];
+        this.offersCount = 0;
+
+        this.addOffers(this.offers);
 
         $('#slug').val('');
         $('#slug-field').addClass('hide');
@@ -212,5 +257,67 @@ export default class {
         }
 
         e.currentTarget.submit();
+    }
+
+    addDownloads(downloads) {
+        for (let attributes of downloads) {
+            this.addDownload(attributes);
+        }
+
+        if (this.downloadsCount === 0) {
+            this.addDownload();
+        }
+    }
+
+    addOffers(offers) {
+        for (let attributes of offers) {
+            this.addOffer(attributes);
+        }
+
+        if (this.offersCount === 0) {
+            this.addOffer();
+        }
+    }
+
+    addDownload(attributes = {}) {
+        let download = new Download({ download: attributes });
+
+        $('#downloads-wrapper').append(download.render());
+
+        this.downloadsCount++;
+        window.admin.tooltip();
+    }
+
+    addOffer(attributes = {}) {
+        let offer = new Offer({ offer: attributes });
+
+        $('#offers-wrapper').append(offer.render());
+
+        this.offersCount++;
+        window.admin.tooltip();
+    }
+
+    attachEventListeners() {
+        $('#add-new-file').on('click', () => {
+            this.addDownload();
+        });
+
+        $('#add-new-offer').on('click', () => {
+            this.addOffer();
+        });
+    }
+
+    makeDownloadsSortable() {
+        Sortable.create(document.getElementById('downloads-wrapper'), {
+            handle: '.drag-icon',
+            animation: 150,
+        });
+    }
+
+    makeOffersSortable() {
+        Sortable.create(document.getElementById('offers-wrapper'), {
+            handle: '.drag-icon',
+            animation: 150,
+        });
     }
 }

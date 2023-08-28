@@ -30,6 +30,7 @@
 
                         @hasAccess('admin.media.index')
                             <li class="image-tab"><a data-toggle="tab" href="#image">{{ trans('program::programs.tabs.image') }}</a></li>
+                            <li class="downloads-tab"><a data-toggle="tab" href="#downloads">{{ trans('program::programs.tabs.downloads') }}</a></li>
                         @endHasAccess
 
                         <li class="seo-tab hide"><a data-toggle="tab" href="#seo">{{ trans('program::programs.tabs.seo') }}</a></li>
@@ -83,6 +84,77 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div id="downloads" class="tab-pane fade">
+                                    <div id="program-downloads-wrapper" class="slider-values-wrapper clearfix">
+                                        <div class="slide">
+                                            <div class="slide-header clearfix">
+                                                <span class="pull-left">
+                                                    {{ trans('program::programs.form.downloadable_files') }}
+                                                </span>
+                                            </div>
+
+                                            <div class="slide-body">
+                                                <div class="table-responsive">
+                                                    <table class="options table table-bordered">
+                                                        <thead class="hidden-xs">
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>{{ trans('program::programs.form.file') }}</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="downloads-wrapper">
+                                                            {{-- Downloadable file will be added here dynamically using JS --}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <button type="button" class="btn btn-default" id="add-new-file">
+                                                    {{ trans('program::programs.form.add_new_file') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @include('program::admin.programs.tabs.templates.download')
+                                    
+                                    <div id="program-offers-wrapper" class="slider-values-wrapper clearfix">
+                                        <div class="slide">
+                                            <div class="slide-header clearfix">
+                                                <span class="pull-left">
+                                                    {{ trans('program::programs.form.offer_files') }}
+                                                </span>
+                                            </div>
+
+                                            <div class="slide-body">
+                                                <div class="table-responsive">
+                                                    <table class="options table table-bordered">
+                                                        <thead class="hidden-xs">
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>{{ trans('program::programs.form.file') }}</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="offers-wrapper">
+                                                            {{-- Downloadable file will be added here dynamically using JS --}}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                                <button type="button" class="btn btn-default" id="add-new-offer">
+                                                    {{ trans('program::programs.form.add_new_file') }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @include('program::admin.programs.tabs.templates.offer')
+
+                                </div>
                             @endif
 
                             <div id="seo" class="tab-pane fade">
@@ -116,4 +188,11 @@
             <i class="fa fa-refresh fa-spin"></i>
         </div>
     </div>
+
+    @push('globals')
+        <script>
+            SMIS.data['program.downloads'] = [];
+            SMIS.data['program.offers'] = [];
+        </script>
+    @endpush
 @endsection

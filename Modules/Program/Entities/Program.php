@@ -3,6 +3,7 @@
 namespace Modules\Program\Entities;
 
 use Modules\Media\Entities\File;
+use Illuminate\Support\Facades\DB;
 use Modules\Support\Eloquent\Model;
 use Modules\Media\Eloquent\HasMedia;
 use Illuminate\Support\Facades\Cache;
@@ -86,6 +87,24 @@ class Program extends Model
         static::saved(function ($program) {
             if (! empty(request()->all())) {
                 $program->saveRelations(request()->all());
+            }
+
+            if (! request()->has('files') || ! array_key_exists('downloads', request()->get('files'))) {
+                $program->downloads->map(function($download) {
+                    $exists = DB::table('entity_files')->whereFileId($download->id)
+                            ->whereZone('downloads')->where('id', '!=', $download->pivot->id)
+                            ->exists();
+                    $exists ? $download->pivot->delete() : $download->delete();
+                });
+            }
+
+            if (! request()->has('files') || ! array_key_exists('offers', request()->get('files'))) {
+                $program->offers->map(function($offer) {
+                    $exists = DB::table('entity_files')->whereFileId($offer->id)
+                            ->whereZone('download_offers')->where('id', '!=', $offer->pivot->id)
+                            ->exists();
+                    $exists ? $offer->pivot->delete() : $offer->delete();
+                });
             }
         });
 
@@ -183,6 +202,32 @@ class Program extends Model
     public function getSmallBannerAttribute()
     {
         return $this->files->where('pivot.zone', 'small_banner')->first() ?: new File;
+    }
+
+    /**
+     * Get program's downloadable files.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getDownloadsAttribute()
+    {
+        return $this->files
+            ->where('pivot.zone', 'downloads')
+            ->sortBy('pivot.id')
+            ->flatten();
+    }
+
+    /**
+     * Get program's offers.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getOffersAttribute()
+    {
+        return $this->files
+            ->where('pivot.zone', 'download_offers')
+            ->sortBy('pivot.id')
+            ->flatten();
     }
 
     public function forCard()
