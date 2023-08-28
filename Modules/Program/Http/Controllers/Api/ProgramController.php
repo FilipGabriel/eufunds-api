@@ -51,7 +51,7 @@ class ProgramController
 
     public function download($id)
     {
-        $file = File::where($id)->firstOrFail();
+        $file = File::whereId($id)->firstOrFail();
 
         abort_if(is_null($file) || ! file_exists($file->realPath()), 404);
 
