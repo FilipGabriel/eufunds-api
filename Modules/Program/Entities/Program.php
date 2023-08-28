@@ -88,24 +88,6 @@ class Program extends Model
             if (! empty(request()->all())) {
                 $program->saveRelations(request()->all());
             }
-
-            if (! request()->has('files') || ! array_key_exists('downloads', request()->get('files'))) {
-                $program->downloads->map(function($download) {
-                    $exists = DB::table('entity_files')->whereFileId($download->id)
-                            ->whereZone('downloads')->where('id', '!=', $download->pivot->id)
-                            ->exists();
-                    $exists ? $download->pivot->delete() : $download->delete();
-                });
-            }
-
-            if (! request()->has('files') || ! array_key_exists('offers', request()->get('files'))) {
-                $program->offers->map(function($offer) {
-                    $exists = DB::table('entity_files')->whereFileId($offer->id)
-                            ->whereZone('download_offers')->where('id', '!=', $offer->pivot->id)
-                            ->exists();
-                    $exists ? $offer->pivot->delete() : $offer->delete();
-                });
-            }
         });
 
         static::addActiveGlobalScope();

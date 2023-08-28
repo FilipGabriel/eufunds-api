@@ -53,7 +53,7 @@ class ImportProductsCommand extends Command
 
     private function updateOrCreateProduct($product)
     {
-        $newProduct = Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
+        $newProduct = Product::withoutGlobalScope('active')->makeHidden(['options'])->updateOrCreate(['nod_id' => $product->id], [
             'name' => $product->title,
             'brand_id' => Brand::whereNodId($product->manufacturer_id)->first()->id ?? null,
             'warranty' => $product->warranty,
@@ -91,11 +91,10 @@ class ImportProductsCommand extends Command
                 $location = $key === 0 ? 'base_image' : 'additional_images';
                 $path = "media/{$location}/{$name}";
                 
-                if (file_exists($storage . '/' . $path)) {
-                    continue; // Skip if the file already exists
+                if (! file_exists($storage . '/' . $path)) {
+                    file_put_contents($storage . '/' . $path, file_get_contents($url));
                 }
                 
-                file_put_contents($storage . '/' . $path, file_get_contents($url));
                 $file = new SymfonyFile("{$storage}/{$path}");
 
                 $newFile = File::create([
