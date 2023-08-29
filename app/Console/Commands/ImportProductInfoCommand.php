@@ -45,7 +45,7 @@ class ImportProductInfoCommand extends Command
 
     private function updateOrCreateProduct($product, $options)
     {
-        Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
+        $newProduct = Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
             'price' => $product->ron_promo_price,
             'qty' => $product->stock_value,
             'in_stock' => $product->stock_value > 0,
@@ -59,8 +59,20 @@ class ImportProductInfoCommand extends Command
                     'name' => $doc->document_name,
                     'path' => $doc->document_data
                 ];
-            })->toArray(),
-            'options' => $options
+            })->toArray()
         ]);
+
+        $this->saveOptions($newProduct, $options);
+    }
+
+    private function saveOptions($product, $options)
+    {
+        foreach (array_reset_index($options) as $index => $attributes) {
+            $attributes += ['is_global' => false, 'position' => $index];
+
+            $option = $product->options()->updateOrCreate(['id' => $attributes['id'] ?? null], $attributes);
+
+            $option->saveValues($attributes['values'] ?? []);
+        }
     }
 }

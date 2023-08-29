@@ -69,9 +69,10 @@ class ImportProductsCommand extends Command
             'supplier_stock' => $product->supplier_stock_value,
             'supplier_stock_date' => $product->supplier_stock_delivery_date,
             'reserved_stock' => $product->reserved_stock_value,
-            'is_on_demand_only' => $product->is_on_demand_only,
-            'options' => $oldProduct->options ?? []
+            'is_on_demand_only' => $product->is_on_demand_only
         ]);
+
+        $this->saveOptions($newProduct, $oldProduct->options ?? []);
 
         $productCategoryId = $product->product_category_id;
         if(! $newProduct->categories->pluck('id')->contains($productCategoryId)) {
@@ -81,6 +82,17 @@ class ImportProductsCommand extends Command
         }
         
         $this->handleImages($product->images, $newProduct);
+    }
+
+    private function saveOptions($product, $options)
+    {
+        foreach (array_reset_index($options) as $index => $attributes) {
+            $attributes += ['is_global' => false, 'position' => $index];
+
+            $option = $product->options()->updateOrCreate(['id' => $attributes['id'] ?? null], $attributes);
+
+            $option->saveValues($attributes['values'] ?? []);
+        }
     }
 
     private function handleImages($images, $product)

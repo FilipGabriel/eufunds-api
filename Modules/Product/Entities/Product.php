@@ -649,7 +649,7 @@ class Product extends Model
 
     public static function findByNodId($nodId)
     {
-        return self::with([ 'categories', 'attributes.attribute.attributeSet' ])
+        return self::with([ 'options', 'categories', 'attributes.attribute.attributeSet' ])
             ->withoutGlobalScope('active')
             ->where('nod_id', $nodId)
             ->first();
