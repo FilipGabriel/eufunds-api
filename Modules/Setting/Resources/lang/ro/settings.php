@@ -56,6 +56,7 @@ return [
         'enable_bank_transfer' => 'Activeaza Transfer Bancar',
         'add_vat_to_plans' => 'Adauga TVA la Subscriptii',
         'vat_value' => 'Valoare TVA',
+        'update_old_products_on_import' => 'Updateaza produsele la import',
     ],
     'validation' => [
         'sqlite_is_not_installed' => 'SQLite nu este instalat.',

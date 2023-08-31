@@ -6,5 +6,6 @@
         {{ Form::select('default_locale', trans('setting::attributes.default_locale'), $errors, $locales, $settings, ['required' => true]) }}
         {{ Form::select('default_timezone', trans('setting::attributes.default_timezone'), $errors, $timeZones, $settings, ['required' => true]) }}
         {{ Form::select('customer_role', trans('setting::attributes.customer_role'), $errors, $roles, $settings, ['required' => true]) }}
+        {{ Form::checkbox('update_old_products_on_import', trans('setting::attributes.cron'), trans('setting::settings.form.update_old_products_on_import'), $errors, $settings) }}
     </div>
 </div>

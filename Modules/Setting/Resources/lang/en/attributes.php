@@ -24,6 +24,7 @@ return [
     'app_country' => 'App Country',
     'app_state' => 'App State',
     'app_zip' => 'App Zip',
+    'cron' => 'Cron',
 
     'supported_currencies' => 'Supported Currencies',
     'default_currency' => 'Default Currency',

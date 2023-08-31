@@ -24,6 +24,7 @@ return [
     'app_country' => 'App Tara',
     'app_state' => 'App Judet',
     'app_zip' => 'App Cod Postal',
+    'cron' => 'Cron',
 
     'supported_currencies' => 'Monede Eligibile',
     'default_currency' => 'Moneda Default',

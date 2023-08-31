@@ -56,6 +56,7 @@ return [
         'enable_bank_transfer' => 'Enable Bank Transfer',
         'add_vat_to_plans' => 'Add VAT to Plans',
         'vat_value' => 'VAT Value',
+        'update_old_products_on_import' => 'Update old products on import',
     ],
     'validation' => [
         'sqlite_is_not_installed' => 'SQLite is not installed.',

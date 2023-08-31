@@ -55,6 +55,41 @@ class ImportProductsCommand extends Command
     {
         $oldProduct = Product::findByNodId($product->id);
 
+        if($oldProduct) {
+            if(setting('update_old_products_on_import', false)) {
+                $oldProduct->withoutEvents(function () use ($oldProduct, $product) {
+                    $newProduct = $oldProduct->updateOrCreate(['nod_id' => $product->id], [
+                        'name' => $product->title,
+                        'brand_id' => Brand::whereNodId($product->manufacturer_id)->first()->id ?? null,
+                        'warranty' => $product->warranty,
+                        'price' => $product->ron_promo_price,
+                        'short_description' => $product->description,
+                        'description' => $product->long_description,
+                        'qty' => $product->stock_value,
+                        'sku' => $product->code,
+                        'in_stock' => $product->stock_value > 0,
+                        'supplier_stock' => $product->supplier_stock_value,
+                        'supplier_stock_date' => $product->supplier_stock_delivery_date,
+                        'reserved_stock' => $product->reserved_stock_value,
+                        'is_on_demand_only' => $product->is_on_demand_only
+                    ]);
+        
+                    $newProduct->update(['selling_price' => $newProduct->getSellingPrice()->amount()]);
+    
+                    $productCategoryId = $product->product_category_id;
+                    if(! $newProduct->categories->pluck('id')->contains($productCategoryId)) {
+                        $categoryIds = Category::getNestCategoryBy($productCategoryId, [$productCategoryId]);
+                
+                        $newProduct->categories()->sync($categoryIds);
+                    }
+                    
+                    $this->handleImages($product->images, $newProduct);
+                });
+            }
+
+            return;
+        }
+
         $newProduct = Product::withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
             'name' => $product->title,
             'brand_id' => Brand::whereNodId($product->manufacturer_id)->first()->id ?? null,
@@ -72,8 +107,6 @@ class ImportProductsCommand extends Command
             'is_on_demand_only' => $product->is_on_demand_only
         ]);
 
-        $this->saveOptions($newProduct, $oldProduct->options ?? []);
-
         $productCategoryId = $product->product_category_id;
         if(! $newProduct->categories->pluck('id')->contains($productCategoryId)) {
             $categoryIds = Category::getNestCategoryBy($productCategoryId, [$productCategoryId]);
@@ -82,17 +115,6 @@ class ImportProductsCommand extends Command
         }
         
         $this->handleImages($product->images, $newProduct);
-    }
-
-    private function saveOptions($product, $options)
-    {
-        foreach (array_reset_index($options) as $index => $attributes) {
-            $attributes += ['is_global' => false, 'position' => $index];
-
-            $option = $product->options()->updateOrCreate(['id' => $attributes['id'] ?? null], $attributes);
-
-            $option->saveValues($attributes['values'] ?? []);
-        }
     }
 
     private function handleImages($images, $product)
