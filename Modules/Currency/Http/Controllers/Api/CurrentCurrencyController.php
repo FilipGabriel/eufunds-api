@@ -13,8 +13,9 @@ class CurrentCurrencyController
     public function store($currency)
     {
         abort_if(! in_array($currency, setting('supported_currencies')), 403);
+        $domain = config('app.env') == 'local' ? 'localhost' : '.euprojects.ro';
 
-        $cookie = cookie()->forever('currency', $currency, null, '.euprojects.ro', true, false, false, 'none');
+        $cookie = cookie()->forever('currency', $currency, null, $domain, true, false, false, 'none');
 
         return response()->json()->withCookie($cookie);
     }
