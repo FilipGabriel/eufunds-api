@@ -57,10 +57,6 @@ class UserController
             return $this->getModel()->table($request);
         }
 
-        if(auth()->user()->hasRoleName('affiliate')) {
-            return view("{$this->viewPath}.affiliate_index");
-        }
-
         return view("{$this->viewPath}.index");
     }
 
