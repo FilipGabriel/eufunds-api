@@ -150,7 +150,7 @@ class OrderController
             $template = $document->getExtraRules($order, $template);
         }
 
-        $name = trim($order->company_name);
+        $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($order->company_name));
         $fileName = "Oferta - {$name}";
         $file = $this->saveFile($fileName, $template);
 

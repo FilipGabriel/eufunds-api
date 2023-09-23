@@ -43,7 +43,7 @@ class Invoice extends Mailable implements ShouldQueue
 
         $this->order->load('products');
         
-        $name = trim($this->order->company_name);
+        $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($this->order->company_name));
         $orderFile = $this->generateOrderTemplate($name);
 
         return $this->subject(trans('appfront::invoice.subject', ['id' => $this->order->id]))
