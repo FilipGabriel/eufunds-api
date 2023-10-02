@@ -34,7 +34,7 @@ return [
     'users_analytics_title' => 'Utilizatori',
     'sales_analytics_title' => 'Vanzari',
     'sales_analytics' => [
-        'orders' => 'Plati',
+        'orders' => 'Comenzi',
         'sales' => 'Vanzari',
         'day_names' => [
             'Luni',
