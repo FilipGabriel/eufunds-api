@@ -11,6 +11,7 @@ return [
         'admin.css' => ['module' => 'admin:css/admin.css'],
         'admin.js' => ['module' => 'admin:js/admin.js'],
         'admin.dashboard.css' => ['module' => 'admin:css/dashboard.css'],
+        'admin.dashboard.js' => ['module' => 'admin:js/dashboard.js'],
         'admin.polyfill.js' => ['cdn' => 'https://cdn.polyfill.io/v2/polyfill.min.js'],
     ],
 

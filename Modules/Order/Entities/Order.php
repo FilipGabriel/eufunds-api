@@ -92,10 +92,10 @@ class Order extends Model
     {
         return self::select('total', 'created_at')
             ->withoutCanceledOrders()
-            ->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->whereBetween('created_at', [now()->addDays(-6)->startOfDay(), now()->endOfDay()])
             ->get()
             ->reduce(function ($ordersByWeekDay, $order) {
-                $ordersByWeekDay[$order->created_at->weekday()][] = $order;
+                $ordersByWeekDay[$order->created_at->format('Ymd')][] = $order;
 
                 return $ordersByWeekDay;
             });
@@ -103,9 +103,9 @@ class Order extends Model
 
     private function normalizeOrders($orders)
     {
-        return Collection::times(7)->map(function ($dayOfWeek) use ($orders) {
-            return new OrderCollection($orders[$dayOfWeek] ?? []);
-        });
+        return Collection::times(7)->reverse()->map(function ($dayOfWeek, $key) use ($orders) {
+            return new OrderCollection($orders[now()->addDays($key * -1)->format('Ymd')] ?? []);
+        })->values();
     }
 
     private function dataForChart(OrderCollection $orders)

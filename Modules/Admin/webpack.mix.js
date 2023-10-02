@@ -2,6 +2,7 @@ let mix = require('laravel-mix');
 let execSync = require('child_process').execSync;
 
 mix.js(`${__dirname}/Resources/assets/js/main.js`, `${__dirname}/Assets/js/admin.js`)
+    .js(`${__dirname}/Resources/assets/js/dashboard.js`, `${__dirname}/Assets/js/dashboard.js`)
     .sass(`${__dirname}/Resources/assets/sass/main.scss`, `${__dirname}/Assets/css/admin.css`)
     .sass(`${__dirname}/Resources/assets/sass/dashboard.scss`, `${__dirname}/Assets/css/dashboard.css`)
     .copy(`${__dirname}/Resources/assets/images`, `${__dirname}/Assets/images`)

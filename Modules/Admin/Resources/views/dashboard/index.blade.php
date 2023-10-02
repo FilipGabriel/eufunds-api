@@ -26,8 +26,14 @@
 
     <div class="row">
         <div class="col-lg-6">
+            @include('admin::dashboard.panels.sales_analytics')
+        </div>
+        <div class="col-lg-6">
             @include('admin::dashboard.panels.latest_orders')
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-lg-6">
             @include('admin::dashboard.panels.latest_search_terms')
         </div>
