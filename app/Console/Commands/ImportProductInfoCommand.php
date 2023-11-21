@@ -50,7 +50,7 @@ class ImportProductInfoCommand extends Command
         $newProduct = Product::findByNodId($product->id);
 
         $newProduct->withoutEvents(function () use ($newProduct, $product) {
-            $newProduct->updateOrCreate(['nod_id' => $product->id], [
+            $newProduct->withoutGlobalScope('active')->updateOrCreate(['nod_id' => $product->id], [
                 'price' => $product->ron_promo_price,
                 'qty' => $product->stock_value,
                 'in_stock' => $product->stock_value > 0,
@@ -67,7 +67,7 @@ class ImportProductInfoCommand extends Command
                 })->toArray()
             ]);
 
-            $newProduct->update(['selling_price' => $newProduct->getSellingPrice()->amount()]);
+            $newProduct->withoutGlobalScope('active')->update(['selling_price' => $newProduct->getSellingPrice()->amount()]);
         });
     }
 }
