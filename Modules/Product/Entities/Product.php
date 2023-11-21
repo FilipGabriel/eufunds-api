@@ -16,6 +16,7 @@ use Modules\Support\Search\Searchable;
 use Modules\Category\Entities\Category;
 use Modules\Product\Admin\ProductTable;
 use Modules\Support\Eloquent\Sluggable;
+use Illuminate\Support\Facades\Artisan;
 use Modules\Support\Eloquent\Translatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Attribute\Entities\ProductAttribute;
@@ -129,6 +130,12 @@ class Product extends Model
      */
     protected static function booted()
     {
+        static::saving(function ($product) {
+            if(! $product->getRawOriginal('is_active') && request('is_active')) {
+                Artisan::call("nod:import-product-info", ['nodId' => $product->nod_id]);
+            }
+        });
+
         static::saved(function ($product) {
             if (! empty(request()->all())) {
                 $product->saveRelations(request()->all());

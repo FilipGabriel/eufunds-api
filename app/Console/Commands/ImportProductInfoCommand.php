@@ -17,7 +17,7 @@ class ImportProductInfoCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'nod:import-product-info';
+    protected $signature = 'nod:import-product-info {nodId?}';
 
     /**
      * The console command description.
@@ -28,7 +28,12 @@ class ImportProductInfoCommand extends Command
 
     public function handle()
     {
-        Product::whereNotNull('nod_id')->get()->map(function($product) {
+        $nodId = $this->argument('nodId');
+        $products = Product::whereNotNull('nod_id')->when($nodId, function($query) use ($nodId) {
+            return $query->withoutGlobalScope('active')->whereNodId($nodId);
+        })->get();
+
+        $products->map(function($product) {
             try {
                 $response = $this->getRequest("/products/{$product->nod_id}?show_extended_info=1");
                 $this->updateOrCreateProduct($response->product);
