@@ -132,9 +132,9 @@ class Product extends Model
     {
         static::saving(function ($product) {
             if(! $product->getRawOriginal('is_active') && request('is_active') && $product->nod_id) {
-                $product->is_active = true;
-                $product->save();
-                Artisan::call("nod:import-product-info", ['nodId' => $product->nod_id]);
+                // $product->is_active = true;
+                // $product->save();
+                // Artisan::call("nod:import-product-info", ['nodId' => $product->nod_id]);
             }
         });
 
