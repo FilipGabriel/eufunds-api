@@ -2,6 +2,7 @@
 
 return [
     'subject' => 'Ofertă #:id',
+    'order_subject' => 'Comandă #:id',
     'invoice' => 'OFERTA',
     'order_id' => 'Numar',
     'date' => 'Data',

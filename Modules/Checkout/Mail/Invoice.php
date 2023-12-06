@@ -44,14 +44,20 @@ class Invoice extends Mailable implements ShouldQueue
         $this->order->load('products');
         
         $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($this->order->company_name));
+        $subject = trans('appfront::invoice.subject', ['id' => $this->order->id]);
+
+        if($this->order->type == 'acquisition') {
+            $subject = trans('appfront::invoice.order_subject', ['id' => $this->order->id]);
+        }
+
         $orderFile = $this->generateOrderTemplate($name);
 
-        return $this->subject(trans('appfront::invoice.subject', ['id' => $this->order->id]))
+        return $this->subject($subject)
             ->view("emails.invoice", [
                 'logo' => File::findOrNew(setting('appfront_mail_logo'))->path,
             ])
             ->attach($orderFile, [
-                'as' => "Oferta - {$name}.doc",
+                'as' => "{$subject} - {$name}.doc",
                 'mime' => 'application/msword',
             ]);
     }

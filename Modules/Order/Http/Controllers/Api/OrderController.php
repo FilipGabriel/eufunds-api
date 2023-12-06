@@ -150,8 +150,14 @@ class OrderController
             $template = $document->getExtraRules($order, $template);
         }
 
+        $subject = trans('appfront::invoice.subject', ['id' => $order->id]);
+
+        if($order->type == 'acquisition') {
+            $subject = trans('appfront::invoice.order_subject', ['id' => $order->id]);
+        }
+
         $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($order->company_name));
-        $fileName = "Oferta - {$name}";
+        $fileName = "{$subject} - {$name}";
         $file = $this->saveFile($fileName, $template);
 
         return response()->download($file, "{$fileName}.doc");

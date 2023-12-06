@@ -159,7 +159,7 @@
 						colspan="3">
 						<p style="text-align: center;" align="center">
 							<span style="color: black;">
-							{!! $product->product->name !!}
+							{!! $product->product->short_description !!}
 							</span>
 							@if ($product->hasAnyOption())
 							@foreach ($product->options as $option)

@@ -130,14 +130,6 @@ class Product extends Model
      */
     protected static function booted()
     {
-        static::saving(function ($product) {
-            if(! $product->getRawOriginal('is_active') && request('is_active') && $product->nod_id) {
-                // $product->is_active = true;
-                // $product->save();
-                // Artisan::call("nod:import-product-info", ['nodId' => $product->nod_id]);
-            }
-        });
-
         static::saved(function ($product) {
             if (! empty(request()->all())) {
                 $product->saveRelations(request()->all());
@@ -146,6 +138,10 @@ class Product extends Model
             $product->withoutEvents(function () use ($product) {
                 $product->update(['selling_price' => $product->getSellingPrice()->amount()]);
             });
+
+            if(request('is_active') && $product->nod_id) {
+                Artisan::call("nod:import-product-info", ['nodId' => $product->nod_id]);
+            }
         });
 
         static::addActiveGlobalScope();
