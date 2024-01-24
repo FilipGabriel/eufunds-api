@@ -38,7 +38,11 @@ class ImportProductInfoCommand extends Command
                 $response = $this->getRequest("/products/{$product->nod_id}?show_extended_info=1");
                 $this->updateOrCreateProduct($response->product);
             } catch (Exception $e) {
-                if($e->getCode() == 404) { $product->update(['is_active' => false]); }
+                if($e->getCode() == 404) {
+                    $product->withoutEvents(function () use ($product) {
+                        $product->update(['is_active' => false]);
+                    });
+                }
 
                 Log::info("Get product info {$product->nod_id}: {$e->getMessage()}");
             }
