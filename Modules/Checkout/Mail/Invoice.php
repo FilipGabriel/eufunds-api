@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use PhpOffice\PhpWord\Settings;
 use Modules\Media\Entities\File;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Queue\SerializesModels;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -45,9 +46,17 @@ class Invoice extends Mailable implements ShouldQueue
         
         $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($this->order->company_name));
         $subject = trans('appfront::invoice.subject', ['id' => $this->order->id]);
+        $mime = 'application/msword';
+        $type = 'doc';
 
         if($this->order->type == 'acquisition') {
             $subject = trans('appfront::invoice.order_subject', ['id' => $this->order->id]);
+        }
+
+        if($this->order->type == 'presales') {
+            $subject = trans('appfront::invoice.presales_subject', ['id' => $this->order->id]);
+            $mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            $type = 'xlsx';
         }
 
         $orderFile = $this->generateOrderTemplate($name);
@@ -57,13 +66,22 @@ class Invoice extends Mailable implements ShouldQueue
                 'logo' => File::findOrNew(setting('appfront_mail_logo'))->path,
             ])
             ->attach($orderFile, [
-                'as' => "{$subject} - {$name}.doc",
-                'mime' => 'application/msword',
+                'as' => "{$subject} - {$name}.{$type}",
+                'mime' => $mime,
             ]);
     }
 
     private function generateOrderTemplate($name)
     {
+        if($this->order->type == 'presales') {
+            $path = storage_path("offers");
+            $class = 'Modules\\Order\\Exports\\XlsxOffer';
+
+            Excel::store(new $class($this->order), "{$name}.xlsx", 'offers');
+
+            return "{$path}/{$name}.xlsx";
+        }
+
         $class = 'Modules\\Order\\Exports\\Offer';
         $document = new $class();
         

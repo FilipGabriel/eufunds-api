@@ -3,6 +3,7 @@
 namespace Modules\Program\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
+use Modules\Option\Entities\Option;
 use Modules\Product\Entities\Product;
 use Modules\Program\Entities\Program;
 use Modules\Option\Entities\OptionValue;
@@ -56,18 +57,7 @@ class ProgramProductController extends Controller
             ! array_intersect($program->categories->pluck('id')->toArray(), $product->categories->pluck('id')->toArray()
         ), 404);
 
-        $product->stock = $product->qty;
-        $product->qty = 1;
-        $product->reserved_stock = $product->reserved_stock;
-        $product->supplier_stock = $product->supplier_stock;
-        $product->is_on_demand_only = $product->is_on_demand_only;
-        $product->supplier_stock_date = $product->supplier_stock_date ? $product->supplier_stock_date->format('d.m.Y') : null;
-        $product->has_dnsh = $product->has_dnsh;
-        $product->brand_name = $product->brand->name;
-        $product->selling_price = $product->getSellingPrice()->amount();
-        $product->manage_stock = $product->manage_stock && $program->types == ['acquisition'];
-        $product->end_special_price = $product->special_price_valid_to ? $product->special_price_valid_to->format('d.m.Y') : null;
-        $product->variants = $product->options->map(function($option) use ($product) {
+        $variants = $product->options->map(function($option) use ($product) {
             return [
                 'id' => $option->id,
                 'type' => $option->type,
@@ -80,6 +70,40 @@ class ProgramProductController extends Controller
                 })
             ];
         });
+
+        if(request()->has('presales')) {
+            $option = Option::whereHas('translations', function($translation) {
+                $translation->whereName('Marja');
+            })->first();
+            
+            $variants = [
+                [
+                    'id' => $option->id,
+                    'type' => $option->type,
+                    'values' => $option->values->map(function (OptionValue $value) use ($product, $option) {
+                        return [
+                            'id' => $value->id,
+                            'label' => $option->name . $value->formattedPriceForProduct($product),
+                            'amount' => (float) $value->priceForProduct($product)->convertToCurrentCurrency()->amount(),
+                            'value' => 0
+                        ];
+                    })
+                ]
+            ];
+        }
+
+        $product->stock = $product->qty;
+        $product->qty = 1;
+        $product->reserved_stock = $product->reserved_stock;
+        $product->supplier_stock = $product->supplier_stock;
+        $product->is_on_demand_only = $product->is_on_demand_only;
+        $product->supplier_stock_date = $product->supplier_stock_date ? $product->supplier_stock_date->format('d.m.Y') : null;
+        $product->has_dnsh = $product->has_dnsh;
+        $product->brand_name = $product->brand->name;
+        $product->selling_price = $product->getSellingPrice()->amount();
+        $product->manage_stock = $product->manage_stock && $program->types == ['acquisition'];
+        $product->end_special_price = $product->special_price_valid_to ? $product->special_price_valid_to->format('d.m.Y') : null;
+        $product->variants = $variants;
         
         $relatedProducts = $product->relatedProducts()->forCard()->get();
         $upSellProducts = $product->upSellProducts()->forCard()->get();

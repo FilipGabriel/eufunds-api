@@ -66,7 +66,7 @@ export default class {
     }
 
     templateTypeIsText(type) {
-        return ['field', 'textarea', 'date', 'date_time', 'time'].includes(type);
+        return ['field', 'number', 'textarea', 'date', 'date_time', 'time'].includes(type);
     }
 
     templateTypeIsSelect(type) {

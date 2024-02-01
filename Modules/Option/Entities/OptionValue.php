@@ -51,18 +51,22 @@ class OptionValue extends Model
         return $this->price_type === 'fixed';
     }
 
-    public function priceForProduct(Product $product)
+    public function priceForProduct(Product $product, $value = null)
     {
         if ($this->priceIsFixed()) {
             return $this->price;
         }
 
-        return $this->getPercentOf($product->selling_price->amount());
+        if(request()->has('presales')) {
+            return $this->getPercentOf($product->getSellingPrice()->amount(), $value);
+        }
+
+        return $this->getPercentOf($product->selling_price->amount(), $this->price);
     }
 
-    private function getPercentOf($productPrice)
+    private function getPercentOf($productPrice, $value)
     {
-        return Money::inDefaultCurrency(($this->price / 100) * $productPrice);
+        return Money::inDefaultCurrency(($value / 100) * $productPrice);
     }
 
     public function formattedPriceForProduct(Product $product, $forSelectOption = false)

@@ -51,6 +51,7 @@ class Product extends Model
         'rma',
         'documents',
         'price',
+        'ps_price',
         'special_price',
         'special_price_type',
         'special_price_start',
@@ -195,6 +196,7 @@ class Product extends Model
     {
         $query->addSelect([
             'products.price',
+            'products.ps_price',
             'products.special_price',
             'products.special_price_type',
             'products.selling_price',
@@ -267,6 +269,13 @@ class Product extends Model
     {
         if (! is_null($specialPrice)) {
             return Money::inDefaultCurrency($specialPrice);
+        }
+    }
+
+    public function getPsPriceAttribute($psPrice)
+    {
+        if (! is_null($psPrice)) {
+            return Money::inDefaultCurrency($psPrice);
         }
     }
 
@@ -391,6 +400,10 @@ class Product extends Model
 
     public function getSellingPrice()
     {
+        if(request()->has('presales')) {
+            return $this->ps_price;
+        }
+
         $sellingPrice = $this->hasSpecialPrice() ? $this->getSpecialPrice() : $this->price;
 
         $sellingPrice = $this->applyProgramDiscounts($sellingPrice);

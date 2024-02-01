@@ -4,6 +4,7 @@ namespace Modules\Order\Http\Controllers\Api;
 
 use Exception;
 use PhpOffice\PhpWord\Settings;
+use Maatwebsite\Excel\Facades\Excel;
 use Modules\Program\Entities\Program;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Modules\Checkout\Events\OrderPlaced;
@@ -137,6 +138,20 @@ class OrderController
         $order = auth()->user()->orders()->with(['products'])
             ->findOrFail($id);
 
+        $subject = trans('appfront::invoice.subject', ['id' => $order->id]);
+        $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($order->company_name));
+        $fileName = "{$subject} - {$name}";
+
+        if($order->type == 'acquisition') {
+            $subject = trans('appfront::invoice.order_subject', ['id' => $order->id]);
+        }
+
+        if($order->type == 'presales') {
+            $class = 'Modules\\Order\\Exports\\XlsxOffer';
+
+            return Excel::download(new $class($order), "{$fileName}.xlsx");
+        }
+
         $class = 'Modules\\Order\\Exports\\Offer';
         $document = new $class();
         
@@ -150,14 +165,6 @@ class OrderController
             $template = $document->getExtraRules($order, $template);
         }
 
-        $subject = trans('appfront::invoice.subject', ['id' => $order->id]);
-
-        if($order->type == 'acquisition') {
-            $subject = trans('appfront::invoice.order_subject', ['id' => $order->id]);
-        }
-
-        $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($order->company_name));
-        $fileName = "{$subject} - {$name}";
         $file = $this->saveFile($fileName, $template);
 
         return response()->download($file, "{$fileName}.doc");

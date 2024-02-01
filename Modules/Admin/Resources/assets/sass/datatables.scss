@@ -41,6 +41,22 @@
                 }
             }
 
+            &.presales {
+                background: rgb(47,174,223,.4);
+
+                &:hover {
+                    background: rgb(47,174,223);
+                }
+            }
+
+            &.acquisition {
+                background: rgb(58,188,191,.4);
+
+                &:hover {
+                    background: rgb(58,188,191);
+                }
+            }
+
             > td {
                 padding: 15px;
                 vertical-align: middle;

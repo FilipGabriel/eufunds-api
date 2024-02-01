@@ -18,6 +18,10 @@
                             {{ trans('option::options.form.option_types.field') }}
                         </option>
 
+                        <option value="number" {{ old('type', $option->type) === 'number' ? 'selected' : '' }}>
+                            {{ trans('option::options.form.option_types.number') }}
+                        </option>
+
                         <option value="textarea" {{ old('type', $option->type) === 'textarea' ? 'selected' : '' }}>
                             {{ trans('option::options.form.option_types.textarea') }}
                         </option>

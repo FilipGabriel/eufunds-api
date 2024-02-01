@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\ScaffoldEntityCommand::class,
         Commands\ImportProductsCommand::class,
         Commands\ImportProductInfoCommand::class,
+        Commands\UpdateProductPsPriceCommand::class,
         Commands\ImportProductCategoriesCommand::class,
         Commands\ImportProductAttributesCommand::class,
         Commands\ImportProductManufacturersCommand::class,

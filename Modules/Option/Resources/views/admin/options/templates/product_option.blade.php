@@ -44,6 +44,12 @@
                                             {{ trans('option::options.form.option_types.field') }}
                                         </option>
 
+                                        <option value="number"
+                                            <%= option.type === 'number' ? 'selected' : '' %>
+                                        >
+                                            {{ trans('option::options.form.option_types.number') }}
+                                        </option>
+
                                         <option value="textarea"
                                             <%= option.type === 'textarea' ? 'selected' : '' %>
                                         >

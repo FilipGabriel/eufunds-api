@@ -22,11 +22,19 @@ class CartItem implements JsonSerializable
 
     public function unitPrice()
     {
+        if(request()->has('presales')) {
+            return $this->product->getSellingPrice()->add($this->optionsPrice());
+        }
+
         return $this->product->getSellingPrice();
     }
 
     public function total()
     {
+        if(request()->has('presales')) {
+            return $this->unitPrice()->multiply($this->qty);
+        }
+
         return $this->unitPrice()->multiply($this->qty)->add($this->optionsPrice());
     }
 
@@ -38,17 +46,22 @@ class CartItem implements JsonSerializable
     public function calculateOptionsPrice()
     {
         return $this->options->sum(function ($option) {
+            $valueSubmitted = request()->has('presales') ? $option['values'][0]['value'] ?? null : null;
             $option = Option::find($option['id']);
             
-            return $this->valuesSum($option->values);
+            return $this->valuesSum($option->values, $valueSubmitted);
         });
     }
 
-    private function valuesSum($values)
+    private function valuesSum($values, $valueSubmitted)
     {
-        return $values->sum(function ($value) {
+        return $values->sum(function ($value) use ($valueSubmitted) {
             if ($value->price_type === 'fixed') {
                 return $value->price->amount();
+            }
+
+            if(request()->has('presales')) {
+                return ($valueSubmitted / 100) * $this->product->getSellingPrice()->amount();
             }
 
             return ($value->price / 100) * $this->product->getSellingPrice()->amount();

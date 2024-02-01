@@ -17,8 +17,14 @@ class SendNewOrderEmails
      */
     public function handle(OrderPlaced $event)
     {
+        $emails = [$event->order->customer_email];
+
+        if($event->order->customer->manager_email) {
+            $emails = [$event->order->customer_email, $event->order->customer->manager_email];
+        }
+
         try {
-            Mail::to([$event->order->customer_email, $event->order->customer->manager_email])
+            Mail::to($emails)
                 ->send(new Invoice($event->order));
         } catch (Swift_TransportException $e) {
             //

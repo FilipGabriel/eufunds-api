@@ -28,6 +28,7 @@ return [
             'please_select' => 'Selecteaza',
             'text' => 'Text',
             'field' => 'Field',
+            'number' => 'Number',
             'textarea' => 'Textarea',
             'select' => 'Select',
             'dropdown' => 'Dropdown',

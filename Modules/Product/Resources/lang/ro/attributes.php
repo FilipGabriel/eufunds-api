@@ -14,6 +14,7 @@ return [
     'virtual' => 'Virtual',
     'is_active' => 'Status',
     'price' => 'Pret',
+    'ps_price' => 'Pret Presale',
     'special_price' => 'Pret Special',
     'special_price_type' => 'Tip Pret Special',
     'special_price_start' => 'Special Price Start',

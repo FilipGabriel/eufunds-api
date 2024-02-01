@@ -29,6 +29,7 @@ return [
     ],
     'types' => [
         'budget' => 'Ofertă',
+        'presales' => 'Presales',
         'acquisition' => 'Comandă'
     ]
 ];

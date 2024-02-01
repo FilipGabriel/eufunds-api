@@ -29,6 +29,10 @@
                                             <br>
                                             @foreach ($product->options as $option)
                                                 <span>
+                                                    @if ($option->option->isFieldType())
+                                                    {{ $option->name }}:
+                                                    @endif
+
                                                     <span>
                                                         @if ($option->option->isFieldType())
                                                             {{ $option->value }}

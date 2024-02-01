@@ -17,7 +17,7 @@ class Option extends Model
      * @var array
      */
     const TYPES = [
-        'field', 'textarea', 'dropdown', 'checkbox', 'checkbox_custom',
+        'field', 'number', 'textarea', 'dropdown', 'checkbox', 'checkbox_custom',
         'radio', 'radio_custom', 'multiple_select', 'date', 'date_time', 'time',
     ];
 
@@ -75,7 +75,7 @@ class Option extends Model
 
     public function isFieldType()
     {
-        return in_array($this->type, ['field', 'textarea', 'dropdown', 'radio', 'date', 'date_time', 'time']);
+        return in_array($this->type, ['field', 'number', 'textarea', 'dropdown', 'radio', 'date', 'date_time', 'time']);
     }
 
     /**

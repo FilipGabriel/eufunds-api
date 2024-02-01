@@ -165,7 +165,7 @@
 							@foreach ($product->options as $option)
 							<br /><span style="color: #9a9a9a;">
 							@if ($option->option->isFieldType())
-							{{ $option->value }}
+							{{ $option->name }}: {{ $option->value }}
 							@else
 							{{ $option->values->implode('label', ', ') }}
 							@endif
