@@ -49,7 +49,7 @@
 
                                         {{ Form::text('name', trans('program::attributes.name'), $errors, null, ['required' => true, 'labelCol' => 2]) }}
                                         {{ Form::text('title', trans('program::attributes.title'), $errors, null, ['required' => true, 'labelCol' => 2]) }}
-                                        {{ Form::select('types', trans('program::attributes.types'), $errors, trans('program::programs.types'), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
+                                        {{ Form::select('types', trans('program::attributes.types'), $errors, array_filter(trans('program::programs.types'), function($key) { return $key != 'presales'; }, ARRAY_FILTER_USE_KEY), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
                                         {{ Form::select('categories', trans('product::attributes.categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation', 'multiple' => true, 'required' => true, 'labelCol' => 2]) }}
                                         {{ Form::select('list_categories', trans('product::attributes.list_categories'), $errors, \Modules\Category\Entities\Category::treeList(), null, ['class' => 'selectize prevent-creation draggable', 'multiple' => true, 'labelCol' => 2]) }}
                                         {{ Form::checkbox('is_active', trans('program::attributes.is_active'), trans('program::programs.form.enable_the_program'), $errors, null, ['labelCol' => 2]) }}

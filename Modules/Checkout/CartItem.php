@@ -23,7 +23,7 @@ class CartItem implements JsonSerializable
     public function unitPrice()
     {
         if(request()->has('presales')) {
-            return $this->product->ps_price->add($this->optionsPrice());
+            return $this->product->ps_price->add($this->optionsPrice()->round(2))->round(2);
         }
 
         return $this->product->getSellingPrice();
