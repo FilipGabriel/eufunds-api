@@ -400,10 +400,6 @@ class Product extends Model
 
     public function getSellingPrice()
     {
-        if(request()->has('presales')) {
-            return $this->ps_price;
-        }
-
         $sellingPrice = $this->hasSpecialPrice() ? $this->getSpecialPrice() : $this->price;
 
         $sellingPrice = $this->applyProgramDiscounts($sellingPrice);

@@ -23,7 +23,7 @@ class CartItem implements JsonSerializable
     public function unitPrice()
     {
         if(request()->has('presales')) {
-            return $this->product->getSellingPrice()->add($this->optionsPrice());
+            return $this->product->ps_price->add($this->optionsPrice());
         }
 
         return $this->product->getSellingPrice();
@@ -61,7 +61,7 @@ class CartItem implements JsonSerializable
             }
 
             if(request()->has('presales')) {
-                return ($valueSubmitted / 100) * $this->product->getSellingPrice()->amount();
+                return ($valueSubmitted / 100) * $this->product->ps_price->amount();
             }
 
             return ($value->price / 100) * $this->product->getSellingPrice()->amount();

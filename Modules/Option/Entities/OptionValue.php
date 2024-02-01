@@ -58,7 +58,7 @@ class OptionValue extends Model
         }
 
         if(request()->has('presales')) {
-            return $this->getPercentOf($product->getSellingPrice()->amount(), $value);
+            return $this->getPercentOf($product->ps_price->amount(), $value);
         }
 
         return $this->getPercentOf($product->selling_price->amount(), $this->price);

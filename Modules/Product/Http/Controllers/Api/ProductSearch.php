@@ -76,6 +76,7 @@ trait ProductSearch
                     'variants' => $product->options->count(),
                     'short_description' => $product->short_description,
                     'base_image' => $product->base_image->path ?? null,
+                    'ps_price' => $product->ps_price,
                     'selling_price' => $product->getSellingPrice(),
                     'special_price_valid_to' => $product->special_price_valid_to ? $product->special_price_valid_to->format('d.m.Y') : null,
                     'manage_stock' => $product->manage_stock && $programTypes == ['acquisition']
