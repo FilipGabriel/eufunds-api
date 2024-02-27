@@ -14,7 +14,7 @@ class AlterProductsTableAddPsPriceColumn extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->decimal('ps_price', 18, 4)->unsigned()->nullable()->after('selling_price');
+            $table->decimal('ps_price', 18, 4)->unsigned()->nullable()->default(0)->after('selling_price');
         });
     }
 

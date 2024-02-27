@@ -140,11 +140,16 @@ class OrderController
 
         $subject = trans('appfront::invoice.subject', ['id' => $order->id]);
         $name = preg_replace("/[^A-Za-z0-9\.\-\_]+/i", " ", trim($order->company_name));
-        $fileName = "{$subject} - {$name}";
 
         if($order->type == 'acquisition') {
             $subject = trans('appfront::invoice.order_subject', ['id' => $order->id]);
         }
+
+        if($order->type == 'presales') {
+            $subject = trans('appfront::invoice.presales_subject', ['id' => $order->id]);
+        }
+
+        $fileName = "{$subject} - {$name}";
 
         if($order->type == 'presales') {
             $class = 'Modules\\Order\\Exports\\XlsxOffer';

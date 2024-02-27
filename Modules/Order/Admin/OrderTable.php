@@ -25,9 +25,6 @@ class OrderTable extends AdminTable
             })
             ->editColumn('type', function ($order) {
                 return $order->type ? trans("program::programs.types.{$order->type}") : '';
-            })
-            ->setRowClass(function($order) {
-                return $order->type;
             });
     }
 }

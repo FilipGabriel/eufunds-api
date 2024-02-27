@@ -51,11 +51,11 @@ class OrderProductOption extends Model
         return $this->option->isFieldType();
     }
 
-    public function storeValues($product, $values, $valueSubmitted = null)
+    public function storeValues($product, $values)
     {
-        $values = $values->mapWithKeys(function (OptionValue $value) use ($product, $valueSubmitted) {
+        $values = $values->mapWithKeys(function (OptionValue $value) use ($product) {
             return [$value->id => [
-                'price' => $value->priceForProduct($product, $valueSubmitted)->amount(),
+                'price' => $value->priceForProduct($product)->amount(),
             ]];
         });
 

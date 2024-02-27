@@ -39,6 +39,22 @@ class XlsxOffer implements FromCollection, WithEvents, ShouldAutoSize, WithStric
     {
         $data[] = [
             [
+                'A' => "",'B' => "Beneficiar",
+                'C' => $this->order->company_name ?? '-',
+                'D' => "", 'E' => "", 'F' => "", 'G' => "",
+                'H' => "", 'I' => "", 'J' => "", 'K' => "",
+            ],
+            [
+                'A' => "", 'B' => "Program de finanțare",
+                'C' => $this->order->funding->name ?? '-',
+                'D' => "", 'E' => "", 'F' => "", 'G' => "",
+                'H' => "", 'I' => "", 'J' => "", 'K' => "",
+            ],
+            [
+                'A' => "", 'B' => "", 'C' => "", 'D' => "", 'E' => "", 'F' => "",
+                'G' => "", 'H' => "", 'I' => "", 'J' => "", 'K' => "",
+            ],
+            [
                 'A' => "Nr. crt",
                 'B' => "Codul produsului",
                 'C' => "Denumirea produsului sau a serviciilor",
@@ -85,22 +101,29 @@ class XlsxOffer implements FromCollection, WithEvents, ShouldAutoSize, WithStric
             ]
         ];
 
-        $rowStart = 1;
+        $rowStart = 4;
         $rowEnd = $rowStart + $event->getConcernable()->countProducts;
 
-        $event->sheet->getDelegate()->getStyle("A1:K{$rowEnd}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $event->sheet->getStyle("A1:K{$rowEnd}")->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $event->sheet->getDelegate()->getStyle("B1")->getFont()->setBold(true);
+        $event->sheet->getDelegate()->getStyle("C1")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $event->sheet->getStyle("C1")->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $event->sheet->getDelegate()->getStyle("B2")->getFont()->setBold(true);
+        $event->sheet->getDelegate()->getStyle("C2")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $event->sheet->getStyle("C2")->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+        $event->sheet->getDelegate()->getStyle("A{$rowStart}:K{$rowEnd}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $event->sheet->getStyle("A{$rowStart}:K{$rowEnd}")->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
 
         $columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
         for($value = $rowStart; $value <= $rowEnd; $value++) {
-            $event->sheet->getDelegate()->getRowDimension($value)->setRowHeight($value == 1 ? 40 : 200);
+            $event->sheet->getDelegate()->getRowDimension($value)->setRowHeight($value == $rowStart ? 40 : 200);
 
             foreach($columns as $column) {
-                if($value == 1) {
+                if($value == $rowStart) {
                     $event->sheet->getDelegate()->getStyle("{$column}{$value}")->getFont()->setBold(true);
                 }
 
-                $event->sheet->getDelegate()->getStyle("{$column}{$value}")->applyFromArray(array_merge($border, $value == 1 ? [
+                $event->sheet->getDelegate()->getStyle("{$column}{$value}")->applyFromArray(array_merge($border, $value == $rowStart ? [
                     'fill' => [
                         'fillType' => Fill::FILL_SOLID,
                         'color' => ['argb' => 'ffd6dce4']

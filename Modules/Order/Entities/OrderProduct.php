@@ -59,16 +59,15 @@ class OrderProduct extends Model
     public function storeOptions($options)
     {
         $options->each(function ($option) {
-            $valueSubmitted = request()->has('presales') ? $option['values'][0]['value'] ?? null : null;
             $option = Option::find($option['id']);
 
             $orderProductOption = $this->options()->create([
                 'order_product_id' => $this->id,
                 'option_id' => $option->id,
-                'value' => $option->isFieldType() ? $valueSubmitted : null,
+                'value' => $option->isFieldType() ? $option->values->first()->label : null,
             ]);
 
-            $orderProductOption->storeValues($this->product, $option->values, $valueSubmitted);
+            $orderProductOption->storeValues($this->product, $option->values);
         });
     }
 

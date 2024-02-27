@@ -72,24 +72,7 @@ class ProgramProductController extends Controller
         });
 
         if(request()->has('presales')) {
-            $option = Option::whereHas('translations', function($translation) {
-                $translation->whereName('Marja');
-            })->first();
-            
-            $variants = [
-                [
-                    'id' => $option->id,
-                    'type' => $option->type,
-                    'values' => $option->values->map(function (OptionValue $value) use ($product, $option) {
-                        return [
-                            'id' => $value->id,
-                            'label' => $option->name . $value->formattedPriceForProduct($product),
-                            'amount' => (float) $value->priceForProduct($product)->convertToCurrentCurrency()->amount(),
-                            'value' => 0
-                        ];
-                    })
-                ]
-            ];
+            $variants = [];
         }
 
         $product->stock = $product->qty;
@@ -100,7 +83,6 @@ class ProgramProductController extends Controller
         $product->supplier_stock_date = $product->supplier_stock_date ? $product->supplier_stock_date->format('d.m.Y') : null;
         $product->has_dnsh = $product->has_dnsh;
         $product->brand_name = $product->brand->name;
-        $product->ps_price = $product->ps_price->amount();
         $product->selling_price = $product->getSellingPrice()->amount();
         $product->manage_stock = $product->manage_stock && $program->types == ['acquisition'];
         $product->end_special_price = $product->special_price_valid_to ? $product->special_price_valid_to->format('d.m.Y') : null;

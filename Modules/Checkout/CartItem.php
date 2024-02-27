@@ -10,12 +10,14 @@ use Modules\Product\Entities\Product;
 class CartItem implements JsonSerializable
 {
     public $qty;
+    public $psPrice;
     public $product;
     public $options;
 
     public function __construct($item)
     {
         $this->qty = $item['qty'];
+        $this->psPrice = $item['ps_price'] ?? null;
         $this->product = Product::find($item['id']);
         $this->options = collect($item['options'] ?? []);
     }
@@ -23,7 +25,7 @@ class CartItem implements JsonSerializable
     public function unitPrice()
     {
         if(request()->has('presales')) {
-            return $this->product->ps_price->add($this->optionsPrice()->round(2))->round(2);
+            return Money::inDefaultCurrency($this->psPrice['amount'] ?? 0);
         }
 
         return $this->product->getSellingPrice();
@@ -46,22 +48,21 @@ class CartItem implements JsonSerializable
     public function calculateOptionsPrice()
     {
         return $this->options->sum(function ($option) {
-            $valueSubmitted = request()->has('presales') ? $option['values'][0]['value'] ?? null : null;
             $option = Option::find($option['id']);
             
-            return $this->valuesSum($option->values, $valueSubmitted);
+            return $this->valuesSum($option->values);
         });
     }
 
-    private function valuesSum($values, $valueSubmitted)
+    private function valuesSum($values)
     {
-        return $values->sum(function ($value) use ($valueSubmitted) {
+        return $values->sum(function ($value) {
             if ($value->price_type === 'fixed') {
                 return $value->price->amount();
             }
 
             if(request()->has('presales')) {
-                return ($valueSubmitted / 100) * $this->product->ps_price->amount();
+                return ($value->price / 100) * $this->psPrice['amount'];
             }
 
             return ($value->price / 100) * $this->product->getSellingPrice()->amount();
@@ -72,6 +73,7 @@ class CartItem implements JsonSerializable
     {
         return [
             'qty' => $this->qty,
+            'ps_price' => $this->psPrice,
             'product' => $this->product->clean(),
             'options' => $this->options->keyBy('position'),
             'unitPrice' => $this->unitPrice(),

@@ -30,7 +30,7 @@ class UpdateProductPsPriceCommand extends Command
         $path = public_path("storage") . '/media/ps_prices.xlsx';
 
         try {
-            $filename = 'https://docs.smis.ro/ps_prices.xlsx';
+            $filename = 'ps_prices.xlsx';
             $file = file_get_contents($filename);
             file_put_contents($path, $file);
 
@@ -40,7 +40,8 @@ class UpdateProductPsPriceCommand extends Command
             Log::info("Update Presale Prices: {$e->getMessage()}");
         }
 
-        unlink($path);
+        if(file_exists($path)) { unlink($path); }
+
         $this->updateProductPrices();
     }
 
