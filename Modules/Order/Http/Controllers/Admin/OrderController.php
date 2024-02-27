@@ -77,7 +77,9 @@ class OrderController
                 yield collect([
                     'ID Comanda' => $row->id,
                     'Program' => $row->funding->name,
+                    'Beneficiar' => $row->company_name,
                     'Tip' => $row->type ? trans("program::programs.types.{$row->type}") : '',
+                    'Cod produs' => $product->product->sku,
                     'Nume produs' => $product->name,
                     'Brand' => $product->product->brand->name,
                     'Cantitate' => $product->qty,
