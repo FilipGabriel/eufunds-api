@@ -35,7 +35,7 @@
         new DataTable('#orders-table .table', {
             columns: [
                 { data: 'id', width: '5%' },
-                { data: 'funding', orderable: false, searchable: false },
+                { data: 'funding', orderable: false, searchable: false, width: '14%' },
                 { data: 'company_name' },
                 { data: 'customer_name', orderable: false, searchable: false },
                 { data: 'customer_email' },

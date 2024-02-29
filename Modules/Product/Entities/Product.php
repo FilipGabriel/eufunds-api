@@ -58,6 +58,7 @@ class Product extends Model
         'special_price_end',
         'selling_price',
         'manage_stock',
+        'shipping',
         'qty',
         'supplier_stock',
         'supplier_stock_date',

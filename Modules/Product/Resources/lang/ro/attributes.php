@@ -8,6 +8,7 @@ return [
     'product_id' => 'NOD ID',
     'brand_id' => 'Brand',
     'warranty' => 'Garantie',
+    'shipping' => 'Livrare standard',
     'programs' => 'Programe',
     'categories' => 'Categorii',
     'list_categories' => 'Categorii listate',

@@ -18,6 +18,7 @@ class OrderService
             'program' => $request->program,
             'type' => request()->has('presales') ? 'presales' : $request->type,
             'company_name' => $request->company_name,
+            'partner' => $request->partner ?? null,
             'business_id' => $request->business_id,
             'customer_email' => auth()->user()->email,
             'customer_phone' => auth()->user()->phone ?? null,

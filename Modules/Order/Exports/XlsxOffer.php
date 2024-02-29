@@ -45,6 +45,12 @@ class XlsxOffer implements FromCollection, WithEvents, ShouldAutoSize, WithStric
                 'H' => "", 'I' => "", 'J' => "", 'K' => "",
             ],
             [
+                'A' => "",'B' => "Partener",
+                'C' => $this->order->partner ?? '-',
+                'D' => "", 'E' => "", 'F' => "", 'G' => "",
+                'H' => "", 'I' => "", 'J' => "", 'K' => "",
+            ],
+            [
                 'A' => "", 'B' => "Program de finanțare",
                 'C' => $this->order->funding->name ?? '-',
                 'D' => "", 'E' => "", 'F' => "", 'G' => "",
@@ -82,7 +88,7 @@ class XlsxOffer implements FromCollection, WithEvents, ShouldAutoSize, WithStric
                 'G' => $product->unit_price->convert($this->order->currency, $this->order->currency_rate)->format($this->order->currency),
                 'H' => $product->line_total->convert($this->order->currency, $this->order->currency_rate)->format($this->order->currency),
                 'I' => $product->product->warranty ?: '-',
-                'J' => '-',
+                'J' => $product->product->shipping ?: '-',
                 'K' => '-',
             ];
         }
@@ -101,7 +107,7 @@ class XlsxOffer implements FromCollection, WithEvents, ShouldAutoSize, WithStric
             ]
         ];
 
-        $rowStart = 4;
+        $rowStart = 5;
         $rowEnd = $rowStart + $event->getConcernable()->countProducts;
 
         $event->sheet->getDelegate()->getStyle("B1")->getFont()->setBold(true);
@@ -110,6 +116,9 @@ class XlsxOffer implements FromCollection, WithEvents, ShouldAutoSize, WithStric
         $event->sheet->getDelegate()->getStyle("B2")->getFont()->setBold(true);
         $event->sheet->getDelegate()->getStyle("C2")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $event->sheet->getStyle("C2")->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+        $event->sheet->getDelegate()->getStyle("B3")->getFont()->setBold(true);
+        $event->sheet->getDelegate()->getStyle("C3")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $event->sheet->getStyle("C3")->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
 
         $event->sheet->getDelegate()->getStyle("A{$rowStart}:K{$rowEnd}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $event->sheet->getStyle("A{$rowStart}:K{$rowEnd}")->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);

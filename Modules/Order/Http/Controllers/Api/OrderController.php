@@ -25,6 +25,7 @@ class OrderController
                     'type' => $order->type,
                     'business_id' => $order->business_id,
                     'company_name' => $order->company_name,
+                    'partner' => $order->partner,
                     'total' => $order->total->convert($order->currency, $order->currency_rate)->format($order->currency),
                     'program' => $order->funding->name,
                     'created' => $order->created_at->format('d M Y'),

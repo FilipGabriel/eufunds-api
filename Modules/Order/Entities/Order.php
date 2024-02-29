@@ -232,6 +232,7 @@ class Order extends Model
                 'id',
                 'program',
                 'type',
+                'partner',
                 'company_name',
                 'business_id',
                 'customer_first_name',

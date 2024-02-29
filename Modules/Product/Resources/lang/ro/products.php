@@ -31,6 +31,12 @@ return [
             'fixed' => 'Fix',
             'percent' => 'Procent',
         ],
+        'shipping_types' => [
+            '' => 'Selectati',
+            '30 Zile' => '30 Zile',
+            '60 Zile' => '60 Zile',
+            '90 Zile' => '90 Zile',
+        ],
         'manage_stock_states' => [
             '0' => 'Don\'t Track Inventory',
             '1' => 'Track Inventory',
