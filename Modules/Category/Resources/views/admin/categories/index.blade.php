@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <div id="id-field" class="hide">
-                                            {{ Form::text('id', trans('category::attributes.id'), $errors, null, ['disabled' => true]) }}
+                                            {{ Form::text('id', trans('category::attributes.id'), $errors, null, ['disabled' => false]) }}
                                         </div>
 
                                         {{ Form::text('name', trans('category::attributes.name'), $errors, null, ['required' => true]) }}
