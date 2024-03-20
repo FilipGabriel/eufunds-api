@@ -93,7 +93,7 @@ class OrderController
         try {
             foreach($order->products as $cartItem) {
                 $this->checkCategoriesAndPrice($cartItem, $categoryIds);
-                $this->checkQuantity($cartItem);
+                // $this->checkQuantity($cartItem);
             }
         } catch (Exception $e) {
             return response()->json([ 'message' => $e->getMessage() ], 422);
