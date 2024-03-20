@@ -26,9 +26,10 @@ class CheckCartItems
             foreach($request->products as $cartItem) {
                 $this->checkCategoriesAndPrice($cartItem, $categoryIds);
 
-                if($request->type == 'acquisition') {
-                    $this->checkQuantity($cartItem);
-                }
+                // 20.03.2024 -> Nu se pot comanda produse fara stoc din platforma ex extensii de garantie
+                // if($request->type == 'acquisition') {
+                //     $this->checkQuantity($cartItem);
+                // }
             }
         } catch (Exception $e) {
             return response()->json([ 'message' => $e->getMessage() ], 422);
